@@ -12,6 +12,19 @@ class Horario extends Model
         'abertura', 'fechamento', 'dia_semana'
     ];
 
+    public static $rules = [
+        'abertura' => 'required',
+        'fechamento' => 'required|after:abertura',
+        'dia_semana' => 'string|required|max:15',
+    ];
+
+    public static $messages = [
+        'string' => 'O campo :attribute deve ser texto',
+        'required' => 'O campo :attribute é obrigatório',
+        'after' => 'A hora do campo :attribute é inválida',
+        'max' => 'O campo :attribute deve ter no máximo 15 caracteres',
+    ];
+
     public function estabelecimento(){
         return $this->belongsTo(Estabelecimento::class);
     }
