@@ -12,6 +12,16 @@ class Atracao extends Model
         'nome', 'descricao'
     ];
 
+    public static $rules = [
+        'nome' => 'required',
+        'descricao' => 'string',
+    ];
+
+    public static $messages = [
+        'required' => 'O campo :attribute é obrigatório',
+        'string' => 'O campo :attribute deve ser um texto',
+    ];
+
     public function contato(){
         return $this->hasMany(Contato::class);
     }
