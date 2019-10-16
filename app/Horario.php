@@ -14,7 +14,7 @@ class Horario extends Model
 
     public static $rules = [
         'abertura' => 'required',
-        'fechamento' => 'required|after:abertura',
+        'fechamento' => 'required',
         'dia_semana' => 'string|required|max:15',
     ];
 

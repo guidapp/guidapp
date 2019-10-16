@@ -13,13 +13,14 @@ class Atracao extends Model
     ];
 
     public static $rules = [
-        'nome' => 'required',
+        'nome' => 'required|string|max:500',
         'descricao' => 'string',
     ];
 
     public static $messages = [
         'required' => 'O campo :attribute é obrigatório',
         'string' => 'O campo :attribute deve ser um texto',
+        'nome.max' => 'O nome é muito grande (máx 500 caracteres)',
     ];
 
     public function contato(){

@@ -1,20 +1,20 @@
 <?php
 
 namespace App\Validator;
-use App\Horario;
+use App\Apresentacao;
 
-class HorarioValidator
+class ApresentacaoValidator
 {
     public static function validate($dados)
     {
         $validator = \Validator::make(
             $dados,
-            Horario::$rules,
-            Horario::$messages);
+            Apresentacao::$rules,
+            Apresentacao::$messages);
 
         if(!$validator->errors()->isEmpty())
         {
-            throw new ValidationException($validator, $validator->errors(0));
+            throw new ValidationException($validator, "Erro ao validar Apresentacao");
         }
     }
 }

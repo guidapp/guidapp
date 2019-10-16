@@ -13,7 +13,8 @@ class Contato extends Model
     ];
 
     public static $rules = [
-        'texto' => 'string|max:255',
+        'texto' => 'required|string|max:255',
+        'atracao_id' => 'required'
     ];
 
     public static $messages = [
