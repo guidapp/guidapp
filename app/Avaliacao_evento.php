@@ -14,17 +14,17 @@ class Avaliacao_evento extends Model
 
     public static $rules = [
         'avaliacao' => 'required|numeric|between:0,5',
-        'evento_id' => 'required|numeric|exists:eventos,id',
-        'user_id' => 'required|numeric|exists:users,id',
+        /* 'evento_id' => 'required|numeric|exists:eventos,id',
+        'user_id' => 'required|numeric|exists:users,id', */
     ];
 
     public static $messages = [
         'required' => 'O campo :attribute é obrigatório',
-        'string' => 'O campo :attribute deve ser um texto',
         'numeric' => 'O campo :attribute deve ser um número',
-        'nome.max' => 'O nome é muito grande (máx 500 caracteres)',
+        'between' => 'O campo :attribute deve ter um valor entre 0 e 5',
+        /* 'nome.max' => 'O nome é muito grande (máx 500 caracteres)',
         'evento_id.exists' => 'Evento não existe',
-        'user_id.exists' => 'Usuário não existe',
+        'user_id.exists' => 'Usuário não existe', */
     ];
 
     public function evento(){

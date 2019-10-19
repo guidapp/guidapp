@@ -12,6 +12,31 @@ class Comentario extends Model
         'texto', 'lido'
     ];
 
+    public static $rules = [
+        'texto' => 'required|string|max:1500',
+        'lido' => 'required|boolean',
+        /* 'comentario_id' => 'nullable|numeric|exists:comentarios,id',
+        'user_id' => 'nullable|numeric|exists:users,id',
+        'estabelecimento_id' => 'nullable|numeric|exists:estabelecimentos,id',
+        'prato_id' => 'nullable|numeric|exists:pratos,id',
+        'evento_id' => 'nullable|numeric|exists:eventos,id',
+        'atracao' => 'nullable|numeric|exists:atracaos,id', */
+    ];
+
+    public static $messages = [
+        'required' => 'O campo :attribute é obrigatório',
+        'string' => 'O campo :attribute deve ser um texto',
+        'boolean' => 'O campo :attribute deve ser um boleano',
+        'texto.max' => 'O nome é muito grande',
+        /* 'comentario_id.exists' => 'Comentario não existe',
+        'numeric' => 'O campo :attribute deve ser um número',
+        'user_id.exists' => 'Usuário não existe',
+        'estabelecimento_id.exists' => 'Estabelecimento não existe',
+        'prato_id.exists' => 'Prato não existe',
+        'evento_id.exists' => 'Evento não existe',
+        'atracao_id.exists' => 'Atração não existe', */
+    ];
+
     public function atracao(){
         return $this->belongsTo(Atracao::class);
     }

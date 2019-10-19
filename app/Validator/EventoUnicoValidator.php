@@ -1,16 +1,16 @@
 <?php
 
 namespace App\Validator;
-use App\Avaliacao_evento;
+use App\EventoUnico;
 
-class Avaliacao_eventoValidator
+class EventoUnicoValidator
 {
     public static function validate($dados)
     {
         $validator = \Validator::make(
             $dados,
-            Avaliacao_evento::$rules,
-            Avaliacao_evento::$messages);
+            EventoUnico::$rules,
+            EventoUnico::$messages);
 
 
         if ($validator->errors()) {

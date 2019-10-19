@@ -14,11 +14,13 @@ class Contato extends Model
 
     public static $rules = [
         'texto' => 'required|string|max:255',
-        'atracao_id' => 'required'
+        //'atracao_id' => 'required'
     ];
 
     public static $messages = [
+        'required' => 'O campo :attribute é obrigatório',
         'string' => 'O campo :attribute deve ser texto',
+        'max' => 'O campo :attribute deve ter no máximo 255 caracteres',
     ];
 
     public function atracao(){
