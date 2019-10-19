@@ -12,6 +12,15 @@ class Imagem extends Model
         'nome'
     ];
 
+    public static $rules = [
+        'nome' => 'required|string',
+    ];
+
+    public static $messages = [
+        'required' => 'O campo :attribute é obrigatório',
+        'string' => 'O campo :attribute deve ser texto',
+    ];
+
     public function atracao(){
         return $this->belongsTo(EventoUnico::class);
     }

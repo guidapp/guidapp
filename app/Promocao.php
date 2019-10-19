@@ -12,6 +12,20 @@ class Promocao extends Model
         'texto', 'dia_semana', 'mes', 'data_inicial', 'data_final'
     ];
 
+    public static $rules = [
+        'texto' => 'required|string|max:255',
+        'dia_semana' => 'required|integer|between:1,7',
+        'mes' => 'required|integer|between:1,12',
+        'data_inicial' => 'required|date|after_or_equal:today',
+        'data_final' => 'required|date|after_or_equal:data_inicial',
+    ];
+
+    public static $messages = [
+        'required' => 'O campo :attribute é obrigatório',
+        'string' => 'O campo :attribute deve ser texto',
+        'max' => 'O campo :attribute deve ter no máximo 255 carateres',
+    ];
+
     public function imagem(){
         return $this->hasMany(Imagem::class);
     }

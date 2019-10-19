@@ -13,8 +13,8 @@ class Prato extends Model
     ];
 
     public static $rules = [
-        'nome' => 'required',
-        'descricao' => 'required',
+        'nome' => 'required|string|max:255',
+        'descricao' => 'required|string|max:255',
         'preco' => 'required|numeric|min:0',
     ];
 

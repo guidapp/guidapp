@@ -40,10 +40,11 @@ class User extends Authenticatable
     ];
 
     public static $rules = [
-        'name' => 'required',
-        'surname' => 'required',
+        'name' => 'required|string|max:255',
+        'surname' => 'required|string|max:255',
         'email' => 'required|email|unique:users',
-        'password' => 'required|min:8',
+        'password' => 'required|string|min:8',
+        'cpf' => 'nullable|digits:11|unique:users,cpf',
     ];
 
     public static $messages = [
