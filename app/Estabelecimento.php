@@ -13,16 +13,19 @@ class Estabelecimento extends Model
     ];
 
     public static $rules = [
-        'nome' => 'required',
-        'latitude' => 'required',
-        'longitude' => 'required',
-        'descricao' => 'required',
-        'telefone' => 'required',
-        'cidade' => 'required',
+        'nome' => 'required|string|max:255',
+        'latitude' => 'required|numeric',
+        'longitude' => 'required|numeric',
+        'descricao' => 'required|string|max:3000',
+        'telefone' => 'required|string',
+        'cidade' => 'required|string',
     ];
 
     public static $messages = [
         'required' => 'O campo :attribute é obrigatório',
+        'string' => 'O campo :attribute deve ser texto',
+        'numeric' => 'O campo :attribute deve ser numérico',
+        'max' => 'O campo :attribute deve tem no máximo 3000 caracteres'
     ];
 
     public function eventos(){

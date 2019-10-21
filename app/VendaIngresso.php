@@ -12,6 +12,18 @@ class VendaIngresso extends Model
         'hash', 'usado', 'validado'
     ];
 
+    public static $rules = [
+        'hash' => 'required|string|max:255',
+        'usado' => 'required|boolean',
+        'validado' => 'required|boolean',
+    ];
+
+    public static $messages = [
+        'required' => 'O campo :attribute é obrigatório',
+        'string' => 'O campo :attribute deve ser texto',
+        'max' => 'O campo :attribute deve ter no máximo 255 carateres',
+    ];
+
     public function ingresso(){
         return $this->hasOne(Ingresso::class);
     }

@@ -10,8 +10,8 @@ $factory->define(Promocao::class, function (Faker $faker) {
         'texto' => $faker->text,
         'dia_semana' => $faker->numberBetween(1,7),
         'mes' => $faker->numberBetween(1,12),
-        'data_inicial' => $faker->dateTimeThisYear,
-        'data_final' => $faker->dateTimeThisYear,
+        'data_inicial' => now(),
+        'data_final' => $faker->dateTimeInInterval('now','+2 years'),
         'estabelecimento_id' => $faker->numberBetween(1,15)
     ];
 });

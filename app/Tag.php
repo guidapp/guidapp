@@ -12,6 +12,16 @@ class Tag extends Model
         'nome'
     ];
 
+    public static $rules = [
+        'nome' => 'required|string|max:255',
+    ];
+
+    public static $messages = [
+        'required' => 'O campo :attribute é obrigatório',
+        'string' => 'O campo :attribute deve ser texto',
+        'max' => 'O campo :attribute deve ter no máximo 255 carateres',
+    ];
+
     public function prato(){
         return $this->belongsToMany(Prato::class)
                     ->withPivot('prato_tag');
