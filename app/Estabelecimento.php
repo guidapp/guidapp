@@ -45,7 +45,7 @@ class Estabelecimento extends Model
     }
 
     public function imagems(){
-        return $this->hasMany(Imagem::class);
+        return $this->morphMany('App\Imagem', 'imagemable');
     }
 
     public function horarios(){

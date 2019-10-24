@@ -35,8 +35,8 @@ class Atracao extends Model
         return $this->hasMany(Comentario::class);
     }
 
-    public function imagem(){
-        return $this->hasMany(Imagem::class);
+    public function imagems(){
+        return $this->morphMany('App\Imagem', 'imagemable');
     }
 
     public function tag(){

@@ -26,8 +26,8 @@ class Promocao extends Model
         'max' => 'O campo :attribute deve ter no máximo 255 carateres',
     ];
 
-    public function imagem(){
-        return $this->hasMany(Imagem::class);
+    public function imagems(){
+        return $this->morphMany('App\Imagem', 'imagemable');
     }
 
     public function estabelecimento(){
