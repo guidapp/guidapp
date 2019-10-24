@@ -31,8 +31,8 @@ class Prato extends Model
         return $this->belongsTo(Estabelecimento::class);
     }
 
-    public function tag(){
-        return $this->hasMany(Tag::class);
+    public function tags(){
+        return $this->morphToMany('App\Tag', 'taggable');
     }
 
     public function comentarios(){

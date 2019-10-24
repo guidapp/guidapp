@@ -22,23 +22,19 @@ class Tag extends Model
         'max' => 'O campo :attribute deve ter no máximo 255 carateres',
     ];
 
-    public function prato(){
-        return $this->belongsToMany(Prato::class)
-                    ->withPivot('prato_tag');
+    public function pratos(){
+        return $this->morphedByMany('App\Prato', 'taggable');
     }
 
-    public function estabelecimento(){
-        return $this->belongsToMany(Estabelecimento::class)
-                    ->withPivot('estabelecimento_tag');
+    public function estabelecimentos(){
+        return $this->morphedByMany('App\Estabelecimento', 'taggable');
     }
 
-    public function evento(){
-        return $this->belongsToMany(Evento::class)
-                    ->withPivot('evento_tag');
+    public function eventos(){
+        return $this->morphedByMany('App\Evento', 'taggable');
     }
 
-    public function atracao(){
-        return $this->belongsToMany(Atracao::class)
-                    ->withPivot('atracao_tag');
+    public function atracaos(){
+        return $this->morphedByMany('App\Atracao', 'taggable');
     }
 }

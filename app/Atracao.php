@@ -39,7 +39,7 @@ class Atracao extends Model
         return $this->morphMany('App\Imagem', 'imagemable');
     }
 
-    public function tag(){
-        return $this->hasMany(Tag::class);
+    public function tags(){
+        return $this->morphToMany('App\Tag', 'taggable');
     }
 }

@@ -33,7 +33,7 @@ class Estabelecimento extends Model
     }
 
     public function tags(){
-        return $this->hasMany(Tag::class);
+        return $this->morphToMany('App\Tag', 'taggable');
     }
 
     public function pratos(){

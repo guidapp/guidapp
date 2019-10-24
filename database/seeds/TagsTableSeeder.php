@@ -15,13 +15,13 @@ class TagsTableSeeder extends Seeder
             ->create()
             ->each(function ($tag){
                 $estabelecimento = factory(\App\Estabelecimento::class)->create();
-                $tag->estabelecimento()->attach($estabelecimento->id);
+                $tag->estabelecimentos()->attach($estabelecimento->id);
                 $evento = factory(\App\Evento::class)->create();
-                $tag->evento()->attach($evento->id);
+                $tag->eventos()->attach($evento->id);
                 $prato = factory(\App\Prato::class)->create();
-                $tag->prato()->attach($prato->id);
+                $tag->pratos()->attach($prato->id);
                 $atracao = factory(\App\Atracao::class)->create();
-                $tag->atracao()->attach($atracao->id);
+                $tag->atracaos()->attach($atracao->id);
             });
     }
 }
