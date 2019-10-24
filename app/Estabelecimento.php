@@ -61,7 +61,7 @@ class Estabelecimento extends Model
     }
 
     public function comentarios(){
-        return $this->hasMany(Comentario::class);
+        return $this->morphMany('App\Comentario', 'comentarioable');
     }
 
     public function getAvaliacaoGeral(){

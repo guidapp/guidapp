@@ -20,4 +20,13 @@ class ComentarioTest extends TestCase
 
         $this->assertTrue(true);
     }
+
+    public function testDadoPolimorfico()
+    {
+        $comentario = Comentario::find(1);
+        
+        $comentarioable = $comentario->comentarioable;
+
+        $this->assertTrue(true);
+    }
 }

@@ -37,6 +37,10 @@ class Comentario extends Model
         'atracao_id.exists' => 'Atração não existe', */
     ];
 
+    public function comentarioable() {
+        return $this->morphTo();
+    }
+
     public function atracao(){
         return $this->belongsTo(Atracao::class);
     }

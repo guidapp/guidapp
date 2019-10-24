@@ -35,7 +35,7 @@ class Prato extends Model
         return $this->hasMany(Tag::class);
     }
 
-    public function comentario(){
-        return $this->hasMany(Comentario::class);
+    public function comentarios(){
+        return $this->morphMany('App\Comentario', 'comentarioable');
     }
 }

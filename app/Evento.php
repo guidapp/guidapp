@@ -40,8 +40,8 @@ class Evento extends Model
         return $this->belongsTo(Estabelecimento::class);
     }
 
-    public function comentario(){
-        return $this->hasMany(Comentario::class);
+    public function comentarios(){
+        return $this->morphMany('App\Comentario', 'comentarioable');
     }
 
     public function avaliacao(){

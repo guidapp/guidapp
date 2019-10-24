@@ -31,8 +31,8 @@ class Atracao extends Model
         return $this->hasMany(Apresentacao::class);
     }
 
-    public function comentario(){
-        return $this->hasMany(Comentario::class);
+    public function comentarios(){
+        return $this->morphMany('App\Comentario', 'comentarioable');
     }
 
     public function imagems(){
