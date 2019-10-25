@@ -15,6 +15,6 @@ $factory->define(Imagem::class, function (Faker $faker) {
             'App\Prato', 
             'App\Promocao', 
             'App\Estabelecimento', 
-            'App\Usuario']),
+            'App\User']),
     ];
 });

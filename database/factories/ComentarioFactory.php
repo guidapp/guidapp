@@ -15,7 +15,7 @@ $factory->define(Comentario::class, function (Faker $faker) {
             'App\Evento', 
             'App\Prato', 
             'App\Estabelecimento', 
-            'App\Usuario']),
+            'App\User']),
         // 'user_id' => $faker->numberBetween(1,15),
         // 'estabelecimento_id' => $faker->numberBetween(1,15),
         // 'prato_id' => $faker->numberBetween(1,15),

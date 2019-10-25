@@ -25,7 +25,7 @@ class VendaIngresso extends Model
     ];
 
     public function ingresso(){
-        return $this->hasOne(Ingresso::class);
+        return $this->belongsTo(Ingresso::class);
     }
 
     public function pagamento(){
@@ -33,6 +33,10 @@ class VendaIngresso extends Model
     }
 
     public function usuario(){
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function validar(){
+        return $this->validado = true;
     }
 }

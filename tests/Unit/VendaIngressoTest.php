@@ -19,4 +19,13 @@ class VendaIngressoTest extends TestCase
 
         $this->assertTrue(true);
     }
+
+    public function testValidarVendaIngresso()
+    {
+        $venda_ingresso = VendaIngresso::find(1);
+
+        $venda_ingresso->validar();
+
+        $this->assertTrue($venda_ingresso->validado);
+    }
 }

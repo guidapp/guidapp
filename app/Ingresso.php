@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Hash;
 
 class Ingresso extends Model
 {
@@ -31,6 +32,23 @@ class Ingresso extends Model
     }
 
     public function vendaIngresso(){
-        return $this->belongsToMany(VendaIngresso::class);
+        return $this->hasMany(VendaIngresso::class);
+    }
+
+    public function vender($user, $quantidade){
+        for ($i=0; $i < $quantidade; $i++) { 
+            $vendaIngresso = new VendaIngresso;
+            $vendaIngresso->hash = Hash::make($this->evento->hash);
+            $vendaIngresso->usado = false;
+            $vendaIngresso->validado = false;
+
+            $vendaIngresso->ingresso()->associate($this);
+            $vendaIngresso->usuario()->associate($user);
+
+            $vendaIngresso->save();
+
+            $this->quantidade -= 1;
+            $this->save();
+        }
     }
 }
