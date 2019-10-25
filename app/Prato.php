@@ -24,18 +24,18 @@ class Prato extends Model
     ];
 
     public function imagem(){
-        return $this->hasOne(Imagem::class);
+        return $this->morphOne('App\Imagem', 'imagemable');
     }
 
     public function estabelecimento(){
         return $this->belongsTo(Estabelecimento::class);
     }
 
-    public function tag(){
-        return $this->hasMany(Tag::class);
+    public function tags(){
+        return $this->morphToMany('App\Tag', 'taggable');
     }
 
-    public function comentario(){
-        return $this->hasMany(Comentario::class);
+    public function comentarios(){
+        return $this->morphMany('App\Comentario', 'comentarioable');
     }
 }

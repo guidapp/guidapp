@@ -19,4 +19,13 @@ class ImagemTest extends TestCase
 
         $this->assertTrue(true);
     }
+
+    public function testDadoPolimorfico()
+    {
+        $imagem = Imagem::find(1);
+
+        $imagemable = $imagem->imagemable;
+
+        $this->assertTrue(true);
+    }
 }

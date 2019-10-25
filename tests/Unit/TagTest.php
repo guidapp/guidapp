@@ -19,4 +19,13 @@ class TagTest extends TestCase
 
         $this->assertTrue(true);
     }
+
+    public function testDadoPolimorfico()
+    {
+        $tag = Tag::find(1);
+        
+        $pratos = $tag->pratos;
+
+        $this->assertGreaterThan(0, count($pratos));
+    }
 }

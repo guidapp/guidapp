@@ -53,7 +53,7 @@ class User extends Authenticatable
     ];
 
     public function imagem(){
-        return $this->hasOne(Imagem::class);
+        return $this->morphOne('App\Imagem', 'imagemable');
     }
 
     public function avaliacaoEstabelecimentos(){
@@ -61,7 +61,7 @@ class User extends Authenticatable
     }
 
     public function comentarios(){
-        return $this->hasMany(Comentario::class);
+        return $this->morphMany('App\Comentario', 'comentarioable');
     }
 
     public function avaliacaoEventos(){

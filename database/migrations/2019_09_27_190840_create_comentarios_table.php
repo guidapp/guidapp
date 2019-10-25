@@ -17,6 +17,8 @@ class CreateComentariosTable extends Migration
             $table->bigIncrements('id');
             $table->string('texto');
             $table->boolean('lido')->default(false);
+            $table->integer('comentarioable_id');
+            $table->string('comentarioable_type');
             $table->timestamps();
             $table->softDeletes();
         });

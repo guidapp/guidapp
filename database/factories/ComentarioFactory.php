@@ -9,10 +9,17 @@ $factory->define(Comentario::class, function (Faker $faker) {
     return [
         'texto' => $faker->text,
         'lido' => $faker->boolean,
-        'user_id' => $faker->numberBetween(1,15),
-        'estabelecimento_id' => $faker->numberBetween(1,15),
-        'prato_id' => $faker->numberBetween(1,15),
-        'evento_id' => $faker->numberBetween(1,15),
-        'atracao_id' => $faker->numberBetween(1,15)
+        'comentarioable_id' => $faker->numberBetween(1,15),
+        'comentarioable_type' => $faker->randomElement(
+            ['App\Atracao', 
+            'App\Evento', 
+            'App\Prato', 
+            'App\Estabelecimento', 
+            'App\Usuario']),
+        // 'user_id' => $faker->numberBetween(1,15),
+        // 'estabelecimento_id' => $faker->numberBetween(1,15),
+        // 'prato_id' => $faker->numberBetween(1,15),
+        // 'evento_id' => $faker->numberBetween(1,15),
+        // 'atracao_id' => $faker->numberBetween(1,15)
     ];
 });

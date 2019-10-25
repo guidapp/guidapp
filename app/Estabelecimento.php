@@ -33,7 +33,7 @@ class Estabelecimento extends Model
     }
 
     public function tags(){
-        return $this->hasMany(Tag::class);
+        return $this->morphToMany('App\Tag', 'taggable');
     }
 
     public function pratos(){
@@ -45,7 +45,7 @@ class Estabelecimento extends Model
     }
 
     public function imagems(){
-        return $this->hasMany(Imagem::class);
+        return $this->morphMany('App\Imagem', 'imagemable');
     }
 
     public function horarios(){
@@ -61,7 +61,7 @@ class Estabelecimento extends Model
     }
 
     public function comentarios(){
-        return $this->hasMany(Comentario::class);
+        return $this->morphMany('App\Comentario', 'comentarioable');
     }
 
     public function getAvaliacaoGeral(){

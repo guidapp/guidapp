@@ -16,6 +16,8 @@ class CreateImagemsTable extends Migration
         Schema::create('imagems', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nome');
+            $table->integer('imagemable_id');
+            $table->string('imagemable_type');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -28,20 +28,20 @@ class Evento extends Model
         'between' => 'O campo :attribute deve ter um valor entre 0 e 5',
     ];
 
-    public function imagem(){
-        return $this->hasMany(Imagem::class);
+    public function imagems(){
+        return $this->morphMany('App\Imagem', 'imagemable');
     }
-    
-    public function tag(){
-        return $this->hasMany(Tag::class);
+
+    public function tags(){
+        return $this->morphToMany('App\Tag', 'taggable');
     }
 
     public function estabelecimento(){
         return $this->belongsTo(Estabelecimento::class);
     }
 
-    public function comentario(){
-        return $this->hasMany(Comentario::class);
+    public function comentarios(){
+        return $this->morphMany('App\Comentario', 'comentarioable');
     }
 
     public function avaliacao(){
