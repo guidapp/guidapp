@@ -24,15 +24,38 @@ class Pagamento extends Model
         'max' => 'O campo :attribute deve ter no máximo 255 carateres',
     ];
 
-    public function impulsionamento(){
+    public function impulsionamentos(){
         return $this->belongsToMany(Impulsionamento::class);
     }
 
-    public function vendaIngresso(){
-        return $this->belongsToMany(VendaIngresso::class);
+    public function vendaIngressos(){
+        return $this->hasMany(VendaIngresso::class);
     }
 
-    public function Usuario(){
+    public function usuario(){
         return $this->belongsTo(User::class);
+    }
+
+    public function gerarPagamento($user, $ingressosVendidos) {
+        $this->vendaIngressos()->saveMany($ingressosVendidos);
+        var_dump($this->vendaIngressos->count());
+
+        $this->valor = 0;
+
+        foreach ($ingressosVendidos as $vendaIngresso) {
+            $this->valor += $vendaIngresso->ingresso->preco * (100-$vendaIngresso->ingresso->desconto) / 100;
+        }
+
+        $this->data_hora = date("Y-m-d H:i:s");
+    }
+
+    public function confirmarPagamento($id_pag_paypal) {
+        $this->id_pag_paypal = $id_pag_paypal;
+        var_dump($this->vendaIngressos->count());
+        
+        foreach ($this->vendaIngressos as $vendaIngresso) {
+            $vendaIngresso->validar();
+            // var_dump('validando');
+        }
     }
 }

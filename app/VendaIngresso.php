@@ -24,12 +24,17 @@ class VendaIngresso extends Model
         'max' => 'O campo :attribute deve ter no máximo 255 carateres',
     ];
 
+    protected $casts = [
+        'usado' => 'boolean',
+        'validado' => 'boolean',
+    ];
+
     public function ingresso(){
         return $this->belongsTo(Ingresso::class);
     }
 
     public function pagamento(){
-        return $this->hasMany(Pagamento::class);
+        return $this->belongsTo(Pagamento::class);
     }
 
     public function usuario(){
@@ -37,6 +42,8 @@ class VendaIngresso extends Model
     }
 
     public function validar(){
-        return $this->validado = true;
+        $this->validado = true;
+        $this->save();
+        var_dump($this->validado);
     }
 }

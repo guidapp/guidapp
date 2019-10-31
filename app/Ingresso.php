@@ -31,11 +31,13 @@ class Ingresso extends Model
         return $this->belongsTo(Evento::class);
     }
 
-    public function vendaIngresso(){
+    public function vendaIngressos(){
         return $this->hasMany(VendaIngresso::class);
     }
 
-    public function vender($user, $quantidade){
+    public function criarVenda($user, $quantidade){
+        $ingressosVendidos = [];
+
         for ($i=0; $i < $quantidade; $i++) { 
             $vendaIngresso = new VendaIngresso;
             $vendaIngresso->hash = Hash::make($this->evento->hash);
@@ -47,8 +49,16 @@ class Ingresso extends Model
 
             $vendaIngresso->save();
 
-            $this->quantidade -= 1;
             $this->save();
+
+            array_push($ingressosVendidos, $vendaIngresso);
         }
+
+        return $ingressosVendidos;
+    }
+
+    public function quantidadeIngressosConfirmados() {
+        // return $this->vendaIngressos->where('validado','true')->count();
+        return VendaIngresso::where(['validado' => true, 'ingresso_id' => $this->id])->count();
     }
 }

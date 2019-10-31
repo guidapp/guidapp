@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Ingresso;
+use App\Pagamento;
 
 class CompraIngressoController extends Controller
 {
@@ -15,6 +16,16 @@ class CompraIngressoController extends Controller
     }
 
     public function comprar(Request $request) {
-        return $request->quantidade;
+        $ingresso = Ingresso::find($request['ingresso_id']);
+
+        $user = Auth::user();
+
+        $ingressosVendidos = $ingresso->criarVenda($user, $request['quantidade']);
+
+        $pagamento = new Pagamento;
+        $pagamento->usuario->associate($user);
+        $pagamento->vendaIngressos->attach($ingressosVendidos);
+
+        return $ingresso->preco;
     }
 }

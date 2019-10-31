@@ -17,3 +17,7 @@ Route::get('/', function () {
 
 Route::get('compraingresso/{id}', 'CompraIngressoController@prepararCompra');
 Route::post('compraingresso', 'CompraIngressoController@comprar');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
