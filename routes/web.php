@@ -20,6 +20,9 @@ Route::get('compraingresso/{id}', 'CompraIngressoController@prepararCompra')
 Route::post('compraingresso', 'CompraIngressoController@comprar')
     ->middleware('auth');
 
+Route::get('ingressos', 'CompraIngressoController@listagemIngressosPagos')
+    ->middleware('auth');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

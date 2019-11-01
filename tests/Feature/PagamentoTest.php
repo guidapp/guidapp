@@ -51,4 +51,30 @@ class PagamentoTest extends TestCase
         $response->assertStatus(200)
             ->assertSee('Ingressos esgotados');
     }
+
+    public function testTelaListaDeIngressosPagos() {
+        $user = User::find(1);
+
+        $response = $this->actingAs($user)
+            ->get('/ingressos');
+
+        $response->assertStatus(200)
+            ->assertSee('Ingressos comprados');
+    }
+
+    public function testListaDeIngressosPagos() {
+        $user = User::find(1);
+
+        $ingresso = factory(Ingresso::class)->create();
+
+        $response = $this->actingAs($user)
+            ->post('/compraingresso', ['quantidade' => 3, 'ingresso_id' => $ingresso->id]);
+
+        $response = $this->actingAs($user)
+            ->get('/ingressos');
+
+        $response->assertStatus(200)
+            ->assertSee('Ingressos comprados')
+            ->assertSee(substr($ingresso->descricao, 0, 30));
+    }
 }

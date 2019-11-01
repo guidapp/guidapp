@@ -34,4 +34,12 @@ class CompraIngressoController extends Controller
 
         return 'Compra efetuada com sucesso!';
     }
+
+    public function listagemIngressosPagos() {
+        $user = Auth::user();
+
+        $ingressos = $user->compraIngressos;
+
+        return view('ingressosComprados')->with(['ingressos' => $ingressos]);
+    }
 }
