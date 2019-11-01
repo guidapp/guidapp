@@ -32,4 +32,10 @@ class PagamentoTest extends TestCase
         $response->assertStatus(200)
             ->assertSee('Compra efetuada com sucesso!');
     }
+
+    public function testComprarIngressoSemEstarLogado() {
+        $response = $this->post('/compraingresso', ['quantidade' => 3, 'ingresso_id' => 1]);
+
+        $response->assertStatus(302);
+    }
 }

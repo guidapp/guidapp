@@ -58,7 +58,10 @@ class Ingresso extends Model
     }
 
     public function quantidadeIngressosConfirmados() {
-        // return $this->vendaIngressos->where('validado','true')->count();
         return VendaIngresso::where(['validado' => true, 'ingresso_id' => $this->id])->count();
+    }
+
+    public function quantidadeIngressosDisponiveis() {
+        return $this->quantidade - $this->quantidadeIngressosConfirmados();
     }
 }

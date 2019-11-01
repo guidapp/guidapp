@@ -7,6 +7,7 @@
         <h2>Compra de ingressos</h2>
         <h3>Evento: {{ $ingresso->evento->nome }}</h3>
         <h3>Descrição do ingresso: {{ $ingresso->descricao }}</h3>
+        <h3>Quantidade disponível: {{ $ingresso->quantidadeIngressosDisponiveis() }}</h3>
         <h3>Preço: R$ {{ $ingresso->preco }}</h3>
         <h3>Desconto: {{ $ingresso->desconto }}%</h3>
         <h3>Preço com desconto: R$ {{ $ingresso->preco * (100 - $ingresso->desconto)/100 }}</h3>
