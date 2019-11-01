@@ -7,6 +7,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 use App\User;
+use App\Ingresso;
 
 class PagamentoTest extends TestCase
 {
@@ -37,5 +38,17 @@ class PagamentoTest extends TestCase
         $response = $this->post('/compraingresso', ['quantidade' => 3, 'ingresso_id' => 1]);
 
         $response->assertStatus(302);
+    }
+
+    public function testComprarIngressosEsgotados() {
+        $ingresso = factory(Ingresso::class)->create(['quantidade' => 0]);
+
+        $user = User::find(1);
+
+        $response = $this->actingAs($user)
+            ->post('/compraingresso', ['quantidade' => 3, 'ingresso_id' => $ingresso->id]);
+
+        $response->assertStatus(200)
+            ->assertSee('Ingressos esgotados');
     }
 }

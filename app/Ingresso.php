@@ -36,6 +36,10 @@ class Ingresso extends Model
     }
 
     public function criarVenda($user, $quantidade){
+        if($quantidade > $this->quantidadeIngressosDisponiveis()) {
+            return NULL;
+        }
+
         $ingressosVendidos = [];
 
         for ($i=0; $i < $quantidade; $i++) { 

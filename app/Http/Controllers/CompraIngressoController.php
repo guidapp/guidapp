@@ -23,6 +23,10 @@ class CompraIngressoController extends Controller
 
         $ingressosVendidos = $ingresso->criarVenda($user, $request['quantidade']);
 
+        if($ingressosVendidos == NULL) {
+            return 'Ingressos esgotados';
+        }
+
         $pagamento = Pagamento::gerarPagamento($user, $ingressosVendidos);
 
         // pagamento PAYPAL
