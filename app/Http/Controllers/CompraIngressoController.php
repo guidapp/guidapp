@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Session;
 
 use App\Ingresso;
 use App\Pagamento;
@@ -29,8 +30,21 @@ class CompraIngressoController extends Controller
 
         $pagamento = Pagamento::gerarPagamento($user, $ingressosVendidos);
 
-        // pagamento PAYPAL
-        $pagamento->confirmarPagamento('id_paypal');
+        Session::put('pagamento_id', $pagamento->id);
+
+        return redirect()->route('paypal.ingresso');
+    }
+
+    public function confirmarPagamento(Request $request) {
+        $pagamento_id = Session::get('pagamento_id');
+        $id_pag_paypal = Session::get('id_pag_paypal');
+
+        Session::forget('pagamento_id');
+        Session::forget('id_pag_paypal');
+
+        $pagamento = Pagamento::find($pagamento_id);
+
+        $pagamento->confirmarPagamento($id_pag_paypal);
 
         return 'Compra efetuada com sucesso!';
     }
