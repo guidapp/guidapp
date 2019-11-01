@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Ingresso;
 use App\Pagamento;
+use Illuminate\Support\Facades\Auth;
 
 class CompraIngressoController extends Controller
 {
@@ -22,10 +23,11 @@ class CompraIngressoController extends Controller
 
         $ingressosVendidos = $ingresso->criarVenda($user, $request['quantidade']);
 
-        $pagamento = new Pagamento;
-        $pagamento->usuario->associate($user);
-        $pagamento->vendaIngressos->attach($ingressosVendidos);
+        $pagamento = Pagamento::gerarPagamento($user, $ingressosVendidos);
 
-        return $ingresso->preco;
+        // pagamento PAYPAL
+        $pagamento->confirmarPagamento('id_paypal');
+
+        return 'Compra efetuada com sucesso!';
     }
 }

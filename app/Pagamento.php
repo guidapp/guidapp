@@ -33,29 +33,32 @@ class Pagamento extends Model
     }
 
     public function usuario(){
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function gerarPagamento($user, $ingressosVendidos) {
-        $this->vendaIngressos()->saveMany($ingressosVendidos);
-        var_dump($this->vendaIngressos->count());
+    public static function gerarPagamento($user, $ingressosVendidos) {
+        $pagamento = new Pagamento;
+        $pagamento->valor = 0;
+        $pagamento->data_hora = date("Y-m-d H:i:s");
+        $pagamento->usuario()->associate($user);
 
-        $this->valor = 0;
+        $pagamento->save();
+
+        $pagamento->vendaIngressos()->saveMany($ingressosVendidos);
 
         foreach ($ingressosVendidos as $vendaIngresso) {
-            $this->valor += $vendaIngresso->ingresso->preco * (100-$vendaIngresso->ingresso->desconto) / 100;
+            $pagamento->valor += $vendaIngresso->ingresso->preco * (100-$vendaIngresso->ingresso->desconto) / 100;
         }
 
-        $this->data_hora = date("Y-m-d H:i:s");
+        return $pagamento;
     }
 
     public function confirmarPagamento($id_pag_paypal) {
         $this->id_pag_paypal = $id_pag_paypal;
-        var_dump($this->vendaIngressos->count());
+        $this->save();
         
         foreach ($this->vendaIngressos as $vendaIngresso) {
             $vendaIngresso->validar();
-            // var_dump('validando');
         }
     }
 }

@@ -44,6 +44,5 @@ class VendaIngresso extends Model
     public function validar(){
         $this->validado = true;
         $this->save();
-        var_dump($this->validado);
     }
 }

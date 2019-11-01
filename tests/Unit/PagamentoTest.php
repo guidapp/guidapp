@@ -24,11 +24,10 @@ class PagamentoTest extends TestCase
     }
 
     public function testValorTotalPagamentoIngressos() {
-        $ingressosVendidos = factory(VendaIngresso::class, 10)->make();
+        $ingressosVendidos = factory(VendaIngresso::class, 10)->create();
         $user = User::find(1);
 
-        $pagamento = new Pagamento();
-        $pagamento->gerarPagamento($user, $ingressosVendidos);
+        $pagamento = Pagamento::gerarPagamento($user, $ingressosVendidos);
 
         $valorTotal = 0;
         foreach ($ingressosVendidos as $vendaIngresso) {
@@ -60,24 +59,23 @@ class PagamentoTest extends TestCase
 
         $ingressosVendidos = $ingresso->criarVenda($user, 2);
 
-        $pagamento = new Pagamento;
-        $pagamento->gerarPagamento($user, $ingressosVendidos);
+        $pagamento = Pagamento::gerarPagamento($user, $ingressosVendidos);
 
         $pagamento->confirmarPagamento('id do paypal');
 
         $this->assertEquals(2, $ingresso->quantidadeIngressosConfirmados());
     }
 
-    // public function testIngressosDoUsuarioAposVenda()
-    // {
-    //     $ingresso = factory(Ingresso::class)->create();
+    public function testIngressosDoUsuarioAposPagamento()
+    {
+        $ingresso = factory(Ingresso::class)->create();
 
-    //     $user = User::find(1);
+        $user = User::find(1);
 
-    //     $ingresso->criarVenda($user, 2);
+        $ingresso->criarVenda($user, 2);
 
-    //     $qnt_ingressos_comprados = $user->compraIngressos->where('ingresso_id',$ingresso->id)->count();
+        $qnt_ingressos_comprados = $user->compraIngressos->where('ingresso_id', $ingresso->id)->count();
 
-    //     $this->assertEquals(2, $qnt_ingressos_comprados);
-    // }
+        $this->assertEquals(2, $qnt_ingressos_comprados);
+    }
 }

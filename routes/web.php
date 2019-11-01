@@ -15,8 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('compraingresso/{id}', 'CompraIngressoController@prepararCompra');
-Route::post('compraingresso', 'CompraIngressoController@comprar');
+Route::get('compraingresso/{id}', 'CompraIngressoController@prepararCompra')
+    ->middleware('auth');
+Route::post('compraingresso', 'CompraIngressoController@comprar')
+    ->middleware('auth');
 
 Auth::routes();
 

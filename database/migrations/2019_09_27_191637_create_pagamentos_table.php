@@ -17,7 +17,7 @@ class CreatePagamentosTable extends Migration
             $table->bigIncrements('id');
             $table->float('valor');
             $table->date('data_hora');
-            $table->string('id_pag_paypal');
+            $table->string('id_pag_paypal')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
