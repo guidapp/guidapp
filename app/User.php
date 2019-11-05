@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -81,10 +82,16 @@ class User extends Authenticatable
     }
     
     public function ehOrganizador(){
-        return $this->cpf != null;
+        $user = Auth::user();
+        if ($user->cpf) {
+            return true;
+        }
+        return false;
     }
 
     public function tornarOrganizador($cpf) {
-        $this->cpf = $cpf;
+        $user = Auth::user();
+        $user->cpf = $cpf;
+        $user->save();
     }
 }
