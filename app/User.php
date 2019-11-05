@@ -82,16 +82,9 @@ class User extends Authenticatable
     }
     
     public function ehOrganizador(){
-        $user = Auth::user();
-        if ($user->cpf) {
-            return true;
-        }
-        return false;
+        return $this->cpf != null;
     }
-
     public function tornarOrganizador($cpf) {
-        $user = Auth::user();
-        $user->cpf = $cpf;
-        $user->save();
+        $this->cpf = $cpf;
     }
 }
