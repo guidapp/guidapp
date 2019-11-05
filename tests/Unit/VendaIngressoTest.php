@@ -8,6 +8,9 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
+use App\Ingresso;
+use App\User;
+
 class VendaIngressoTest extends TestCase
 {
     public function testDadosCorretos()
@@ -18,5 +21,14 @@ class VendaIngressoTest extends TestCase
         VendaIngressoValidator::validate($venda_ingresso->toArray());
 
         $this->assertTrue(true);
+    }
+
+    public function testValidarVendaIngresso()
+    {
+        $venda_ingresso = VendaIngresso::find(1);
+
+        $venda_ingresso->validar();
+
+        $this->assertTrue($venda_ingresso->validado);
     }
 }

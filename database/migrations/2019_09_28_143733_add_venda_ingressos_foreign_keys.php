@@ -15,7 +15,7 @@ class AddVendaIngressosForeignKeys extends Migration
     {
         Schema::table('venda_ingressos', function (Blueprint $table) {
             $table->unsignedBigInteger('ingresso_id');
-            $table->unsignedBigInteger('pagamento_id');
+            $table->unsignedBigInteger('pagamento_id')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->foreign('ingresso_id')->references('id')->on('ingressos');
             $table->foreign('pagamento_id')->references('id')->on('pagamentos');

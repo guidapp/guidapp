@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Hash;
 
 class Ingresso extends Model
 {
@@ -30,7 +31,41 @@ class Ingresso extends Model
         return $this->belongsTo(Evento::class);
     }
 
-    public function vendaIngresso(){
-        return $this->belongsToMany(VendaIngresso::class);
+    public function vendaIngressos(){
+        return $this->hasMany(VendaIngresso::class);
+    }
+
+    public function criarVenda($user, $quantidade){
+        if($quantidade > $this->quantidadeIngressosDisponiveis()) {
+            return NULL;
+        }
+
+        $ingressosVendidos = [];
+
+        for ($i=0; $i < $quantidade; $i++) { 
+            $vendaIngresso = new VendaIngresso;
+            $vendaIngresso->hash = Hash::make($this->evento->hash);
+            $vendaIngresso->usado = false;
+            $vendaIngresso->validado = false;
+
+            $vendaIngresso->ingresso()->associate($this);
+            $vendaIngresso->usuario()->associate($user);
+
+            $vendaIngresso->save();
+
+            $this->save();
+
+            array_push($ingressosVendidos, $vendaIngresso);
+        }
+
+        return $ingressosVendidos;
+    }
+
+    public function quantidadeIngressosConfirmados() {
+        return VendaIngresso::where(['validado' => true, 'ingresso_id' => $this->id])->count();
+    }
+
+    public function quantidadeIngressosDisponiveis() {
+        return $this->quantidade - $this->quantidadeIngressosConfirmados();
     }
 }

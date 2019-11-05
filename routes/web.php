@@ -14,3 +14,23 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('compraingresso/{id}', 'CompraIngressoController@prepararCompra')
+    ->middleware('auth');
+Route::post('compraingresso', 'CompraIngressoController@comprar')
+    ->middleware('auth');
+
+Route::get('ingressos', 'CompraIngressoController@listagemIngressosPagos')
+    ->middleware('auth');
+
+Route::get('ingressos/confirmacao', 'CompraIngressoController@confirmarPagamento')->name('ingressos.confirmacao')
+    ->middleware('auth');
+
+
+// ROTAS PAYPAL
+Route::get('/paypal/ingresso', 'PaypalController@pagamentoIngresso')->name('paypal.ingresso')->middleware('auth');
+Route::get('/paypal/status/ingresso', 'PaypalController@statusPagamentoIngresso')->name('paypal.ingresso.status')->middleware('auth');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
