@@ -54,11 +54,17 @@ class Pagamento extends Model
     }
 
     public function confirmarPagamento($id_pag_paypal) {
+        if(isset($this->id_pag_paypal)) {
+            return false;
+        }
+
         $this->id_pag_paypal = $id_pag_paypal;
         $this->save();
         
         foreach ($this->vendaIngressos as $vendaIngresso) {
             $vendaIngresso->validar();
         }
+
+        return true;
     }
 }

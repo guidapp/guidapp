@@ -44,9 +44,11 @@ class CompraIngressoController extends Controller
 
         $pagamento = Pagamento::find($pagamento_id);
 
-        $pagamento->confirmarPagamento($id_pag_paypal);
-
-        return 'Compra efetuada com sucesso!';
+        if($pagamento->confirmarPagamento($id_pag_paypal)) {
+            return 'Compra efetuada com sucesso!';
+        } else {
+            return redirect('ingressos')->withErrors(['Ingresso já foi pago']);
+        }
     }
 
     public function listagemIngressosPagos() {

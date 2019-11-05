@@ -5,9 +5,12 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use Session;
 
 use App\User;
 use App\Ingresso;
+use App\VendaIngresso;
+use App\Pagamento;
 
 class PagamentoTest extends TestCase
 {
@@ -30,8 +33,41 @@ class PagamentoTest extends TestCase
         $response = $this->actingAs($user)
             ->post('/compraingresso', ['quantidade' => 3, 'ingresso_id' => 1]);
 
+        $response->assertStatus(302)
+            ->assertRedirect(route('paypal.ingresso'));
+    }
+
+    public function testFinalizacaoCompraIngresso() {
+        $ingressosVendidos = factory(VendaIngresso::class, 10)->create();
+        $user = User::find(1);
+
+        $pagamento = Pagamento::gerarPagamento($user, $ingressosVendidos);
+
+        Session::put('pagamento_id', $pagamento->id);
+        Session::put('id_pag_paypal', 'id_pagamento_paypal');
+
+        $response = $this->actingAs($user)
+            ->followingRedirects()
+            ->get(route('paypal.ingresso.status'));
+
         $response->assertStatus(200)
             ->assertSee('Compra efetuada com sucesso!');
+    }
+    
+    public function testPagamentoDuplicado() {
+        $user = User::find(1);
+
+        $pagamento = factory(Pagamento::class)->create();
+
+        Session::put('pagamento_id', $pagamento->id);
+        Session::put('id_pag_paypal', 'id_pagamento_paypal');
+
+        $response = $this->actingAs($user)
+            ->followingRedirects()
+            ->get(route('paypal.ingresso.status'));
+
+        $response->assertStatus(200)
+            ->assertSee('Ingresso já foi pago');
     }
 
     public function testComprarIngressoSemEstarLogado() {

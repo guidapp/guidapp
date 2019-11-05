@@ -4,6 +4,11 @@
     </body>
     <head>
         <h1>GUIDAPP</h1>
+
+        @if($errors->any())
+            <h4>{{$errors->first()}}</h4>
+        @endif
+
         <h2>Ingressos comprados</h2>
 
         <h3>ID  Descrição</h3>
