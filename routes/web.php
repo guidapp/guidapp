@@ -27,6 +27,12 @@ Route::get('ingressos/confirmacao', 'CompraIngressoController@confirmarPagamento
     ->middleware('auth');
 
 
+ // CRIAR EVENTO
+
+ Route::get('/cadastrarevento', 'CadastrarEventoController@cadastrarEvento')->name('evento.cadastrar')->middleware('auth');
+
+Route::post('/cadastrareventosalvar', 'CadastrarEventoController@cadastrareventosalvar')->name('evento.salvar')->middleware('auth');
+
 // ROTAS PAYPAL
 Route::get('/paypal/ingresso', 'PaypalController@pagamentoIngresso')->name('paypal.ingresso')->middleware('auth');
 Route::get('/paypal/status/ingresso', 'PaypalController@statusPagamentoIngresso')->name('paypal.ingresso.status')->middleware('auth');
