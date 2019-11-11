@@ -1,6 +1,6 @@
 <html>
     <body>
-        <title>Cadastrar eventos</title>
+        <title>Cadastrar atrações</title>
     </body>
     <head>
        

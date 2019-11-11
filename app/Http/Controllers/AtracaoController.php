@@ -35,10 +35,9 @@ class AtracaoController extends Controller
      */
     public function store(Request $request)
     {
-        $atracao = new Atracao();
-        $atracao->nome = $request->nome;
-        $atracao->descricao = $request->descricao;
-        $atracao->save();
+        $a = new Atracao();
+        $a->cadastrar($request);
+        return redirect()->route("atracao.cadastrar");
     }
 
     /**
