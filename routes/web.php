@@ -15,6 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// INGRESSOS
 Route::get('compraingresso/{id}', 'CompraIngressoController@prepararCompra')
     ->middleware('auth');
 Route::post('compraingresso', 'CompraIngressoController@comprar')
@@ -27,10 +28,12 @@ Route::get('ingressos/confirmacao', 'CompraIngressoController@confirmarPagamento
     ->middleware('auth');
 
 
- // CRIAR EVENTO
+// ATRACAOS
+Route::get('/cadastraratracao', 'AtracaoController@create')->name('atracao.cadastrar')->middleware('auth');
+Route::post('/cadastraratracaosalvar', 'AtracaoController@store')->name('atracao.salvar')->middleware('auth');
 
- Route::get('/cadastrarevento', 'CadastrarEventoController@cadastrarEvento')->name('evento.cadastrar')->middleware('auth');
-
+// CRIAR EVENTO
+Route::get('/cadastrarevento', 'CadastrarEventoController@cadastrarEvento')->name('evento.cadastrar')->middleware('auth');
 Route::post('/cadastrareventosalvar', 'CadastrarEventoController@cadastrareventosalvar')->name('evento.salvar')->middleware('auth');
 
 // ROTAS PAYPAL
