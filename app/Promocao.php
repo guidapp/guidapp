@@ -9,7 +9,7 @@ class Promocao extends Model
 {
     use SoftDeletes;
     protected $fillable = [
-        'texto', 'dia_semana', 'mes', 'data_inicial', 'data_final'
+        'texto', 'domingo', 'segunda', 'terca', 'quarta', 'quinta', 'sexta', 'sabado', 'data_inicial', 'data_final'
     ];
 
     public static $rules = [
