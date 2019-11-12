@@ -15,7 +15,7 @@ class Atracao extends Model
 
     public static $rules = [
         'nome' => 'required|string|max:500',
-        'descricao' => 'string',
+        'descricao' => 'nullable|string',
     ];
 
     public static $messages = [
@@ -23,21 +23,6 @@ class Atracao extends Model
         'string' => 'O campo :attribute deve ser um texto',
         'nome.max' => 'O nome é muito grande (máx 500 caracteres)',
     ];
-
-    //public $validator = Validator::make($rules, $messages);
-
-    public function cadastrar($data){
-        $validator = Validator::make($data->all(),[Atracao::$rules, Atracao::$messages]);
-        if ($validator->fails()) {
-            return redirect('/cadastraratracao')
-                        ->withErrors($validator)
-                        ->withInput();
-        }
-
-        $this->nome = $data->nome;
-        $this->descricao = $data->descricao;
-        $this->save();
-    }
 
     public function contato(){
         return $this->hasMany(Contato::class);

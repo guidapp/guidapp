@@ -25,7 +25,7 @@ class CadastrarAtracaoTest extends DuskTestCase
                     ->type('nome', $atracao->nome)
                     ->type('descricao', $atracao->descricao)
                     ->pause(2000)
-                    ->press('submit');
+                    ->press('cadastrar');
         });
     }
 }
