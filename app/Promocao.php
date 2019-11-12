@@ -14,8 +14,13 @@ class Promocao extends Model
 
     public static $rules = [
         'texto' => 'required|string|max:255',
-        'dia_semana' => 'required|integer|between:1,7',
-        'mes' => 'required|integer|between:1,12',
+        'domingo' => 'nullable|boolean',
+        'segunda' => 'nullable|boolean',
+        'terca' => 'nullable|boolean',
+        'quarta' => 'nullable|boolean',
+        'quinta' => 'nullable|boolean',
+        'sexta' => 'nullable|boolean',
+        'sabado' => 'nullable|boolean',
         'data_inicial' => 'required|date|after_or_equal:today',
         'data_final' => 'required|date|after_or_equal:data_inicial',
     ];
