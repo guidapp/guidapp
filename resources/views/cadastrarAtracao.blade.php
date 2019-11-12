@@ -1,3 +1,5 @@
+@extends('layouts.app')
+@section('content')
 <html>
     <body>
         <title>Cadastrar atrações</title>
@@ -27,3 +29,4 @@
         </form>
     </head>
 </html>
+@endsection
