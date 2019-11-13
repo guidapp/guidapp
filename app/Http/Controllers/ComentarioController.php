@@ -6,22 +6,45 @@ use Illuminate\Http\Request;
 
 use App\Comentario;
 use App\Evento;
+use App\Estabelecimento;
+use App\Atracao;
 
 class ComentarioController extends Controller
 {
-    public function listagemComentariosEvento($id_evento) {
-        $evento = Evento::find($id_evento);
+    public function listagemComentarios($model, $id_evento) {
+        $object = null;
+        if($model == 'evento') {
+            $object = Evento::find($id_evento);
+        } else if($model == 'estabelecimento') {
+            $object = Estabelecimento::find($id_evento);
+        } else if($model == 'atracao') {
+            $object = Atracao::find($id_evento);
+        } else {
+            abort(404);
+        }
 
-        return view('comentariosEvento')->with('evento', $evento);
+        return view('comentarios')->with([
+            'model' => $model,
+            'object' => $object]);
     }
 
-    public function addComentarioEvento(Request $request, $id_evento) {
-        $evento = Evento::find($id_evento);
+    public function addComentario(Request $request, $model, $id_evento) {
+        $object = null;
+        if($model == 'evento') {
+            $object = Evento::find($id_evento);
+        } else if($model == 'estabelecimento') {
+            $object = Estabelecimento::find($id_evento);
+        } else if($model == 'atracao') {
+            $object = Atracao::find($id_evento);
+        } else {
+            abort(404);
+        }
 
-        $evento->addComentario($request['texto']);
+        $object->addComentario($request['texto']);
 
-        return redirect('/evento/'.$id_evento.'/comentarios')
-            ->with(['evento' => $evento,
+        return redirect('/comentarios/'.$model.'/'.$id_evento)
+            ->with(['object' => $object,
+                'model' => $model,
                 'success' => 'Comentario adicionado com sucesso']);
     }
 }

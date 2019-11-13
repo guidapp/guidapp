@@ -14,15 +14,15 @@
             <h4>{{$errors->first()}}</h4>
         @endif
 
-        <h2>Comentarios do evento {{ $evento->nome }}</h2>
+        <h2>Comentarios do {{ $model }} {{ $object->nome }}</h2>
 
         <br>
 
-        @foreach ($evento->comentarios as $comentario)
+        @foreach ($object->comentarios as $comentario)
             <h4>{{ $comentario->usuario->name }} - {{ $comentario->texto }}</h4>
         @endforeach
 
-        <form action='/evento/{{$evento->id}}/comentarios/add' method='post'>
+        <form action='/comentarios/{{$model}}/{{$object->id}}/add' method='post'>
         @csrf
             Adicionar comentario: <input type="text" name="texto">
             <input type='submit' value='Enviar'/>

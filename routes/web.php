@@ -28,9 +28,9 @@ Route::get('ingressos/confirmacao', 'CompraIngressoController@confirmarPagamento
     ->middleware('auth');
 
 // COMENTARIOS
-Route::get('evento/{id}/comentarios', 'ComentarioController@listagemComentariosEvento')
+Route::get('comentarios/{model}/{id}', 'ComentarioController@listagemComentarios')
     ->middleware('auth');
-Route::post('evento/{id}/comentarios/add', 'ComentarioController@addComentarioEvento')
+Route::post('comentarios/{model}/{id}/add', 'ComentarioController@addComentario')
     ->middleware('auth');
 
 // ATRACAOS
