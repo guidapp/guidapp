@@ -60,7 +60,7 @@ class Estabelecimento extends Model
     }
 
     public function organizador(){
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function comentarios(){

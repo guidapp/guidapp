@@ -43,7 +43,7 @@ class Evento extends Model
     }
 
     public function comentarios(){
-        return $this->morphMany('App\Comentario', 'comentarioable');
+        return $this->morphMany('App\Comentario', 'comentarioable')->where('comentario_id', null);
     }
 
     public function avaliacao(){
@@ -51,7 +51,7 @@ class Evento extends Model
     }
 
     public function organizador(){
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function ingresso(){

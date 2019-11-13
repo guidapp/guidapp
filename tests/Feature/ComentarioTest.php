@@ -91,6 +91,33 @@ class ComentarioTest extends TestCase
             ->assertSessionHas('success', 'Comentario adicionado com sucesso');
     }
 
+    // PRATOS
+
+    public function testTelaComentariosPrato()
+    {
+        $user = User::find(1);
+
+        $response = $this->actingAs($user)
+            ->get('/comentarios/prato/1');
+
+        $response->assertStatus(200)
+            ->assertSee('Comentarios');
+    }
+
+    public function testAdicionarComentarioPrato()
+    {
+        $user = User::find(1);
+
+        $comentario = factory('App\Comentario')->make();
+
+        $response = $this->actingAs($user)
+            ->post('/comentarios/prato/1/add', ['texto' => $comentario->texto]);
+
+        $response->assertStatus(302)
+            ->assertRedirect('/comentarios/prato/1')
+            ->assertSessionHas('success', 'Comentario adicionado com sucesso');
+    }
+
     // GERAL
 
     public function testTelaComentariosSemEstarLogado()
@@ -111,5 +138,25 @@ class ComentarioTest extends TestCase
             ->post('/comentarios/evento/1/add', ['texto' => $comentario->texto]);
 
         $response->assertStatus(302);
+    }
+
+    public function testResponderComentario()
+    {
+        $user = User::find(1);
+
+        $evento = factory('App\Evento')->create(['user_id' => 1]);
+
+        $comentario = factory('App\Comentario')->create([
+            'comentarioable_id' => $evento->id,
+            'comentarioable_type' => 'App\Evento']);
+
+        $resposta = factory('App\Comentario')->make();
+
+        $response = $this->actingAs($user)
+            ->post('/comentarios/responder/'.$comentario->id, ['texto' => $resposta->texto]);
+        
+        $response->assertStatus(302)
+            ->assertRedirect('/comentarios/evento/'.$evento->id)
+            ->assertSessionHas('success', 'Resposta adicionada com sucesso');
     }
 }

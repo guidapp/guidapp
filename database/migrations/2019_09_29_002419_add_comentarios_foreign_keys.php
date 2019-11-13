@@ -42,7 +42,7 @@ class AddComentariosForeignKeys extends Migration
             // ]);
 
             $table->dropColumn([
-                'comentario_id'
+                'comentario_id', 'user_id'
             ]);
         });
     }

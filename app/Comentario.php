@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+use Illuminate\Support\Facades\Auth;
+
 class Comentario extends Model
 {
     use SoftDeletes;
@@ -57,11 +59,26 @@ class Comentario extends Model
         return $this->belongsTo(Comentario::class);
     }
 
+    public function respostas(){
+        return $this->hasMany(Comentario::class);
+    }
+
     public function estabelecimento(){
         return $this->belongsTo(Estabelecimento::class);
     }
 
     public function usuario(){
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function addResposta($texto) {
+        $comentario = new Comentario;
+        $comentario->texto = $texto;
+        $comentario->lido = false;
+
+        $comentario->usuario()->associate(Auth::user());
+        $comentario->comentario()->associate($this);
+
+        $this->comentarioable->comentarios()->save($comentario);
     }
 }

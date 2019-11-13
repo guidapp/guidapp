@@ -1,6 +1,14 @@
 <html>
     <body>
         <title>Comentarios</title>
+        
+        <script>
+            function responder(id) {
+                resposta = prompt('Resposta:');
+
+
+            }
+        </script>
     </body>
     <head>
 
@@ -18,9 +26,34 @@
 
         <br>
 
-        @foreach ($object->comentarios as $comentario)
-            <h4>{{ $comentario->usuario->name }} - {{ $comentario->texto }}</h4>
-        @endforeach
+        <table>
+            @foreach ($object->comentarios as $comentario)
+                <tr>
+                    <td style='border:1px solid black' colspan='2'><h3>{{ $comentario->usuario->name }}</h3> {{ $comentario->texto }}</td>
+                    @can('responderComentario', $object)
+                    <td>
+                        <form action='/comentarios/responder/{{ $comentario->id }}' method='post'>
+                        @csrf
+                            Resposta: <input type="text" name="texto"><br>
+                            <input type='submit' value='Enviar'/>
+                        </form>
+                    </td>
+                    @endcan
+                </tr>
+
+                @foreach ($comentario->respostas as $resposta)
+                <tr>
+                    <td>resposta do <br> organizador</td>
+                    <td style='border:1px solid black'><h3>{{ $resposta->usuario->name }}</h3> {{ $resposta->texto }}</td>
+                </tr>
+                @endforeach
+            @endforeach
+            <tr>
+
+            </tr>
+        </table>
+
+        <br>
 
         <form action='/comentarios/{{$model}}/{{$object->id}}/add' method='post'>
         @csrf

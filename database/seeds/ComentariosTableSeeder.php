@@ -11,6 +11,10 @@ class ComentariosTableSeeder extends Seeder
      */
     public function run()
     {
+        // comentarios comuns
+        factory(App\Comentario::class, 30)->create(['comentario_id' => null]);
+        
+        // respostas de comentarios
         factory(App\Comentario::class, 30)->create();
     }
 }
