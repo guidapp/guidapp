@@ -159,4 +159,22 @@ class ComentarioTest extends TestCase
             ->assertRedirect('/comentarios/evento/'.$evento->id)
             ->assertSessionHas('success', 'Resposta adicionada com sucesso');
     }
+
+    public function testResponderComentarioDeOutroOrganizador()
+    {
+        $user = User::find(1);
+
+        $evento = factory('App\Evento')->create(['user_id' => 2]);
+
+        $comentario = factory('App\Comentario')->create([
+            'comentarioable_id' => $evento->id,
+            'comentarioable_type' => 'App\Evento']);
+
+        $resposta = factory('App\Comentario')->make();
+
+        $response = $this->actingAs($user)
+            ->post('/comentarios/responder/'.$comentario->id, ['texto' => $resposta->texto]);
+        
+        $response->assertStatus(403);
+    }
 }

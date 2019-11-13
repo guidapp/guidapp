@@ -10,6 +10,8 @@ use App\Estabelecimento;
 use App\Atracao;
 use App\Prato;
 
+use Illuminate\Support\Facades\Auth;
+
 class ComentarioController extends Controller
 {
     public function listagemComentarios($model, $id) {
@@ -37,6 +39,8 @@ class ComentarioController extends Controller
 
     public function responderComentario(Request $request, $id) {
         $comentario = Comentario::find($id);
+
+        $this->authorize('responderComentario', $comentario->comentarioable);
 
         $comentario->addResposta($request['texto']);
 
