@@ -27,6 +27,11 @@ Route::get('ingressos', 'CompraIngressoController@listagemIngressosPagos')
 Route::get('ingressos/confirmacao', 'CompraIngressoController@confirmarPagamento')->name('ingressos.confirmacao')
     ->middleware('auth');
 
+// COMENTARIOS
+Route::get('evento/{id}/comentarios', 'ComentarioController@listagemComentariosEvento')
+    ->middleware('auth');
+Route::post('evento/{id}/comentarios/add', 'ComentarioController@addComentarioEvento')
+    ->middleware('auth');
 
 // ATRACAOS
 Route::get('/cadastraratracao', 'AtracaoController@create')->name('atracao.cadastrar')->middleware('auth');

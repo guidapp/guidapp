@@ -12,5 +12,8 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         factory('App\User', 30)->create();
+
+        // Usuario para testes manuais no navegador
+        factory('App\User')->create(['email' => 'admin@gmail.com', 'password' => password_hash('123456', PASSWORD_DEFAULT)]);
     }
 }
