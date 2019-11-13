@@ -33,7 +33,12 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                        @auth
+                            <a href="{{route('atracao.cadastrar')}}">+Atração </a>
+                            <a href="{{route('evento.cadastrar')}}">+Evento </a>
+                            <a href="{{route('paypal.cadastrar')}}">+Ingresso </a>
+                            
+                        @endauth
                     </ul>
 
                     <!-- Right Side Of Navbar -->
