@@ -19,19 +19,20 @@ class ComentarioController extends Controller
         if(!$object)
             abort(404);
 
-        return view('comentarios')->with([
-            'model' => $model,
-            'object' => $object]);
+        Comentario::marcarComentariosComoLidos($object);
+        
+        return view('comentarios')->with(['object' => $object]);
     }
 
     public function listagemComentariosUsuario() {
-        foreach (['Evento', 'Prato'] as $model) {
-            $class = 'App\\'.$model;
-            var_dump($class::all());
-        }
-        // $eventos = Evento::all()->where('qntComentariosNaoLidos', '>', '0');
-        
-        // return $eventos;
+        $naoLidos = Comentario::naoLidosDestinadosAoUsuarioLogado();
+
+        $comentarios = collect($naoLidos['comentarios'])->groupBy(['comentarioable_type', 'comentarioable_id']);
+        $respostas = collect($naoLidos['respostas'])->groupBy(['comentarioable_type', 'comentarioable_id']);
+
+        return view('comentariosNaoLidos')->with([
+            'comentarios' => $comentarios,
+            'respostas' => $respostas]);
     }
 
     public function addComentario(Request $request, $model, $id) {
@@ -43,7 +44,6 @@ class ComentarioController extends Controller
 
         return redirect('/comentarios/'.$model.'/'.$id)
             ->with(['object' => $object,
-                'model' => $model,
                 'success' => 'Comentario adicionado com sucesso']);
     }
 
@@ -54,11 +54,8 @@ class ComentarioController extends Controller
 
         $comentario->addResposta($request['texto']);
 
-        $model = strtolower(explode('\\', get_class($comentario->comentarioable))[1]);
-
-        return redirect('/comentarios/'.$model.'/'.$comentario->comentarioable->id)
+        return redirect('/comentarios/'.$comentario->comentarioable->getModelName().'/'.$comentario->comentarioable->id)
             ->with(['object' => $comentario->comentarioable,
-                'model' => $model,
                 'success' => 'Resposta adicionada com sucesso']);
     }
 

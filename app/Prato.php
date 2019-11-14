@@ -50,4 +50,8 @@ class Prato extends Model
 
         $this->comentarios()->save($comentario);
     }
+
+    public function getModelName() {
+        return 'prato';
+    }
 }

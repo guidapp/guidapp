@@ -81,4 +81,48 @@ class Comentario extends Model
 
         $this->comentarioable->comentarios()->save($comentario);
     }
+
+    public static function naoLidosDestinadosAoUsuarioLogado() {
+        // COMENTARIOS COMUNS
+        $comentarios = Comentario::where('comentario_id', '=', null)
+            ->where('lido', '=', false)
+            ->get();
+        $comentariosDestinadosAoUsuarioLogado = [];
+        foreach ($comentarios as $comentario) {
+            if(Auth::user()->can('responderComentario', $comentario->comentarioable))
+                array_push($comentariosDestinadosAoUsuarioLogado, $comentario);
+        }
+
+        // RESPOSTAS DE COMENTARIOS
+        $respostas = Comentario::where('comentario_id', '<>', null)
+            ->where('lido', '=', false)
+            ->get()
+            ->where('comentario.user_id', '=', Auth::id());
+        
+        return ['comentarios' => $comentariosDestinadosAoUsuarioLogado, 'respostas' => $respostas];
+    }
+
+    public static function marcarComentariosComoLidos($comentarioable) {
+        $comentarios = $comentarioable->comentarios;
+        foreach ($comentarios as $comentario) {
+            
+            // COMENTARIOS COMUNS (ORGANIZADOR)
+            if(Auth::user()->can('responderComentario', $comentarioable) && !$comentario->lido) {
+                $comentario->lido = true;
+                $comentario->save();
+                
+                $comentario['lidoAgora'] = true;
+            }
+
+            // RESPOSTAS DE COMENTARIOS (USUARIO COMUM)
+            foreach ($comentario->respostas as $resposta) {
+                if($resposta->comentario->usuario->id == Auth::id() && !$resposta->lido) {
+                    $resposta->lido = true;
+                    $resposta->save();
+            
+                    $resposta['lidoAgora'] = true;
+                }
+            }
+        }
+    }
 }

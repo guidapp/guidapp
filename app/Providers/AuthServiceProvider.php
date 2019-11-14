@@ -44,6 +44,8 @@ class AuthServiceProvider extends ServiceProvider
                 return $user->id == $prato->estabelecimento->organizador->id;
             } else if(get_class($object) == 'App\\Atracao') {
                 $atracao = Atracao::find($object->id);
+                if(count($atracao->apresentacao) == 0)
+                    return false;
                 return $user->id == $atracao->apresentacao[0]->evento_unico->evento->organizador->id;
             } else {
                 return false;

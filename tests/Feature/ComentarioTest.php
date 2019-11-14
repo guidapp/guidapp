@@ -194,6 +194,7 @@ class ComentarioTest extends TestCase
             'comentarioable_id' => $evento->id,
             'comentarioable_type' => 'App\Evento',
             'comentario_id' => $comentario->id,
+            'lido' => false,
             'user_id' => $evento->organizador->id]);
         
         $response = $this->actingAs($user)
@@ -206,7 +207,7 @@ class ComentarioTest extends TestCase
 
     public function testMostrarComentariosNaoLidos()
     {
-        $user = factory('App\User')->create();
+        $user = factory('App\User')->create(['cpf' => 'cpf_fake']);
 
         $evento = factory('App\Evento')->create([
             'user_id' => $user->id]);
@@ -214,8 +215,10 @@ class ComentarioTest extends TestCase
         $comentario = factory('App\Comentario')->create([
             'comentarioable_id' => $evento->id,
             'comentarioable_type' => 'App\Evento',
+            'comentario_id' => null,
+            'lido' => false,
             'user_id' => 1]);
-        
+
         $response = $this->actingAs($user)
             ->get(route('comentarios'));
         
@@ -226,7 +229,7 @@ class ComentarioTest extends TestCase
 
     public function testMarcarComentariosComoLidos()
     {
-        $user = factory('App\User')->create();
+        $user = factory('App\User')->create(['cpf' => 'cpf_fake']);
 
         $evento = factory('App\Evento')->create([
             'user_id' => $user->id]);
@@ -234,6 +237,8 @@ class ComentarioTest extends TestCase
         $comentario = factory('App\Comentario')->create([
             'comentarioable_id' => $evento->id,
             'comentarioable_type' => 'App\Evento',
+            'comentario_id' => null,
+            'lido' => false,
             'user_id' => 1]);
         
         // ler os comentarios

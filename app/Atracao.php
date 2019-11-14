@@ -56,4 +56,8 @@ class Atracao extends Model
 
         $this->comentarios()->save($comentario);
     }
+
+    public function getModelName() {
+        return 'atracao';
+    }
 }

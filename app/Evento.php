@@ -85,4 +85,8 @@ class Evento extends Model
 
         $this->comentarios()->save($comentario);
     }
+
+    public function getModelName() {
+        return 'evento';
+    }
 }
