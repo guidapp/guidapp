@@ -5,6 +5,9 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+use Illuminate\Support\Facades\Auth;
+
+
 class Estabelecimento extends Model
 {
     use SoftDeletes;
@@ -57,7 +60,7 @@ class Estabelecimento extends Model
     }
 
     public function organizador(){
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function comentarios(){
@@ -79,5 +82,19 @@ class Estabelecimento extends Model
         }
 
         return 0;
+    }
+
+    public function addComentario($texto) {
+        $comentario = new Comentario;
+        $comentario->texto = $texto;
+        $comentario->lido = false;
+
+        $comentario->usuario()->associate(Auth::user());
+
+        $this->comentarios()->save($comentario);
+    }
+
+    public function getModelName() {
+        return 'estabelecimento';
     }
 }

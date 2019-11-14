@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Validator;
 
+use Illuminate\Support\Facades\Auth;
+
+
 class Atracao extends Model
 {
     use SoftDeletes;
@@ -42,5 +45,19 @@ class Atracao extends Model
 
     public function tags(){
         return $this->morphToMany('App\Tag', 'taggable');
+    }
+
+    public function addComentario($texto) {
+        $comentario = new Comentario;
+        $comentario->texto = $texto;
+        $comentario->lido = false;
+
+        $comentario->usuario()->associate(Auth::user());
+
+        $this->comentarios()->save($comentario);
+    }
+
+    public function getModelName() {
+        return 'atracao';
     }
 }

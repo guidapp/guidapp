@@ -15,13 +15,13 @@ class AddComentariosForeignKeys extends Migration
     {
         Schema::table('comentarios', function (Blueprint $table) {
             $table->unsignedBigInteger('comentario_id')->nullable();
-            // $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
             // $table->unsignedBigInteger('estabelecimento_id')->nullable();
             // $table->unsignedBigInteger('prato_id')->nullable();
             // $table->unsignedBigInteger('evento_id')->nullable();
             // $table->unsignedBigInteger('atracao_id')->nullable();
             $table->foreign('comentario_id')->references('id')->on('comentarios');
-            // $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
             // $table->foreign('estabelecimento_id')->references('id')->on('estabelecimentos');
             // $table->foreign('prato_id')->references('id')->on('pratos');
             // $table->foreign('evento_id')->references('id')->on('eventos');
@@ -42,7 +42,7 @@ class AddComentariosForeignKeys extends Migration
             // ]);
 
             $table->dropColumn([
-                'comentario_id'
+                'comentario_id', 'user_id'
             ]);
         });
     }

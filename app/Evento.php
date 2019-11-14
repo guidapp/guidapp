@@ -5,12 +5,16 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+use Illuminate\Support\Facades\Auth;
+
 class Evento extends Model
 {
     use SoftDeletes;
     protected $fillable = [
         'nome', 'descricao', 'avaliacao', 'visitas', 'hash'
     ];
+
+    protected $appends = ['qntComentariosNaoLidos'];
 
     public static $rules = [
         'nome' => 'required|string|max:255',
@@ -28,6 +32,10 @@ class Evento extends Model
         'between' => 'O campo :attribute deve ter um valor entre 0 e 5',
     ];
 
+    public function getQntComentariosNaoLidosAttribute() {
+        return $this->comentarios->where('lido', false)->count();
+    }
+
     public function imagems(){
         return $this->morphMany('App\Imagem', 'imagemable');
     }
@@ -41,7 +49,7 @@ class Evento extends Model
     }
 
     public function comentarios(){
-        return $this->morphMany('App\Comentario', 'comentarioable');
+        return $this->morphMany('App\Comentario', 'comentarioable')->where('comentario_id', null);
     }
 
     public function avaliacao(){
@@ -49,7 +57,7 @@ class Evento extends Model
     }
 
     public function organizador(){
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function ingresso(){
@@ -66,5 +74,19 @@ class Evento extends Model
 
     public function festival(){
         return $this->hasMany(Festival::class);
+    }
+
+    public function addComentario($texto) {
+        $comentario = new Comentario;
+        $comentario->texto = $texto;
+        $comentario->lido = false;
+
+        $comentario->usuario()->associate(Auth::user());
+
+        $this->comentarios()->save($comentario);
+    }
+
+    public function getModelName() {
+        return 'evento';
     }
 }
