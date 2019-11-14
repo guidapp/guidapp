@@ -24,6 +24,16 @@ class ComentarioController extends Controller
             'object' => $object]);
     }
 
+    public function listagemComentariosUsuario() {
+        foreach (['Evento', 'Prato'] as $model) {
+            $class = 'App\\'.$model;
+            var_dump($class::all());
+        }
+        // $eventos = Evento::all()->where('qntComentariosNaoLidos', '>', '0');
+        
+        // return $eventos;
+    }
+
     public function addComentario(Request $request, $model, $id) {
         $object = $this->getObject($model, $id);
         if(!$object)

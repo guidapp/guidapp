@@ -28,6 +28,8 @@ Route::get('ingressos/confirmacao', 'CompraIngressoController@confirmarPagamento
     ->middleware('auth');
 
 // COMENTARIOS
+Route::get('comentarios', 'ComentarioController@listagemComentariosUsuario')->name('comentarios')
+    ->middleware('auth');
 Route::get('comentarios/{model}/{id}', 'ComentarioController@listagemComentarios')
     ->middleware('auth');
 Route::post('comentarios/{model}/{id}/add', 'ComentarioController@addComentario')

@@ -1,14 +1,6 @@
 <html>
     <body>
         <title>Comentarios</title>
-        
-        <script>
-            function responder(id) {
-                resposta = prompt('Resposta:');
-
-
-            }
-        </script>
     </body>
     <head>
 
@@ -23,6 +15,7 @@
         @endif
 
         <h2>Comentarios do {{ $model }} {{ $object->nome }}</h2>
+        <h5>{{ $object->qntComentariosNaoLidos }} comentarios nao lidos</h5>
 
         <br>
 

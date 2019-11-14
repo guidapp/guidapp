@@ -7,6 +7,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 use App\User;
+use App\Evento;
 
 class ComentarioTest extends TestCase
 {
@@ -176,5 +177,72 @@ class ComentarioTest extends TestCase
             ->post('/comentarios/responder/'.$comentario->id, ['texto' => $resposta->texto]);
         
         $response->assertStatus(403);
+    }
+
+    public function testMostrarRespostasNaoLidasDeComentarios()
+    {
+        $user = factory('App\User')->create();
+
+        $evento = Evento::find(1);
+
+        $comentario = factory('App\Comentario')->create([
+            'comentarioable_id' => $evento->id,
+            'comentarioable_type' => 'App\Evento',
+            'user_id' => $user->id]);
+        
+        $resposta = factory('App\Comentario')->create([
+            'comentarioable_id' => $evento->id,
+            'comentarioable_type' => 'App\Evento',
+            'comentario_id' => $comentario->id,
+            'user_id' => $evento->organizador->id]);
+        
+        $response = $this->actingAs($user)
+            ->get(route('comentarios'));
+        
+        $response->assertStatus(200)
+            ->assertSee($evento->nome)
+            ->assertSee('1 resposta não lida');
+    }
+
+    public function testMostrarComentariosNaoLidos()
+    {
+        $user = factory('App\User')->create();
+
+        $evento = factory('App\Evento')->create([
+            'user_id' => $user->id]);
+
+        $comentario = factory('App\Comentario')->create([
+            'comentarioable_id' => $evento->id,
+            'comentarioable_type' => 'App\Evento',
+            'user_id' => 1]);
+        
+        $response = $this->actingAs($user)
+            ->get(route('comentarios'));
+        
+        $response->assertStatus(200)
+            ->assertSee($evento->nome)
+            ->assertSee('1 comentário não lido');
+    }
+
+    public function testMarcarComentariosComoLidos()
+    {
+        $user = factory('App\User')->create();
+
+        $evento = factory('App\Evento')->create([
+            'user_id' => $user->id]);
+
+        $comentario = factory('App\Comentario')->create([
+            'comentarioable_id' => $evento->id,
+            'comentarioable_type' => 'App\Evento',
+            'user_id' => 1]);
+        
+        // ler os comentarios
+        $this->actingAs($user)->get('/comentarios/evento/'.$evento->id);
+        
+        $response = $this->actingAs($user)
+            ->get(route('comentarios'));
+        
+        $response->assertStatus(200)
+            ->assertSee('0 comentários não lidos');
     }
 }

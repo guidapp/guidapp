@@ -14,6 +14,8 @@ class Evento extends Model
         'nome', 'descricao', 'avaliacao', 'visitas', 'hash'
     ];
 
+    protected $appends = ['qntComentariosNaoLidos'];
+
     public static $rules = [
         'nome' => 'required|string|max:255',
         'descricao' => 'required|string|max:3000',
@@ -29,6 +31,10 @@ class Evento extends Model
         'descricao.max' => 'O campo deve ter no máx. 3000 caracteres',
         'between' => 'O campo :attribute deve ter um valor entre 0 e 5',
     ];
+
+    public function getQntComentariosNaoLidosAttribute() {
+        return $this->comentarios->where('lido', false)->count();
+    }
 
     public function imagems(){
         return $this->morphMany('App\Imagem', 'imagemable');
