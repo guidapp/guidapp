@@ -37,7 +37,7 @@
                             <a href="{{route('atracao.cadastrar')}}">+Atração </a>
                             <a href="{{route('evento.cadastrar')}}">+Evento </a>
                             <a href="{{route('paypal.ingresso')}}">+Ingresso </a>
-                            <a href="{{route('estabelecimento.cadastrar')}}">+Estabelecimento </a>
+                            <a href="{{route('estabelecimento.listar')}}">+Estabelecimento </a>
                         @endauth
                     </ul>
 

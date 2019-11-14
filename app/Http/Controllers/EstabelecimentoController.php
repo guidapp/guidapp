@@ -15,7 +15,13 @@ class EstabelecimentoController extends Controller
      */
     public function index()
     {
-        //
+        $estabelecimentos = Estabelecimento::all();
+        return view('ListarEstabelecimentos', ["estabelecimentos" => $estabelecimentos]);
+    }
+
+    public function indexByUserId($id){
+        $estabelecimentos = Estabelecimento::where('user_id','=',$id);
+        return view('ListarEstabelecimentos', compact(['estabelecimentos']));
     }
 
     /**
@@ -69,7 +75,11 @@ class EstabelecimentoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $estabelecimento = Estabelecimento::find($id);
+        if (isset($estabelecimento)) {
+            return view('EditarEstabelecimento', compact('estabelecimento'));
+        }
+        return redirect()->back()->with('warning','Estabelecimento não existe.');
     }
 
     /**
@@ -81,7 +91,16 @@ class EstabelecimentoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate(Estabelecimento::$rules, Estabelecimento::$messages);
+        $estabelecimento = Estabelecimento::find($id);
+        $estabelecimento->nome = $request->nome;
+        $estabelecimento->latitude = $request->latitude;
+        $estabelecimento->longitude = $request->longitude;
+        $estabelecimento->descricao = $request->descricao;
+        $estabelecimento->telefone = $request->telefone;
+        $estabelecimento->cidade = $request->cidade;
+        $estabelecimento->save();
+        return redirect()->route('estabelecimento.listar');
     }
 
     /**

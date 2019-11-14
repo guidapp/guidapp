@@ -44,6 +44,11 @@ Route::post('/cadastraratracaosalvar', 'AtracaoController@store')->name('atracao
 //ESTABELECIMENTO
 Route::get('/cadastrarestabelecimento', 'EstabelecimentoController@create')->name('estabelecimento.cadastrar')->middleware('auth');
 Route::post('/cadastrarestabelecimentosalvar', 'EstabelecimentoController@store')->name('estabelecimento.salvar')->middleware('auth');
+Route::get('/listarestabelecimentos', 'EstabelecimentoController@index')->name('estabelecimento.listar')->middleware('auth');
+Route::get('/listarestabelecimentosUser/{id}', 'EstabelecimentoController@indexByUserId')->name('estqabelecimento.listar.user')->middleware('auth');
+Route::get('/mostrarestabelecimento/{id}', 'EstabelecimentoController@show')->name('estabelecimento.mostrar')->middleware('auth');
+Route::get('/editarestabelecimento/{id}', 'EstabelecimentoController@edit')->name('estabelecimento.editar')->middleware('auth');
+Route::post('/editarestabelecimentosalvar/{id}', 'EstabelecimentoController@update')->name('estabelecimento.alterar')->middleware('auth');
 
 // CRIAR EVENTO
 Route::get('/cadastrarevento', 'CadastrarEventoController@cadastrarEvento')->name('evento.cadastrar')->middleware('auth');
