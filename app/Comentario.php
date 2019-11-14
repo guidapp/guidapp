@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+use Illuminate\Support\Facades\Auth;
+
 class Comentario extends Model
 {
     use SoftDeletes;
@@ -57,11 +59,70 @@ class Comentario extends Model
         return $this->belongsTo(Comentario::class);
     }
 
+    public function respostas(){
+        return $this->hasMany(Comentario::class);
+    }
+
     public function estabelecimento(){
         return $this->belongsTo(Estabelecimento::class);
     }
 
     public function usuario(){
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function addResposta($texto) {
+        $comentario = new Comentario;
+        $comentario->texto = $texto;
+        $comentario->lido = false;
+
+        $comentario->usuario()->associate(Auth::user());
+        $comentario->comentario()->associate($this);
+
+        $this->comentarioable->comentarios()->save($comentario);
+    }
+
+    public static function naoLidosDestinadosAoUsuarioLogado() {
+        // COMENTARIOS COMUNS
+        $comentarios = Comentario::where('comentario_id', '=', null)
+            ->where('lido', '=', false)
+            ->get();
+        $comentariosDestinadosAoUsuarioLogado = [];
+        foreach ($comentarios as $comentario) {
+            if(Auth::user()->can('responderComentario', $comentario->comentarioable))
+                array_push($comentariosDestinadosAoUsuarioLogado, $comentario);
+        }
+
+        // RESPOSTAS DE COMENTARIOS
+        $respostas = Comentario::where('comentario_id', '<>', null)
+            ->where('lido', '=', false)
+            ->get()
+            ->where('comentario.user_id', '=', Auth::id());
+        
+        return ['comentarios' => $comentariosDestinadosAoUsuarioLogado, 'respostas' => $respostas];
+    }
+
+    public static function marcarComentariosComoLidos($comentarioable) {
+        $comentarios = $comentarioable->comentarios;
+        foreach ($comentarios as $comentario) {
+            
+            // COMENTARIOS COMUNS (ORGANIZADOR)
+            if(Auth::user()->can('responderComentario', $comentarioable) && !$comentario->lido) {
+                $comentario->lido = true;
+                $comentario->save();
+                
+                $comentario['lidoAgora'] = true;
+            }
+
+            // RESPOSTAS DE COMENTARIOS (USUARIO COMUM)
+            foreach ($comentario->respostas as $resposta) {
+                if($resposta->comentario->usuario->id == Auth::id() && !$resposta->lido) {
+                    $resposta->lido = true;
+                    $resposta->save();
+            
+                    $resposta['lidoAgora'] = true;
+                }
+            }
+        }
     }
 }
