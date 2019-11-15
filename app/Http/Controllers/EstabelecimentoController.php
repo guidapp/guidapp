@@ -16,7 +16,7 @@ class EstabelecimentoController extends Controller
     public function index()
     {
         $estabelecimentos = Estabelecimento::all();
-        return view('ListarEstabelecimentos', ["estabelecimentos" => $estabelecimentos]);
+        return view('ListarEstabelecimentos', compact(['estabelecimentos']));
     }
 
     public function indexByUserId($id){
@@ -53,7 +53,7 @@ class EstabelecimentoController extends Controller
         $estabelecimento->user_id = Auth::user()->id;
         $estabelecimento->save();
         
-        return redirect()->route("estabelecimento.cadastrar");
+        return redirect()->route("estabelecimento.listar");
     }
 
     /**

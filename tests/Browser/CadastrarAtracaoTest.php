@@ -25,7 +25,7 @@ class CadastrarAtracaoTest extends DuskTestCase
                     ->type('nome', $atracao->nome)
                     ->type('descricao', $atracao->descricao)
                     ->pause(2000)
-                    ->press('cadastrar');
+                    ->press('Cadastrar');
         });
     }
 
@@ -38,7 +38,7 @@ class CadastrarAtracaoTest extends DuskTestCase
                     ->type('nome','')
                     ->type('descricao',$atracao->descricao)
                     ->pause(2000)
-                    ->press('cadastrar')
+                    ->press('Cadastrar')
                     ->pause(1000)
                     ->assertSee('O campo nome é obrigatório');
         });
