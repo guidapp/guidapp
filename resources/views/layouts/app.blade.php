@@ -24,53 +24,27 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    GuidApp
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
+
+                <input type="text" class="form-control" style="width:40%;" placeholder="Todos os eventos da cidade em um só lugar! ">
+                <!--Campo de busca-->
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary" type="button">Pesquisar</button>
+                </div>
+
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        @auth
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    Estabelecimentos <span class="caret"></span>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('estabelecimento.cadastrar')}}">Novo estabelecimento</a>
-                                    <a class="dropdown-item" href="{{ route('estabelecimento.listar.user')}}">Meus estabelecimentos</a>
-                                </div>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    Atrações <span class="caret"></span>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('atracao.cadastrar')}}">Nova atração</a>
-                                    <a class="dropdown-item" href="{{ route('estabelecimento.listar.user')}}">Meus estabelecimentos</a>
-                                </div>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    Eventos <span class="caret"></span>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('evento.cadastrar')}}">Novo evento</a>
-                                    <a class="dropdown-item" href="{{ route('estabelecimento.listar.user')}}">Meus estabelecimentos</a>
-                                </div>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    Ingressos <span class="caret"></span>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('evento.cadastrar')}}">Novo evento</a>
-                                    <a class="dropdown-item" href="{{ route('estabelecimento.listar.user')}}">Meus estabelecimentos</a>
-                                </div>
-                            </li>
-                        @endauth
+                        <!-- @auth
+                            <a href="{{route('atracao.cadastrar')}}">+Atração </a>
+                            <a href="{{route('evento.cadastrar')}}">+Evento </a>
+
+                        @endauth -->
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -78,28 +52,58 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Entrar') }}</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Cadastrar') }}</a>
                                 </li>
                             @endif
                         @else
+                          <li class="nav-item">
+                                  <a class="nav-link" href="{{ route('home') }}">{{ __('Home') }}</a>
+                          </li>
+                          <li class="nav-item">
+                                  <a class="nav-link" href="{{ route('evento.cadastrar') }}">{{ __('Criar Evento') }}</a>
+                          </li>
+
                             <li class="nav-item">
                                     <a class="nav-link" href="{{ route('comentarios') }}">{{ __('Comentários') }}</a>
                             </li>
-                            
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                  @if(!is_null( Auth::user()))
+                                      <a class="dropdown-item" href="{{ route('listagemIngressosPagos') }}">
+                                          <div class="btn-group">
+                                              <div style="margin-left:6px; margin-top:3px;">{{ __('Meus Ingressos') }}</div>
+                                          </div>
+                                      </a>
+                                      <hr>
+                                      <a class="dropdown-item" href="{{ route('listar.estabelecimentos.cadastrados') }}">
+                                          <div class="btn-group">
+                                              <div style="margin-left:6px; margin-top:3px;">{{ __('Meu Estabelecimento') }}</div>
+                                          </div>
+                                      </a>
+                                      <a class="dropdown-item" href="{{ route('listar.eventos.cadastrados') }}">
+                                          <div class="btn-group">
+                                              <div style="margin-left:6px; margin-top:3px;">{{ __('Meu Evento') }}</div>
+                                          </div>
+                                      </a>
+                                      <a class="dropdown-item" href="{{ route('configurar.conta') }}">
+                                          <div class="btn-group">
+                                              <div style="margin-left:6px; margin-top:3px;">{{ __('Configurações') }}</div>
+                                          </div>
+                                      </a>
+                                  <hr>
+                                  @endif
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('Sair') }}
                                     </a>
                                     <a class="dropdown-item" href="{{ route('estabelecimento.listar')}}">Estabelecimentos</a>
 

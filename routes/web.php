@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 // INGRESSOS
@@ -21,11 +21,12 @@ Route::get('compraingresso/{id}', 'CompraIngressoController@prepararCompra')
 Route::post('compraingresso', 'CompraIngressoController@comprar')
     ->middleware('auth');
 
-Route::get('ingressos', 'CompraIngressoController@listagemIngressosPagos')
+Route::get('ingressos', 'CompraIngressoController@listagemIngressosPagos')->name('listagemIngressosPagos')
     ->middleware('auth');
 
 Route::get('ingressos/confirmacao', 'CompraIngressoController@confirmarPagamento')->name('ingressos.confirmacao')
     ->middleware('auth');
+
 
 // COMENTARIOS
 Route::get('comentarios', 'ComentarioController@listagemComentariosUsuario')->name('comentarios')
@@ -52,8 +53,19 @@ Route::post('/editarestabelecimentosalvar/{id}', 'EstabelecimentoController@upda
 Route::get('/removerestabelecimento/{id}', 'EstabelecimentoController@destroy')->name('estabelecimento.remover')->middleware('auth');
 
 // CRIAR EVENTO
+// EVENTO
+Route::get('/eventoscadastrados', function(){return view('listarEventosCadastrados');})->name('listar.eventos.cadastrados')->middleware('auth');
 Route::get('/cadastrarevento', 'CadastrarEventoController@cadastrarEvento')->name('evento.cadastrar')->middleware('auth');
-Route::post('/cadastrareventosalvar', 'CadastrarEventoController@cadastrareventosalvar')->name('evento.salvar')->middleware('auth');
+Route::get('/cadastrareventosalvar', 'CadastrarEventoController@cadastrareventosalvar')->name('evento.salvar')->middleware('auth');
+
+// ESTABELECIMENTOS
+Route::get('/estabelecimentoscadastrados', function(){return view('listarEstabelecimentosCadastrados');})->name('listar.estabelecimentos.cadastrados')->middleware('auth');
+Route::get('/cadastrarestabelecimento', function(){return view('cadastrarEstabelecimento');})->name('estabelecimentos.cadastrados')->middleware('auth');
+
+
+//  CONFIGURACAO
+Route::get('/configurarConta', function(){return view('configurarConta');})->name('configurar.conta')->middleware('auth');
+
 
 // ROTAS PAYPAL
 Route::get('/paypal/ingresso', 'PaypalController@pagamentoIngresso')->name('paypal.ingresso')->middleware('auth');
