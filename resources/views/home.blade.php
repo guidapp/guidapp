@@ -2,10 +2,10 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
+    <div class="row">
+        <div class="col-sm" style="padding:1%;">
             <div class="card">
-                <div class="card-header">Dashboard</div>
+                <div class="card-header">Dashboard1</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -14,10 +14,25 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    Lista: Eventos/estabelecimentos
                 </div>
             </div>
         </div>
+        <div class="col-sm" style="padding:1%;">
+            <div class="card">
+                <div class="card-header">Dashboard2</div>
+
+                <div class="card-body">Descrição: eventos/estabelecimentos</div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="padding:1%;">
+    <div style="width:100%;">
+      <div class="card" >
+        <div class="card-header">Dashboard2</div>
+        <div class="card-body">Comentários: eventos/estabelecimentos</div>
+      </div>
+    </div>
     </div>
 </div>
 @endsection
