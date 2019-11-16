@@ -42,6 +42,17 @@ Route::post('comentarios/responder/{id}', 'ComentarioController@responderComenta
 Route::get('/cadastraratracao', 'AtracaoController@create')->name('atracao.cadastrar')->middleware('auth');
 Route::post('/cadastraratracaosalvar', 'AtracaoController@store')->name('atracao.salvar')->middleware('auth');
 
+//ESTABELECIMENTO
+Route::get('/cadastrarestabelecimento', 'EstabelecimentoController@create')->name('estabelecimento.cadastrar')->middleware('auth');
+Route::post('/cadastrarestabelecimentosalvar', 'EstabelecimentoController@store')->name('estabelecimento.salvar')->middleware('auth');
+Route::get('/listarestabelecimentos', 'EstabelecimentoController@index')->name('estabelecimento.listar')->middleware('auth');
+Route::get('/listarestabelecimentosUser', 'EstabelecimentoController@indexByUser')->name('estabelecimento.listar.user')->middleware('auth');
+Route::get('/mostrarestabelecimento/{id}', 'EstabelecimentoController@show')->name('estabelecimento.mostrar')->middleware('auth');
+Route::get('/editarestabelecimento/{id}', 'EstabelecimentoController@edit')->name('estabelecimento.editar')->middleware('auth');
+Route::post('/editarestabelecimentosalvar/{id}', 'EstabelecimentoController@update')->name('estabelecimento.alterar')->middleware('auth');
+Route::get('/removerestabelecimento/{id}', 'EstabelecimentoController@destroy')->name('estabelecimento.remover')->middleware('auth');
+
+// CRIAR EVENTO
 // EVENTO
 Route::get('/eventoscadastrados', function(){return view('listarEventosCadastrados');})->name('listar.eventos.cadastrados')->middleware('auth');
 Route::get('/cadastrarevento', 'CadastrarEventoController@cadastrarEvento')->name('evento.cadastrar')->middleware('auth');
