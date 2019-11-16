@@ -14,7 +14,19 @@ class AtracaoController extends Controller
      */
     public function index()
     {
-        //
+        $atracoes = Atracao::all();
+        return view('ListarAtracoes', compact(['atracoes']));
+    }
+
+    /**
+     * Display a listing of the resource by user.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexByUser()
+    {
+        $atracoes = Atracao::all();
+        return view('ListarAtracoes', compact(['atracoes']));
     }
 
     /**

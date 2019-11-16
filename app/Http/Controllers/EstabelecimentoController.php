@@ -19,9 +19,18 @@ class EstabelecimentoController extends Controller
         return view('ListarEstabelecimentos', compact(['estabelecimentos']));
     }
 
-    public function indexByUserId($id){
-        $estabelecimentos = Estabelecimento::where('user_id','=',$id);
-        return view('ListarEstabelecimentos', compact(['estabelecimentos']));
+    /**
+     * Display a listing of the resource own by a user.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexByUser(){
+        $user = Auth::user();
+        if (isset($user)) {
+            $estabelecimentos = Estabelecimento::where('user_id','=',$user->id)->get();
+            return view('ListarEstabelecimentos', compact(['estabelecimentos']));
+        }
+        return view('home');
     }
 
     /**
@@ -53,7 +62,7 @@ class EstabelecimentoController extends Controller
         $estabelecimento->user_id = Auth::user()->id;
         $estabelecimento->save();
         
-        return redirect()->route("estabelecimento.listar");
+        return redirect()->route("estabelecimento.listar.user");
     }
 
     /**
@@ -64,7 +73,8 @@ class EstabelecimentoController extends Controller
      */
     public function show($id)
     {
-        //
+        $estabelecimento = Estabelecimento::find($id);
+        return view('MostrarEstabelecimento', compact(['estabelecimento']));
     }
 
     /**
@@ -111,6 +121,10 @@ class EstabelecimentoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $estabelecimento = Estabelecimento::find($id);
+        if (isset($estabelecimento)) {
+            $estabelecimento->delete(); 
+        }
+        return redirect()->route('estabelecimento.listar');
     }
 }

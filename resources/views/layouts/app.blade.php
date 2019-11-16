@@ -34,10 +34,42 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         @auth
-                            <a href="{{route('atracao.cadastrar')}}">+Atração </a>
-                            <a href="{{route('evento.cadastrar')}}">+Evento </a>
-                            <a href="{{route('paypal.ingresso')}}">+Ingresso </a>
-                            <a href="{{route('estabelecimento.listar')}}">+Estabelecimento </a>
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    Estabelecimentos <span class="caret"></span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('estabelecimento.cadastrar')}}">Novo estabelecimento</a>
+                                    <a class="dropdown-item" href="{{ route('estabelecimento.listar.user')}}">Meus estabelecimentos</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    Atrações <span class="caret"></span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('atracao.cadastrar')}}">Nova atração</a>
+                                    <a class="dropdown-item" href="{{ route('estabelecimento.listar.user')}}">Meus estabelecimentos</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    Eventos <span class="caret"></span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('evento.cadastrar')}}">Novo evento</a>
+                                    <a class="dropdown-item" href="{{ route('estabelecimento.listar.user')}}">Meus estabelecimentos</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    Ingressos <span class="caret"></span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('evento.cadastrar')}}">Novo evento</a>
+                                    <a class="dropdown-item" href="{{ route('estabelecimento.listar.user')}}">Meus estabelecimentos</a>
+                                </div>
+                            </li>
                         @endauth
                     </ul>
 
@@ -69,6 +101,7 @@
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
+                                    <a class="dropdown-item" href="{{ route('estabelecimento.listar')}}">Estabelecimentos</a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
