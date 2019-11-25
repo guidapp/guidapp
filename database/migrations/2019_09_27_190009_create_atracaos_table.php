@@ -17,7 +17,7 @@ class CreateAtracaosTable extends Migration
             $table->bigIncrements('id');
             $table->string('nome');
             $table->string('descricao')->nullable();
-            $table->date('hora');
+            $table->time('hora');
             $table->timestamps();
             $table->softDeletes();
         });
