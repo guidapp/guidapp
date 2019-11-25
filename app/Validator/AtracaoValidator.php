@@ -14,7 +14,7 @@ class AtracaoValidator
 
         if(!$validator->errors()->isEmpty())
         {
-            throw new ValidationException($validator, "Erro ao validar Prato");
+            throw new ValidationException($validator, "Erro ao validar Atracao");
         }
     }
 }
