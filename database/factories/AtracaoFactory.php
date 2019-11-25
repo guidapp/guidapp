@@ -9,7 +9,7 @@ $factory->define(Atracao::class, function (Faker $faker) {
     return [
         'nome' => $faker->name,
         'descricao' => $faker->text(200),
-        'hora' => now(),
+        'hora' => $faker->time(),
         'evento_unico_id' => $faker->numberBetween(1,15)
     ];
 });
