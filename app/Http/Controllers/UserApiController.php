@@ -15,10 +15,12 @@ class UserApiController extends Controller
     }
 
     public function login(Request $resquest) {
-        $user = User::where('email', $resquest['email'])->get();
+        $user = User::where('email', $resquest['email'])->first();
 
-        if(Hash::check($resquest['senha'], $user[0]->password)) {
-            return response()->json($user[0]);
+        if($user) {
+            if(Hash::check($resquest['senha'], $user->password)) {
+                return response()->json($user);
+            }
         }
 
         abort(401);
