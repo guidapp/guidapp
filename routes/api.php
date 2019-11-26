@@ -26,3 +26,5 @@ Route::resource('usuarios', 'UserApiController');
 Route::get('eventos', 'EventoApiController@index');
 
 Route::post('/login', 'UserApiController@login');
+
+Route::post('/usuarios/alterarsenha', 'UserApiController@alterarSenha');

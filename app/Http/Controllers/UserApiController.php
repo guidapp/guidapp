@@ -39,13 +39,25 @@ class UserApiController extends Controller
         return response()->json($user);
     }
 
-    public function login(Request $resquest) {
-        $user = User::where('email', $resquest['email'])->first();
+    public function login(Request $request) {
+        $user = User::where('email', $request['email'])->first();
 
         if($user) {
-            if(Hash::check($resquest['senha'], $user->password)) {
+            if(Hash::check($request['senha'], $user->password)) {
                 return response()->json($user);
             }
+        }
+
+        abort(401);
+    }
+
+    public function alterarSenha(Request $request) {
+        $user = User::find($request['id']);
+
+        if(Hash::check($request['senhaAtual'], $user->password)) {
+            $user->password = password_hash($request['novaSenha'], PASSWORD_DEFAULT);
+            $user->save();
+            return response()->json($user);
         }
 
         abort(401);
