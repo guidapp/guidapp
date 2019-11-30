@@ -86,12 +86,12 @@
                                       <hr>
                                       <a class="dropdown-item" href="{{ route('listar.estabelecimentos.cadastrados') }}">
                                           <div class="btn-group">
-                                              <div style="margin-left:6px; margin-top:3px;">{{ __('Meu Estabelecimento') }}</div>
+                                              <div style="margin-left:6px; margin-top:3px;">{{ __('Meus Estabelecimentos') }}</div>
                                           </div>
                                       </a>
                                       <a class="dropdown-item" href="{{ route('listar.eventos.cadastrados') }}">
                                           <div class="btn-group">
-                                              <div style="margin-left:6px; margin-top:3px;">{{ __('Meu Evento') }}</div>
+                                              <div style="margin-left:6px; margin-top:3px;">{{ __('Meus Eventos') }}</div>
                                           </div>
                                       </a>
                                       <a class="dropdown-item" href="{{ route('configurar.conta') }}">
