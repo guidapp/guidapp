@@ -1,12 +1,28 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
-
     <div class="row">
       <div style="width:100%;">
         <div class="card">
-          <form action="{{route('evento.salvar')}}">
-          <div class="card-header">Criar Evento</div>
+          <!-- verificar se o usuario vai add ou editar um evento -->
+          @if(isset($eventos))
+            <form action="{{route('atualizar.evento.cadastrar')}}">
+            <div class="card-header">Atualizar Evento</div>
+            <input type="hidden" name="idEvento" value="{{$eventos->id}}">  <!--  armazena o ID do Evento -->
+          @else
+            <form action="{{route('evento.salvar')}}">
+            <div class="card-header">Criar Evento</div>
+          @endif
+
+
+            <!--#####################################################  inputs temporarios ################################################ -->
+            <input type="hidden" name="latitude" value="100">
+            <input type="hidden" name="longitude" value="100">
+            <!--#####################################################  x inputs temporarios  x ################################################ -->
+
+
+
+
           <div class="row">
             <div class="card-body">
                 <div class="card-body">Area das imagens</div>
@@ -17,7 +33,11 @@
                   <div>
                       <label>Nome do evento<a style="color:red"> *</a></label>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" name="nome_evento" aria-label="Default" placeholder="Digite o nome do evento.">
+                      @if(isset($eventos))
+                        <input type="text" class="@error('nome_evento') is-invalid @enderror form-control" name="nome_evento" aria-label="Default" value="{{ $eventos->nome }}">
+                      @else
+                        <input type="text" class="@error('nome_evento') is-invalid @enderror form-control" name="nome_evento" aria-label="Default" placeholder="Digite o nome do evento.">
+                      @endif
                     </div>
                   </div>
                   <div class="btn-group">
@@ -43,7 +63,11 @@
                   <div>
                       <label>Tags<a style="color:red"> *</a></label>
                     <div class="input-group mb-3">
+                      @if(isset($eventos))
+                        <textarea type="text" class="form-control" name="tags" aria-label="Default">{{ $eventos->tags }}</textarea>
+                      @else
                         <input type="text" class="form-control" name="tags" aria-label="Default" placeholder="#SHOW #BALADA #MUSICAAOVIVO #SAMBA"></input>
+                      @endif
                     </div>
                   </div>
                   </div>
@@ -55,23 +79,37 @@
               <div>
                   <label>Descrição<a style="color:red"> *</a></label>
                 <div class="input-group mb-3">
-                    <textarea type="text" class="form-control" name="descricao" aria-label="Default" placeholder="Descreva aqui sobre o evento."></textarea>
+                    @if(isset($eventos))
+                      <textarea type="text" class="form-control" name="descricao" aria-label="Default">{{ $eventos->descricao }}</textarea>
+                    @else
+                      <textarea type="text" class="form-control" name="descricao" aria-label="Default" placeholder="Descreva aqui sobre o evento."></textarea>
+                    @endif
                 </div>
               </div>
-              <div>
-                  <label>Ingresso</label>
-                <div class="input-group mb-3">
+                <div>
+                    <label>Ingresso</label>
+                  @if(isset($eventos))
+                    <textarea type="text" class="form-control" name="ingresso" aria-label="Default">{{ $eventos->ingresso }}</textarea>
+                  @else
                     <textarea type="text" class="form-control" name="ingresso" aria-label="Default" placeholder="Descreva aqui sobre o ingresso."></textarea>
+                  @endif
                 </div>
-              </div>
-              <div>
-                  <label>Pagamento</label>
-                <div class="input-group mb-3">
-                    <textarea type="text" class="form-control" name="ingresso" aria-label="Default" placeholder="Descreva aqui a forma de pagamento para o seu evento."></textarea>
+                <div>
+                    <label>Pagamento</label>
+                  <div class="input-group mb-3">
+                    @if(isset($eventos))
+                      <textarea type="text" class="form-control" name="pagamento" aria-label="Default">{{ $eventos->pagamento }}</textarea>
+                    @else
+                      <textarea type="text" class="form-control" name="pagamento" aria-label="Default" placeholder="Descreva aqui a forma de pagamento para o seu evento."></textarea>
+                    @endif
+                  </div>
                 </div>
-              </div>
               <div>
-                <button type="submit" class="btn btn-primary">Próximo</button>
+                @if(isset($eventos))
+                  <button type="submit" class="btn btn-primary">Atualizar</button>
+                @else
+                  <button type="submit" class="btn btn-primary">Próximo</button>
+                @endif
                 <button class="btn btn-primary">Cancelar</button>
               </div>
             </div>
