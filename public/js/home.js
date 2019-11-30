@@ -73,11 +73,14 @@ function createIngressoItemList(ingresso) {
 }
 
 function selecionarEvento(evento) {
+    document.getElementById('ingressos').style.display = "flex";
+   
     document.getElementById('nome_evento').innerHTML = evento.nome;
     document.getElementById('tags_evento').innerHTML = "tags";
     document.getElementById('local_evento').innerHTML = "local";
     document.getElementById('datahora_evento').innerHTML = "datahora";
     document.getElementById('botao-visualizacoes').innerHTML = evento.visitas + " visualizacoes";
+    document.getElementById('botao-ingressos').innerHTML = "Comprar ingressos";
     document.getElementById('descricao').innerHTML = evento.descricao;
     document.getElementById('valor-total-ingressos').innerHTML = 0
 
@@ -146,6 +149,41 @@ function selecionarEvento(evento) {
     window.scrollTo(0, 0);
 
     // console.log(evento);
+}
+
+function selecionarEstabelecimento(estabelecimento) {
+    document.getElementById('ingressos').style.display = "none";
+    
+    document.getElementById('nome_evento').innerHTML = estabelecimento.nome;
+    document.getElementById('tags_evento').innerHTML = "tags";
+    document.getElementById('local_evento').innerHTML = "local";
+    document.getElementById('datahora_evento').innerHTML = "datahora";
+    document.getElementById('botao-visualizacoes').innerHTML = "-";
+    document.getElementById('botao-ingressos').innerHTML = "-";
+    document.getElementById('descricao').innerHTML = estabelecimento.descricao;
+
+    var lista_imagens = document.getElementById('listaImagens');
+    lista_imagens.innerHTML = "";
+    for (i = 0; i < estabelecimento.imagems.length; i++) {
+        imagem = estabelecimento.imagems[i];
+        var elemImagem = document.createElement("img");
+        elemImagem.classList.add("imagem-menor");
+        elemImagem.classList.add("imagens-laterais");
+        elemImagem.src = imagem.nome;
+        elemImagem.addEventListener('click', function(){selecionarImagem(this);}, false);
+        lista_imagens.appendChild(elemImagem);
+    }
+
+    var imagem_destaque = document.getElementById('imagemDestaque');
+    if(estabelecimento.imagems.length > 0) {
+        imagem_destaque.src = estabelecimento.imagems[0].nome
+    } else {
+        imagem_destaque.src = "images/sem-imagem.jpg"
+    }
+
+    window.scrollTo(0, 0);
+
+    // console.log(estabelecimento);
 }
 
 function selecionarImagem(elemImagem){

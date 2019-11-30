@@ -24,44 +24,78 @@
     <div class="row">
         <div class="col-sm-4" style="padding:1%;">
             <div class="card text-center">
-                <div class="card-header">
-                    <ul class="nav nav-tabs card-header-tabs">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#">Eventos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Estabelecimentos</a>
-                        </li>
-                    </ul>
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="eventos-tab" data-toggle="tab" href="#eventos" role="tab" aria-controls="eventos" aria-selected="true">Eventos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#estabelecimentos" role="tab" aria-controls="estabelecimentos" aria-selected="false">Estabelecimentos</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="eventos" role="tabpanel" aria-labelledby="eventos-tab">
+                        @if(count($eventos) == 0)
+                        <div class="alert alert-danger">
+                                Não há nenhum estabelecimento seu cadastrado no sistema.
+                        </div>
+                        @else
+                            <div class="col-sm">
+                                @foreach ($eventos as $evento)
+                                <div class="card" style="margin:2%" onclick="selecionarEvento({{$evento}})">
+                                    <div class="row">
+                                        <div class="col-sm-5">
+                                            @if (count($evento->imagems) > 0)
+                                                <img src="{{ asset($evento->imagems[0]->nome) }}" class="imagem-menor">
+                                            @else
+                                                <img src="{{ asset('images/sem-imagem.jpg') }}" class="imagem-menor">
+                                            @endif
+                                        </div>
+                                        <div class="col-sm-7 text-left">
+                                            <p class="texto-listagem" style="font-weight:bold">{{ $evento->nome }}</p>
+                                            <p class="texto-listagem">local</p>
+                                            <p class="texto-listagem">hora</p>
+                                            <p class="texto-listagem">{{ $evento->visitas }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                @endforeach
+                            </div>
+                        @endif
+                    </div>
+
+                    <div class="tab-pane fade" id="estabelecimentos" role="tabpanel" aria-labelledby="estabelecimentos-tab">
+                        @if(count($estabelecimentos) == 0)
+                        <div class="alert alert-danger">
+                                Não há nenhum estabelecimento seu cadastrado no sistema.
+                        </div>
+                        @else
+                            <div class="col-sm">
+                                @foreach ($estabelecimentos as $estabelecimento)
+                                <div class="card" style="margin:2%" onclick="selecionarEstabelecimento({{$estabelecimento}})">
+                                    <div class="row">
+                                        <div class="col-sm-5">
+                                            @if (count($estabelecimento->imagems) > 0)
+                                                <img src="{{ asset($estabelecimento->imagems[0]->nome) }}" class="imagem-menor">
+                                            @else
+                                                <img src="{{ asset('images/sem-imagem.jpg') }}" class="imagem-menor">
+                                            @endif
+                                        </div>
+                                        <div class="col-sm-7 text-left">
+                                            <p class="texto-listagem" style="font-weight:bold">{{ $estabelecimento->nome }}</p>
+                                            <p class="texto-listagem">local</p>
+                                            <p class="texto-listagem">hora</p>
+                                            <p class="texto-listagem">{{ $estabelecimento->visitas }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                @endforeach
+                            </div>
+                        @endif
+                    </div>
                 </div>
 
-                @if(count($eventos) == 0)
-                <div class="alert alert-danger">
-                        Não há nenhum estabelecimento seu cadastrado no sistema.
-                </div>
-                @else
-                    <div class="col-sm">
-                        @foreach ($eventos as $evento)
-                        <div class="card" style="margin:2%" onclick="selecionarEvento({{$evento}})">
-                            <div class="row">
-                                <div class="col-sm-5">
-                                    @if (count($evento->imagems) > 0)
-                                        <img src="{{ asset($evento->imagems[0]->nome) }}" class="imagem-menor">
-                                    @else
-                                        <img src="{{ asset('images/sem-imagem.jpg') }}" class="imagem-menor">
-                                    @endif
-                                </div>
-                                <div class="col-sm-7 text-left">
-                                    <p class="texto-listagem" style="font-weight:bold">{{ $evento->nome }}</p>
-                                    <p class="texto-listagem">local</p>
-                                    <p class="texto-listagem">hora</p>
-                                    <p class="texto-listagem">{{ $evento->visitas }}</p>
-                                </div>
-                            </div>
-                        </div>
-                        @endforeach
-                    </div>
-                @endif
+                
             </div>
         </div>
 
@@ -103,7 +137,7 @@
                 </div>
             </div>
 
-            <div class="row" style="padding:1%;">
+            <div id="ingressos" class="row" style="padding:1%;">
                 <div class="col-sm text-left">
                     <div class="card" >
                         <div class="card-header titulo-card">
