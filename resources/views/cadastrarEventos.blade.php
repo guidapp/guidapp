@@ -6,13 +6,11 @@
         <div class="card">
           <!-- verificar se o usuario vai add ou editar um evento -->
           @if(isset($eventos))
-            <form action="{{route('atualizar.evento.cadastrar')}}" enctype="multipart/form-data" method="POST">
-            @csrf
+            <form action="{{route('atualizar.evento.cadastrar')}}">
             <div class="card-header">Atualizar Evento</div>
             <input type="hidden" name="idEvento" value="{{$eventos->id}}">  <!--  armazena o ID do Evento -->
           @else
-            <form action="{{route('evento.salvar')}}" enctype="multipart/form-data" method="POST">
-            @csrf
+            <form action="{{route('evento.salvar')}}">
             <div class="card-header">Criar Evento</div>
           @endif
 
@@ -26,16 +24,10 @@
 
 
           <div class="row">
-            <div class="col-sm-6 text-left">
-              @if(isset($eventos))
-                <img id="image-preview" style="max-width: 500px;max-height: 300px;" src="/{{ $eventos->imagems[0]->nome }}"></img>
-              @else
-                <img id="image-preview" style="max-width: 500px;max-height: 300px;"></img>
-              @endif
-              <br>
-              <input id="image" type="file" accept="image/*" name="imagem" onchange="loadFile(event)">
+            <div class="card-body">
+                <div class="card-body">Area das imagens</div>
             </div>
-            <div class="col-sm-6 text-left">
+            <div class="card-body">
               <div class="card-body">
                 <div class="p-2 bd-highlight">
                   <div>
@@ -123,13 +115,6 @@
             </div>
         </div>
         </form>
-
-        <script>
-          var loadFile = function(event) {
-            var preview = document.getElementById('image-preview');
-            preview.src = URL.createObjectURL(event.target.files[0]);
-          };
-        </script>
       </div>
     </div>
 </div>

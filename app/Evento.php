@@ -60,7 +60,7 @@ class Evento extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function ingressos(){
+    public function ingresso(){
         return $this->hasMany(Ingresso::class);
     }
 
@@ -84,13 +84,6 @@ class Evento extends Model
         $comentario->usuario()->associate(Auth::user());
 
         $this->comentarios()->save($comentario);
-    }
-
-    public function addImagem($nomeImagem) {
-        $imagem = new Imagem;
-        $imagem->nome = $nomeImagem;
-
-        $this->imagems()->save($imagem);
     }
 
     public function getModelName() {
