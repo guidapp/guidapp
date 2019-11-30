@@ -17,7 +17,7 @@ class CreateEventoUnicosTable extends Migration
             $table->bigIncrements('id');
             $table->double('latitude');
             $table->double('longitude');
-            $table->time('data');
+            $table->date('data');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -13,25 +13,27 @@ class Atracao extends Model
 {
     use SoftDeletes;
     protected $fillable = [
-        'nome', 'descricao'
+        'nome', 'descricao', 'hora'
     ];
 
     public static $rules = [
         'nome' => 'required|string|max:500',
         'descricao' => 'nullable|string',
+        'hora' => 'required|after_or_equal:today',
     ];
 
     public static $messages = [
         'required' => 'O campo :attribute é obrigatório',
         'string' => 'O campo :attribute deve ser um texto',
         'nome.max' => 'O nome é muito grande (máx 500 caracteres)',
+        'after_or_equal' => 'A hora do campo :attribute é inválida',
     ];
 
     public function contato(){
         return $this->hasMany(Contato::class);
     }
 
-    public function apresentacao(){
+    public function apresentacaos(){
         return $this->hasMany(Apresentacao::class);
     }
 
@@ -45,6 +47,10 @@ class Atracao extends Model
 
     public function tags(){
         return $this->morphToMany('App\Tag', 'taggable');
+    }
+
+    public function evento_unico(){
+        return $this->belongsTo(EventoUnico::class);
     }
 
     public function addComentario($texto) {

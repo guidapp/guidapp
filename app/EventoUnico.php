@@ -25,8 +25,8 @@ class EventoUnico extends Model
         'after_or_equal' => 'O campo :attribute deve ter data igual ou posterior a hoje',
     ];
 
-    public function apresentacao(){
-        return $this->hasMany(Apresentacao::class);
+    public function atracaos(){
+        return $this->hasMany(Atracao::class);
     }
 
     public function evento(){

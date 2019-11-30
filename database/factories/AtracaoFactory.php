@@ -8,6 +8,8 @@ use Faker\Generator as Faker;
 $factory->define(Atracao::class, function (Faker $faker) {
     return [
         'nome' => $faker->name,
-        'descricao' => $faker->text(200)
+        'descricao' => $faker->text(200),
+        'hora' => $faker->time(),
+        'evento_unico_id' => $faker->numberBetween(1,15)
     ];
 });
