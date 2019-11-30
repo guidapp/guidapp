@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', 'HomeController@index');
 
 // INGRESSOS
 Route::get('compraingresso/{id}', 'CompraIngressoController@prepararCompra')

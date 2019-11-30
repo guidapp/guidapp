@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Estabelecimento;
+use App\Evento;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $estabelecimentos = Estabelecimento::all();
+        $eventos = Evento::with(['tags', 'imagems', 'ingressos'])->get();
+
+        return view('home')->with([
+            'estabelecimentos' => $estabelecimentos,
+            'eventos' => $eventos
+        ]);
     }
 }

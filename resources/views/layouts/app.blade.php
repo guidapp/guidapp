@@ -11,6 +11,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    @stack('scripts')
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -31,7 +32,7 @@
                 </button>
 
 
-                <input type="text" class="form-control" style="width:40%;" placeholder="Todos os eventos da cidade em um só lugar! ">
+                <input id="pesquisa" type="text" class="form-control" style="width:40%;" placeholder="Todos os eventos da cidade em um só lugar! ">
                 <!--Campo de busca-->
                 <div class="input-group-append">
                   <button class="btn btn-outline-secondary" type="button">Pesquisar</button>
