@@ -14,38 +14,21 @@
                 <th scope="col">Opções</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Nome do evento 1</td>
-                <td>Data 1</td>
-                <td>
-                  <button type="button" class="btn btn-primary">Abrir</button>
-                  <button type="button" class="btn btn-secondary">Editar</button>
-                  <button type="button" class="btn btn-danger">Deletar</button>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Nome do evento 2</td>
-                <td>Data 2</td>
-                <td>
-                  <button type="button" class="btn btn-primary">Abrir</button>
-                  <button type="button" class="btn btn-secondary">Editar</button>
-                  <button type="button" class="btn btn-danger">Deletar</button>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>Nome do evento 3</td>
-                <td>Data 3</td>
-                <td>
-                  <button type="button" class="btn btn-primary">Abrir</button>
-                  <button type="button" class="btn btn-secondary">Editar</button>
-                  <button type="button" class="btn btn-danger">Deletar</button>
-                </td>
-              </tr>
-            </tbody>
+            <?php $idTemp =-1; ?>
+            @foreach($eventos as $item)
+              <?php $idTemp++; ?>
+              <tbody>
+                <tr>
+                  <th scope="row">{{$idTemp+1}}</th>
+                  <td>{{$item->nome}}</td>
+                  <td>{{'sei_la'}}</td>
+                  <td>
+                    <a  class="btn btn-secondary btn-sm" style="color:white">Atrações</a>
+                    <a  href="{{ route('editar.cadastrar', ['idEvento' => $item])}}" class="btn btn-primary btn-sm">Editar</a>
+                    <a  href="{{ route('deletar.cadastrar', ['idEvento' => $item])}}" class="btn btn-danger btn-sm" style="color:white">Deletar</a>
+                  </td>
+              </tbody>
+            @endforeach
             </table>
             <a class="btn btn-success" href="{{ route('evento.cadastrar') }}">Criar Evento</a>
         </div>
