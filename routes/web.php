@@ -57,8 +57,8 @@ Route::get('/eventoscadastrados', 'CadastrarEventoController@listarEvento')->nam
 Route::get('/cadastrarevento', 'CadastrarEventoController@cadastrarEvento')->name('evento.cadastrar')->middleware('auth');
 Route::get('/editar/evento', 'CadastrarEventoController@editarEvento')->name('editar.cadastrar')->middleware('auth');
 Route::get('/deletar/evento', 'CadastrarEventoController@deletarEvento')->name('deletar.cadastrar')->middleware('auth');
-Route::get('/atualizarevento', 'CadastrarEventoController@atualizarEvento')->name('atualizar.evento.cadastrar')->middleware('auth');
-Route::get('/cadastrareventosalvar', 'CadastrarEventoController@cadastrarEventoSalvar')->name('evento.salvar')->middleware('auth');
+Route::post('/atualizarevento', 'CadastrarEventoController@atualizarEvento')->name('atualizar.evento.cadastrar')->middleware('auth');
+Route::post('/cadastrareventosalvar', 'CadastrarEventoController@cadastrarEventoSalvar')->name('evento.salvar')->middleware('auth');
 
 // ESTABELECIMENTOS
 Route::get('/estabelecimentoscadastrados', function(){return view('listarEstabelecimentosCadastrados');})->name('listar.estabelecimentos.cadastrados')->middleware('auth');
@@ -76,3 +76,9 @@ Route::get('/paypal/status/ingresso', 'PaypalController@statusPagamentoIngresso'
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/imagens', function() {
+    return view('cadastrarImagem');
+});
+
+Route::post('/imagens', 'ImagemController@store')->name('imagem.cadastrar');

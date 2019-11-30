@@ -86,6 +86,13 @@ class Evento extends Model
         $this->comentarios()->save($comentario);
     }
 
+    public function addImagem($nomeImagem) {
+        $imagem = new Imagem;
+        $imagem->nome = $nomeImagem;
+
+        $this->imagems()->save($imagem);
+    }
+
     public function getModelName() {
         return 'evento';
     }

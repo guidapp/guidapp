@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Session;
 use Illuminate\Support\Facades\Auth;
 use App\Evento;
+use App\Repositories\ImageRepository;
 
 
 class CadastrarEventoController extends Controller
@@ -20,7 +21,16 @@ class CadastrarEventoController extends Controller
 	}
 
 	public function cadastrarEventoSalvar (Request $request){
-		// dd($request);
+		// dd($request->imagem);
+
+		$nomeImagem = '';
+		if(isset($request->imagem)) {
+			$repositorio = new ImageRepository();
+			$nomeImagem = $repositorio->saveImage($request['imagem'], 'evento', 1, 250);
+			if($nomeImagem == '') {
+				abort(400);
+			}
+		}
 
 		//enviar para o banco
 		$evento = new \App\Evento();
@@ -36,6 +46,9 @@ class CadastrarEventoController extends Controller
 		// $evento->QuickHashIntSet
 		$evento->save();
 
+		if(isset($request->imagem)) {
+			$evento->addImagem($nomeImagem);
+		}
 
 		// //enviar para o banco
 		// $evento = new \App\Evento();
