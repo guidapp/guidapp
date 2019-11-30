@@ -41,7 +41,7 @@
                 </div>
                 @else
                     <div class="col-sm">
-                        @foreach ($eventos->slice(0, 4) as $evento)
+                        @foreach ($eventos as $evento)
                         <div class="card" style="margin:2%" onclick="selecionarEvento({{$evento}})">
                             <div class="row">
                                 <div class="col-sm-5">
@@ -95,24 +95,24 @@
                     <p id="botao-ingressos" class="acoes-home" style="background-color: lawngreen;">Comprar ingressos</p>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <div class="row" style="padding:1%;">
-        <div class="col-sm text-left">
-            <p id="titulo-descricao" class="titulo">Descrição do Evento</p>
-            <p id="descricao"></p>
-        </div>
-    </div>
-
-    <div class="row" style="padding:1%;">
-        <div class="col-sm text-left">
-            <div class="card" >
-                <div class="card-header titulo-card">
-                    <div>Ingresso</div>
-                    <div>R$ <a id="valor-total-ingressos"></a></div>
+            <div class="row" style="padding:1%;">
+                <div class="col-sm text-left">
+                    <p id="titulo-descricao" class="titulo">Descrição do Evento</p>
+                    <p id="descricao"></p>
                 </div>
-                <div id="lista-ingressos">
+            </div>
+
+            <div class="row" style="padding:1%;">
+                <div class="col-sm text-left">
+                    <div class="card" >
+                        <div class="card-header titulo-card">
+                            <div>Ingresso</div>
+                            <div>R$ <a id="valor-total-ingressos"></a></div>
+                        </div>
+                        <div id="lista-ingressos">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

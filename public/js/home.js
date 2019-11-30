@@ -143,6 +143,8 @@ function selecionarEvento(evento) {
         lista_ingressos.innerHTML = "<p>Não há ingressos para este evento</p>"
     }
     
+    window.scrollTo(0, 0);
+
     // console.log(evento);
 }
 
