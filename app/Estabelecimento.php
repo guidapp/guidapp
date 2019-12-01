@@ -31,6 +31,10 @@ class Estabelecimento extends Model
         'max' => 'O campo :attribute deve tem no máximo 3000 caracteres'
     ];
 
+    public function usuario(){
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
     public function eventos(){
         return $this->hasMany(Evento::class);
     }

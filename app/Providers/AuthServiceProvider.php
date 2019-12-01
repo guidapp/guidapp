@@ -49,5 +49,25 @@ class AuthServiceProvider extends ServiceProvider
                 return false;
             }
         });
+
+        Gate::define('editarPrato', function ($object) {
+            $estabelecimento = $object->estabelecimento;
+            if(!isset($estabelecimento))
+                return false;
+
+            $usuario = $estabelecimento->usuario;
+            if(!isset($usuario))
+                return false;
+
+            return $usuario->id == Auth::id();
+        });
+
+        Gate::define('editarEstabelecimento', function ($object) {
+            $usuario = User::find($object->id);
+            if(!isset($usuario))
+                return false;
+                
+            return $usuario->id == Auth::id();
+        });
     }
 }
