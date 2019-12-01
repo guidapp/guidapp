@@ -14,28 +14,31 @@ class CadastrarEventoController extends Controller
 {
 	// $idTempEventoSelecionado = 0;
 
-	public function cadastrarEvento(Request $request) {
+	public function cadastrarEvento(Request $request, $idEstabelecimento="") {
 	        //$evento = Ingresso::find($id);
 
-		$estabelecimentos = \App\Estabelecimento::all();
-	    return view('cadastrarEventos')->with(['estabelecimentos' => $estabelecimentos]);
+		// $estabelecimentos = \App\Estabelecimento::all();
+	    return view('cadastrarEventos')->with(['idEstabelecimento' => $idEstabelecimento]);
 	}
 
 	public function cadastrarEventoSalvar (Request $request){
-		// dd($request->imagem);
+		// dd($request->id_estabelecimento == "");
 
 		//enviar para o banco
 		$evento = new \App\Evento();
 		$evento->nome = $request->nome_evento;
 		$evento->descricao = $request->descricao;
 		// $evento->tags = $request->tags;				//tags para o evento
-		 $evento->visitas = 1;										//valor aleatorio
-		 $evento->hash = '16513';									//valor aleatorio
-		 $evento->estabelecimento_id = '1'; 			//valor aleatorio
-		 $evento->avaliacao = 1;									//valor aleatorio
-		 $evento->user_id = Auth::user()->id;
-		// $evento->quantidade
-		// $evento->QuickHashIntSet
+		$evento->visitas = 0;										//valor aleatorio
+		$evento->hash = '16513';									//valor aleatorio
+		$evento->avaliacao = 1;									//valor aleatorio
+		$evento->user_id = Auth::user()->id;
+
+		if($request->id_estabelecimento == "")
+			$evento->estabelecimento_id = null;
+		else
+			$evento->estabelecimento_id = $request->id_estabelecimento;
+
 		$evento->save();
 
 		if(isset($request->imagem)) {
@@ -129,7 +132,13 @@ class CadastrarEventoController extends Controller
 		$estabelecimento = Estabelecimento::find($idEstabelecimento);
 
 		if(!isset($estabelecimento)) {
-
+			return redirect()->route('listar.eventos.cadastrados')->withError('Estabelecimento não encontrado');
 		}
+
+		$eventos = $estabelecimento->eventos;
+
+		return view('listarEventosCadastrados')->with([
+			'eventos' => $eventos,
+			'estabelecimento' => $estabelecimento]);
 	}
 }

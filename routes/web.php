@@ -54,12 +54,13 @@ Route::get('/removerestabelecimento/{id}', 'EstabelecimentoController@destroy')-
 // CRIAR EVENTO
 // EVENTO
 Route::get('/eventoscadastrados', 'CadastrarEventoController@listarEvento')->name('listar.eventos.cadastrados')->middleware('auth');
-Route::get('/cadastrarevento', 'CadastrarEventoController@cadastrarEvento')->name('evento.cadastrar')->middleware('auth');
+Route::get('/cadastrarevento/{idEstabelecimento?}', 'CadastrarEventoController@cadastrarEvento')->name('evento.cadastrar')->middleware('auth');
 Route::get('/editar/evento', 'CadastrarEventoController@editarEvento')->name('editar.cadastrar')->middleware('auth');
 Route::get('/deletar/evento', 'CadastrarEventoController@deletarEvento')->name('deletar.cadastrar')->middleware('auth');
 Route::post('/atualizarevento', 'CadastrarEventoController@atualizarEvento')->name('atualizar.evento.cadastrar')->middleware('auth');
 Route::post('/cadastrareventosalvar', 'CadastrarEventoController@cadastrarEventoSalvar')->name('evento.salvar')->middleware('auth');
 Route::get('/visualizarevento/{id}', 'CadastrarEventoController@visualizarEvento')->name('evento.visualizar');
+Route::get('/estabelecimento/{id}/eventos', 'CadastrarEventoController@indexByEstabelecimento')->name('estabelecimento.eventos.listar');
 
 // ESTABELECIMENTOS
 Route::get('/estabelecimentoscadastrados', 'CadastrarEstabelecimentoController@listarEstabelecimento')->name('listar.estabelecimentos.cadastrados')->middleware('auth');

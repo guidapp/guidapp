@@ -88,7 +88,7 @@
                                                 <a  href="{{ route('estabelecimento.visualizar', [$item->id]) }}" class="btn btn-primary btn-sm" style="color:white">Detalhes</a>
                                             @endcan
                                             <a  href="{{ route('estabelecimento.pratos.listar', [$item->id])}}" class="btn btn-secondary btn-sm" style="color:white">Pratos</a>
-                                            <a  href="" class="btn btn-secondary btn-sm" style="color:white">Eventos</a>
+                                            <a  href="{{ route('estabelecimento.eventos.listar', [$item->id])}}" class="btn btn-secondary btn-sm" style="color:white">Eventos</a>
                                         </td>
                                     </tr>
                                 @endforeach
