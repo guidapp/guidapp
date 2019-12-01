@@ -13,7 +13,7 @@ class CadastrarEstabelecimentoController extends Controller
 
 		//enviar para o banco
 		$estabelecimento = new \App\Estabelecimento();
-		$estabelecimento->nome = $request->nome_estabelecimento;
+		$estabelecimento->nome = $request->nome;
 		$estabelecimento->descricao = $request->descricao;
 		$estabelecimento->latitude = $request->latitude;
 		$estabelecimento->longitude = $request->longitude;
