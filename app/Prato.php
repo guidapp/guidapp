@@ -22,7 +22,8 @@ class Prato extends Model
 
     public static $messages = [
         'required' => 'O campo :attribute é obrigatório',
-        'preco:numeric|min' => 'O preço deve ser um número positivo',
+        'numeric' => 'O preço deve ser um número',
+        'min' => 'O preço deve ser um número positivo',
     ];
 
     public function imagem(){

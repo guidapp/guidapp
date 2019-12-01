@@ -69,12 +69,10 @@ Route::post('/cadastrarestabelecimentosalvar', 'CadastrarEstabelecimentoControll
 // PRATOS
 Route::get('/estabelecimento/{id}/pratos', 'PratoController@indexByEstabelecimento')->name('estabelecimento.pratos.listar')->middleware('auth');
 Route::get('/estabelecimento/{id}/prato/cadastro', 'PratoController@prepararCadastro')->name('prato.cadastrar')->middleware('auth');
-Route::post('/cadastrarestabelecimentosalvar', 'EstabelecimentoController@store')->name('estabelecimento.salvar')->middleware('auth');
-Route::get('/listarestabelecimentosUser', 'EstabelecimentoController@indexByUser')->name('estabelecimento.listar.user')->middleware('auth');
-Route::get('/mostrarestabelecimento/{id}', 'EstabelecimentoController@show')->name('estabelecimento.mostrar')->middleware('auth');
-Route::get('/editarestabelecimento/{id}', 'EstabelecimentoController@edit')->name('estabelecimento.editar')->middleware('auth');
-Route::post('/editarestabelecimentosalvar/{id}', 'EstabelecimentoController@update')->name('estabelecimento.alterar')->middleware('auth');
-Route::get('/removerestabelecimento/{id}', 'EstabelecimentoController@destroy')->name('estabelecimento.remover')->middleware('auth');
+Route::post('/estabelecimento/{id}/prato/cadastro', 'PratoController@cadastro')->name('prato.cadastrar')->middleware('auth');
+Route::get('/prato/{id}', 'PratoController@prapararAtualizacao')->name('prato.atualizar')->middleware('auth');
+Route::post('/prato/{id}', 'PratoController@atualizar')->name('prato.atualizar')->middleware('auth');
+Route::get('/prato/{id}/remover', 'PratoController@remover')->name('prato.remover')->middleware('auth');
 
 //  CONFIGURACAO
 Route::get('/configurarConta', function(){return view('configurarConta');})->name('configurar.conta')->middleware('auth');
