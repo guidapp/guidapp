@@ -16,6 +16,7 @@ class PesquisaController extends Controller
                             ->get();
 
         $estabelecimentos = Estabelecimento::where('nome', 'ilike', '%'.$busca.'%')
+                            ->orWhere('cidade', 'ilike', '%'.$busca.'%')
                             ->get();
 
         $pratos = Prato::where('nome', 'ilike', '%'.$busca.'%')
@@ -39,6 +40,7 @@ class PesquisaController extends Controller
 
     function pesquisarEstabelecimento($busca="") {
         $estabelecimentos = Estabelecimento::where('nome', 'ilike', '%'.$busca.'%')
+                            ->orWhere('cidade', 'ilike', '%'.$busca.'%')
                             ->get();
 
         return view('ResultadoPesquisaEstabelecimentos')->with([
