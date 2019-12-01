@@ -17,8 +17,8 @@
 
           <div class="row">
             <div class="col-sm-6 text-left">
-              @if(isset($prato->imagems[0]))
-                <img id="image-preview" style="max-width: 500px;max-height: 300px;" src="/{{ $prato->imagems[0]->nome }}"></img>
+              @if(isset($prato->imagem))
+                <img id="image-preview" style="max-width: 500px;max-height: 300px;" src="/{{ $prato->imagem->nome }}"></img>
               @else
                 <img id="image-preview" style="max-width: 500px;max-height: 300px;"></img>
               @endif

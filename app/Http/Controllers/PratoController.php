@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Prato;
 use App\Estabelecimento;
+use App\Repositories\ImageRepository;
 
 class PratoController extends Controller
 {
@@ -27,6 +28,14 @@ class PratoController extends Controller
         $prato = new Prato($request->all());
         $prato->estabelecimento_id = $idEstabelecimento;
         $prato->save();
+
+		if(isset($request->imagem)) {
+			$repositorio = new ImageRepository();
+			$nomeImagem = $repositorio->saveImage($request['imagem'], 'prato', $prato->id, 250);
+			if($nomeImagem != '') {
+				$prato->addImagem($nomeImagem);
+			}
+		}
         
         return redirect()->route('estabelecimento.pratos.listar', [$idEstabelecimento])->withSuccess('Prato cadastrado com sucesso.');
     }
@@ -49,6 +58,14 @@ class PratoController extends Controller
 
         $prato->fill($request->all());
         $prato->save();
+
+		if(isset($request->imagem)) {
+			$repositorio = new ImageRepository();
+			$nomeImagem = $repositorio->saveImage($request['imagem'], 'prato', $prato->id, 250);
+			if($nomeImagem != '') {
+				$prato->updateImagem($nomeImagem);
+			}
+		}
 
         return redirect()->route('estabelecimento.pratos.listar', [$prato->estabelecimento->id])->withSuccess('Prato atualizado com sucesso.');
     }

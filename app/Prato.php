@@ -52,6 +52,26 @@ class Prato extends Model
         $this->comentarios()->save($comentario);
     }
 
+    public function addImagem($nomeImagem) {
+        $imagem = new Imagem;
+        $imagem->nome = $nomeImagem;
+
+        $this->imagem()->save($imagem);
+    }
+
+    public function updateImagem($nomeImagem) {
+        if(isset($this->imagem)) {
+            $imagem = $this->imagem;
+            $imagem->nome = $nomeImagem;
+            $imagem->save();
+        } else {
+            $imagem = new Imagem;
+            $imagem->nome = $nomeImagem;
+
+            $this->imagem()->save($imagem);
+        }
+    }
+
     public function getModelName() {
         return 'prato';
     }
