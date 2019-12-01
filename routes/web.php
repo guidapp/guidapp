@@ -78,6 +78,7 @@ Route::get('/prato/{id}/remover', 'PratoController@remover')->name('prato.remove
 Route::post('/pesquisa', 'PesquisaController@pesquisar')->name('pesquisa');
 Route::get('/pesquisa/evento/{busca?}', 'PesquisaController@pesquisarEvento')->name('pesquisa.evento');
 Route::get('/pesquisa/estabelecimento/{busca?}', 'PesquisaController@pesquisarEstabelecimento')->name('pesquisa.estabelecimento');
+Route::get('/pesquisa/prato/{busca?}', 'PesquisaController@pesquisarPrato')->name('pesquisa.prato');
 
 //  CONFIGURACAO
 Route::get('/configurarConta', function(){return view('configurarConta');})->name('configurar.conta')->middleware('auth');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Evento;
 use App\Estabelecimento;
+use App\Prato;
 
 class PesquisaController extends Controller
 {
@@ -17,9 +18,13 @@ class PesquisaController extends Controller
         $estabelecimentos = Estabelecimento::where('nome', 'ilike', '%'.$busca.'%')
                             ->get();
 
+        $pratos = Prato::where('nome', 'ilike', '%'.$busca.'%')
+                            ->get();
+
         return view('ResultadoPesquisa')->with([
             'busca' => $busca,
             'eventos' => $eventos,
+            'pratos' => $pratos,
             'estabelecimentos' => $estabelecimentos]);
     }
 
@@ -39,5 +44,14 @@ class PesquisaController extends Controller
         return view('ResultadoPesquisaEstabelecimentos')->with([
             'busca' => $busca,
             'estabelecimentos' => $estabelecimentos]);
+    }
+
+    function pesquisarPrato($busca="") {
+        $pratos = Prato::where('nome', 'ilike', '%'.$busca.'%')
+                            ->get();
+
+        return view('ResultadoPesquisaPratos')->with([
+            'busca' => $busca,
+            'pratos' => $pratos]);
     }
 }
