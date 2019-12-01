@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Session;
 use Illuminate\Support\Facades\Auth;
 use App\Evento;
+use App\Estabelecimento;
 use App\Repositories\ImageRepository;
 
 
@@ -116,5 +117,19 @@ class CadastrarEventoController extends Controller
 	public function deletarEvento(Request $request){
 		$resultado = Evento::where('id',$request->idEvento)->where('user_id',Auth::user()->id)->delete();
 		return redirect()->route('listar.eventos.cadastrados');
+	}
+
+	public function visualizarEvento($id){
+		$evento = \App\Evento::find($id);
+
+		return view('visualizarEvento', ['evento' => $evento]);
+	}
+
+	public function indexByEstabelecimento($idEstabelecimento) {
+		$estabelecimento = Estabelecimento::find($idEstabelecimento);
+
+		if(!isset($estabelecimento)) {
+
+		}
 	}
 }

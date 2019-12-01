@@ -32,7 +32,7 @@
                 </button>
 
 
-                <form action="{{route('pesquisa')}}" enctype="multipart/form-data" method="POST">
+                <form action="{{route('pesquisa')}}" method="GET">
                 @csrf
                     <input id="pesquisa" name="busca" type="text" class="form-control" style="width:40%;display: inline;min-width: 400px;" placeholder="Todos os eventos da cidade em um só lugar! ">
                     <!--Campo de busca-->

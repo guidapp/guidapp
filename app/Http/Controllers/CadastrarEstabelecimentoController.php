@@ -46,4 +46,13 @@ class CadastrarEstabelecimentoController extends Controller
 		return view('listarEstabelecimentosCadastrados', ['estabelecimentos' => $estabelecimentos]);
 	}
 
+    function visualizarEstabelecimento($id) {
+        $estabelecimento = \App\Estabelecimento::find($id);
+
+        if(!isset($estabelecimento))
+            return redirect('listar.estabelecimentos.cadastrados')->withError('Estabelecimento não encontrado');
+        
+        return view("visualizarEstabelecimento")->with('estabelecimento', $estabelecimento);
+    }
+
 }

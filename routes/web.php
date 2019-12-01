@@ -59,26 +59,29 @@ Route::get('/editar/evento', 'CadastrarEventoController@editarEvento')->name('ed
 Route::get('/deletar/evento', 'CadastrarEventoController@deletarEvento')->name('deletar.cadastrar')->middleware('auth');
 Route::post('/atualizarevento', 'CadastrarEventoController@atualizarEvento')->name('atualizar.evento.cadastrar')->middleware('auth');
 Route::post('/cadastrareventosalvar', 'CadastrarEventoController@cadastrarEventoSalvar')->name('evento.salvar')->middleware('auth');
+Route::get('/visualizarevento/{id}', 'CadastrarEventoController@visualizarEvento')->name('evento.visualizar');
 
 // ESTABELECIMENTOS
 Route::get('/estabelecimentoscadastrados', 'CadastrarEstabelecimentoController@listarEstabelecimento')->name('listar.estabelecimentos.cadastrados')->middleware('auth');
 Route::get('/cadastrarestabelecimento', function(){return view('cadastrarEstabelecimento');})->name('estabelecimentos.cadastrados')->middleware('auth');
 Route::post('/atualizarestabelecimento', 'CadastrarEstabelecimentoController@atualizarEstabelecimento')->name('atualizar.estabelecimento.cadastrar')->middleware('auth');
 Route::post('/cadastrarestabelecimentosalvar', 'CadastrarEstabelecimentoController@cadastrarEstabelecimentoSalvar')->name('estabelecimento.salvar')->middleware('auth');
+Route::get('/visualizarestabelecimento/{id}', 'CadastrarEstabelecimentoController@visualizarEstabelecimento')->name('estabelecimento.visualizar');
 
 // PRATOS
-Route::get('/estabelecimento/{id}/pratos', 'PratoController@indexByEstabelecimento')->name('estabelecimento.pratos.listar')->middleware('auth');
+Route::get('/estabelecimento/{id}/pratos', 'PratoController@indexByEstabelecimento')->name('estabelecimento.pratos.listar');
 Route::get('/estabelecimento/{id}/prato/cadastro', 'PratoController@prepararCadastro')->name('prato.cadastrar')->middleware('auth');
 Route::post('/estabelecimento/{id}/prato/cadastro', 'PratoController@cadastro')->name('prato.cadastrar')->middleware('auth');
 Route::get('/prato/{id}', 'PratoController@prapararAtualizacao')->name('prato.atualizar')->middleware('auth');
 Route::post('/prato/{id}', 'PratoController@atualizar')->name('prato.atualizar')->middleware('auth');
 Route::get('/prato/{id}/remover', 'PratoController@remover')->name('prato.remover')->middleware('auth');
+Route::get('/prato/visualizar/{id}', 'PratoController@visualizar')->name('prato.visualizar');
 
 // PESQUISA
-Route::post('/pesquisa', 'PesquisaController@pesquisar')->name('pesquisa');
 Route::get('/pesquisa/evento/{busca?}', 'PesquisaController@pesquisarEvento')->name('pesquisa.evento');
 Route::get('/pesquisa/estabelecimento/{busca?}', 'PesquisaController@pesquisarEstabelecimento')->name('pesquisa.estabelecimento');
 Route::get('/pesquisa/prato/{busca?}', 'PesquisaController@pesquisarPrato')->name('pesquisa.prato');
+Route::get('/pesquisa/{busca?}', 'PesquisaController@pesquisar')->name('pesquisa');
 
 //  CONFIGURACAO
 Route::get('/configurarConta', function(){return view('configurarConta');})->name('configurar.conta')->middleware('auth');
