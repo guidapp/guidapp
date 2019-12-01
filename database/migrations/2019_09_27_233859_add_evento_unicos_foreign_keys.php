@@ -15,7 +15,7 @@ class AddEventoUnicosForeignKeys extends Migration
     {
         Schema::table('evento_unicos', function (Blueprint $table) {
             $table->unsignedBigInteger('evento_id');
-            $table->bigInteger('festival_id');
+            $table->bigInteger('festival_id')->nullable();
             $table->foreign('evento_id')->references('id')->on('eventos');
             $table->foreign('festival_id')->references('id')->on('festivals');
         });
