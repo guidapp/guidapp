@@ -23,15 +23,6 @@ class CadastrarEventoController extends Controller
 	public function cadastrarEventoSalvar (Request $request){
 		// dd($request->imagem);
 
-		$nomeImagem = '';
-		if(isset($request->imagem)) {
-			$repositorio = new ImageRepository();
-			$nomeImagem = $repositorio->saveImage($request['imagem'], 'evento', 1, 250);
-			if($nomeImagem == '') {
-				abort(400);
-			}
-		}
-
 		//enviar para o banco
 		$evento = new \App\Evento();
 		$evento->nome = $request->nome_evento;
@@ -47,7 +38,11 @@ class CadastrarEventoController extends Controller
 		$evento->save();
 
 		if(isset($request->imagem)) {
-			$evento->addImagem($nomeImagem);
+			$repositorio = new ImageRepository();
+			$nomeImagem = $repositorio->saveImage($request['imagem'], 'evento', $evento->id, 250);
+			if($nomeImagem != '') {
+				$evento->updateImagem($nomeImagem);
+			}
 		}
 
 		// //enviar para o banco
@@ -98,7 +93,18 @@ class CadastrarEventoController extends Controller
 	* VIEW: cadastrarEventos
 	*/
 	public function atualizarEvento(Request $request){
-		$resultado = Evento::where('id',$request->idEvento)->where('user_id',Auth::user()->id)->update(['nome' => $request->nome_evento,'descricao' => $request->descricao]);
+		$resultado = Evento::where('id',$request->idEvento)->where('user_id',Auth::user()->id)->first();
+		
+		$resultado->update(['nome' => $request->nome_evento,'descricao' => $request->descricao]);
+
+		if(isset($request->imagem)) {
+			$repositorio = new ImageRepository();
+			$nomeImagem = $repositorio->saveImage($request['imagem'], 'evento', $resultado->id, 250);
+			if($nomeImagem != '') {
+				$resultado->updateImagem($nomeImagem);
+			}
+		}
+
 		return redirect()->route('listar.eventos.cadastrados');
 	}
 

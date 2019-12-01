@@ -93,6 +93,19 @@ class Evento extends Model
         $this->imagems()->save($imagem);
     }
 
+    public function updateImagem($nomeImagem) {
+        if($this->imagems->count() > 0) {
+            $imagem = $this->imagems[0];
+            $imagem->nome = $nomeImagem;
+            $imagem->save();
+        } else {
+            $imagem = new Imagem;
+            $imagem->nome = $nomeImagem;
+
+            $this->imagems()->save($imagem);
+        }
+    }
+
     public function getModelName() {
         return 'evento';
     }

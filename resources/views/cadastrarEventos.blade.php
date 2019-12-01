@@ -27,7 +27,7 @@
 
           <div class="row">
             <div class="col-sm-6 text-left">
-              @if(isset($eventos))
+              @if(isset($eventos->imagems[0]))
                 <img id="image-preview" style="max-width: 500px;max-height: 300px;" src="/{{ $eventos->imagems[0]->nome }}"></img>
               @else
                 <img id="image-preview" style="max-width: 500px;max-height: 300px;"></img>
