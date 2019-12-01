@@ -7,7 +7,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Imagem::class, function (Faker $faker) {
     return [
-        'nome' => $faker->text,
+        'nome' =>  "images/evento".$faker->numberBetween(1,7).".jpg",
         'imagemable_id' => $faker->numberBetween(1,15),
         'imagemable_type' => $faker->randomElement(
             ['App\Atracao', 

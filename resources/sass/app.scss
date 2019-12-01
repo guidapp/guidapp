@@ -6,3 +6,43 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+.texto-listagem {
+    margin: 0px;
+}
+
+.imagem-menor { 
+    height: 80px;
+}
+
+.imagem-maior { 
+    width: 600px;
+}
+
+.imagens-laterais {
+    margin: 3%;
+}
+
+.acoes-home {
+    margin: 1% 1% 0 0;
+    padding: 10px;
+    font-variant-caps: all-petite-caps;
+    font-size: 20px;
+}
+
+.titulo {
+    font-size: 40px;
+    font-weight: bold;
+    color: gray;
+    font-variant-caps: all-petite-caps;
+}
+
+.titulo-card {
+    font-size: 30px;
+    font-weight: bold;
+    background-color: black;
+    color: white;
+    font-variant-caps: all-petite-caps;
+    display: flex;
+    justify-content: space-between;
+}

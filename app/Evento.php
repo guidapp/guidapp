@@ -60,7 +60,7 @@ class Evento extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function ingresso(){
+    public function ingressos(){
         return $this->hasMany(Ingresso::class);
     }
 
