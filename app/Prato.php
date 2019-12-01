@@ -22,7 +22,8 @@ class Prato extends Model
 
     public static $messages = [
         'required' => 'O campo :attribute é obrigatório',
-        'preco:numeric|min' => 'O preço deve ser um número positivo',
+        'numeric' => 'O preço deve ser um número',
+        'min' => 'O preço deve ser um número positivo',
     ];
 
     public function imagem(){
@@ -49,6 +50,26 @@ class Prato extends Model
         $comentario->usuario()->associate(Auth::user());
 
         $this->comentarios()->save($comentario);
+    }
+
+    public function addImagem($nomeImagem) {
+        $imagem = new Imagem;
+        $imagem->nome = $nomeImagem;
+
+        $this->imagem()->save($imagem);
+    }
+
+    public function updateImagem($nomeImagem) {
+        if(isset($this->imagem)) {
+            $imagem = $this->imagem;
+            $imagem->nome = $nomeImagem;
+            $imagem->save();
+        } else {
+            $imagem = new Imagem;
+            $imagem->nome = $nomeImagem;
+
+            $this->imagem()->save($imagem);
+        }
     }
 
     public function getModelName() {
