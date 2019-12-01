@@ -22,7 +22,7 @@
                   <tr>
                     <th scope="row">{{$idTemp+1}}</th>
                     <td>{{$item->nome}}</td>
-                    <td>{{'sei_la'}}</td>
+                    <td>{{$item->cidade}}</td>
                     <td>
                       <a  href="{{ route('estabelecimento.pratos.listar', [$item->id])}}" class="btn btn-secondary btn-sm" style="color:white">Pratos</a>
                       <a  href="{{ route('estabelecimento.editar', [$item->id])}}" class="btn btn-primary btn-sm">Editar</a>

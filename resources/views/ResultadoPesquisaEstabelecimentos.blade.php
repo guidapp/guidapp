@@ -5,33 +5,34 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="card">
-                <div class="card-header">Eventos</div>
+                <div class="card-header">Estabelecimentos</div>
                 <div class="card-body">
-                    @if ($eventos->count() == 0)
+                    @if ($estabelecimentos->count() == 0)
                         Não foram encontrados resultados para "{{ $busca }}"
                     @else
                         <table class="table table-striped">
                             <thead>
                                 <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Evento</th>
-                                <th scope="col">Data</th>
+                                <th scope="col">Estabelecimento</th>
+                                <th scope="col">Local</th>
                                 <th scope="col">Opções</th>
                                 </tr>
                             </thead>
                             
                             <tbody>
                                 <?php $idTemp =-1; ?>
-                                @foreach($eventos as $item)
+                                @foreach($estabelecimentos as $item)
                                     <?php $idTemp++; ?>
                                     <tr>
                                         <th scope="row">{{$idTemp+1}}</th>
                                         <td>{{$item->nome}}</td>
-                                        <td>{{'sei_la'}}</td>
+                                        <td>{{$item->cidade}}</td>
                                         <td>
-                                            @can('editarEvento', $item)
-                                                <a  href="{{ route('editar.cadastrar', ['idEvento' => $item]) }}" class="btn btn-primary btn-sm">Editar</a>
-                                                <a  href="{{ route('deletar.cadastrar', ['idEvento' => $item]) }}" class="btn btn-danger btn-sm" style="color:white">Deletar</a>
+                                            @can('editarEstabelecimento', $item)
+                                                <a  href="{{ route('estabelecimento.pratos.listar', [$item->id])}}" class="btn btn-secondary btn-sm" style="color:white">Pratos</a>
+                                                <a  href="{{ route('estabelecimento.editar', [$item->id]) }}" class="btn btn-primary btn-sm">Editar</a>
+                                                <a  href="{{ route('estabelecimento.remover', [$item->id]) }}" class="btn btn-danger btn-sm" style="color:white">Deletar</a>
                                             @else
                                                 <a  href="" class="btn btn-primary btn-sm" style="color:white">Ver detalhes</a>
                                             @endcan
