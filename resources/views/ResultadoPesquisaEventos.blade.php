@@ -29,11 +29,10 @@
                                         <td>{{$item->nome}}</td>
                                         <td>{{'sei_la'}}</td>
                                         <td>
+                                            <a  href="{{ route('evento.visualizar', [$item->id]) }}" class="btn btn-primary btn-sm" style="color:white">Detalhes</a>
                                             @can('editarEvento', $item)
                                                 <a  href="{{ route('editar.cadastrar', ['idEvento' => $item]) }}" class="btn btn-primary btn-sm">Editar</a>
                                                 <a  href="{{ route('deletar.cadastrar', ['idEvento' => $item]) }}" class="btn btn-danger btn-sm" style="color:white">Deletar</a>
-                                            @else
-                                                <a  href="" class="btn btn-primary btn-sm" style="color:white">Ver detalhes</a>
                                             @endcan
                                         </td>
                                     </tr>

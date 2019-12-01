@@ -116,12 +116,12 @@
                   </div>
                 </div>
               <div>
+                <a href="{{url()->previous()}}" class="btn btn-danger">Cancelar</a>
                 @if(isset($eventos))
                   <button type="submit" class="btn btn-primary">Atualizar</button>
                 @else
                   <button type="submit" class="btn btn-primary">Próximo</button>
                 @endif
-                <button class="btn btn-primary">Cancelar</button>
               </div>
             </div>
         </div>

@@ -113,8 +113,12 @@
                   @endif
                 </div>
                 <div>
-                  <button type="submit" class="btn btn-primary">Próximo</button>
-                  <button class="btn btn-primary">Cancelar</button>
+                  <a href="{{url()->previous()}}" class="btn btn-danger">Cancelar</a>
+                  @if(isset($estabelecimento))
+                    <button type="submit" class="btn btn-primary">Atualizar</button>
+                  @else
+                    <button type="submit" class="btn btn-primary">Cadastrar</button>
+                  @endif
                 </div>
               </div>
           </div>

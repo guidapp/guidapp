@@ -29,11 +29,10 @@
                                         <td>{{$item->nome}}</td>
                                         <td>{{'sei_la'}}</td>
                                         <td>
+                                            <a  href="{{ route('evento.visualizar', [$item->id]) }}" class="btn btn-primary btn-sm" style="color:white">Detalhes</a>
                                             @can('editarEvento', $item)
                                                 <a  href="{{ route('editar.cadastrar', ['idEvento' => $item]) }}" class="btn btn-primary btn-sm">Editar</a>
                                                 <a  href="{{ route('deletar.cadastrar', ['idEvento' => $item]) }}" class="btn btn-danger btn-sm" style="color:white">Deletar</a>
-                                            @else
-                                                <a  href="{{ route('evento.visualizar', [$item->id]) }}" class="btn btn-primary btn-sm" style="color:white">Detalhes</a>
                                             @endcan
                                         </td>
                                     </tr>
@@ -81,11 +80,10 @@
                                         <td>{{$item->nome}}</td>
                                         <td>{{$item->cidade}}</td>
                                         <td>
+                                            <a  href="{{ route('estabelecimento.visualizar', [$item->id]) }}" class="btn btn-primary btn-sm" style="color:white">Detalhes</a>
                                             @can('editarEstabelecimento', $item)
                                                 <a  href="{{ route('estabelecimento.editar', [$item->id]) }}" class="btn btn-primary btn-sm">Editar</a>
                                                 <a  href="{{ route('estabelecimento.remover', [$item->id]) }}" class="btn btn-danger btn-sm" style="color:white">Deletar</a>
-                                            @else
-                                                <a  href="{{ route('estabelecimento.visualizar', [$item->id]) }}" class="btn btn-primary btn-sm" style="color:white">Detalhes</a>
                                             @endcan
                                             <a  href="{{ route('estabelecimento.pratos.listar', [$item->id])}}" class="btn btn-secondary btn-sm" style="color:white">Pratos</a>
                                             <a  href="{{ route('estabelecimento.eventos.listar', [$item->id])}}" class="btn btn-secondary btn-sm" style="color:white">Eventos</a>
@@ -135,11 +133,10 @@
                                         <td>{{$item->nome}}</td>
                                         <td>R$ {{$item->preco}}</td>
                                         <td>
+                                            <a  href="{{ route('prato.visualizar', [$item->id]) }}" class="btn btn-primary btn-sm" style="color:white">Detalhes</a>
                                             @can('editarPrato', $item)
                                             <a  href="{{ route('prato.atualizar', [$item->id]) }}" class="btn btn-primary btn-sm">Editar</a>
                                             <a  href="{{ route('prato.remover', [$item->id]) }}" class="btn btn-danger btn-sm" style="color:white">Deletar</a>
-                                            @else
-                                            <a  href="{{ route('prato.visualizar', [$item->id]) }}" class="btn btn-primary btn-sm" style="color:white">Detalhes</a>
                                             @endcan
                                         </td>
                                     </tr>

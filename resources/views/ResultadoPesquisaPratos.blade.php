@@ -29,11 +29,10 @@
                                         <td>{{$item->nome}}</td>
                                         <td>R$ {{$item->preco}}</td>
                                         <td>
-                                            @can('editarPrato', $item)
-                                            <a  href="{{ route('prato.atualizar', [$item->id]) }}" class="btn btn-primary btn-sm">Editar</a>
-                                            <a  href="{{ route('prato.remover', [$item->id]) }}" class="btn btn-danger btn-sm" style="color:white">Deletar</a>
-                                            @else
                                             <a  href="{{ route('prato.visualizar', [$item->id]) }}" class="btn btn-primary btn-sm" style="color:white">Ver detalhes</a>
+                                            @can('editarPrato', $item)
+                                                <a  href="{{ route('prato.atualizar', [$item->id]) }}" class="btn btn-primary btn-sm">Editar</a>
+                                                <a  href="{{ route('prato.remover', [$item->id]) }}" class="btn btn-danger btn-sm" style="color:white">Deletar</a>
                                             @endcan
                                         </td>
                                     </tr>
