@@ -14,7 +14,7 @@ class AddEventosForeignKeys extends Migration
     public function up()
     {
         Schema::table('eventos', function (Blueprint $table) {
-            $table->unsignedBigInteger('estabelecimento_id');
+            $table->unsignedBigInteger('estabelecimento_id')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->foreign('estabelecimento_id')->references('id')->on('estabelecimentos');
             $table->foreign('user_id')->references('id')->on('users');

@@ -82,4 +82,13 @@ class PratoController extends Controller
 
         return redirect()->route('estabelecimento.pratos.listar', [$prato->estabelecimento->id])->withSuccess('Prato removido com sucesso.');
     }
+
+    function visualizar($idPrato) {
+        $prato = Prato::find($idPrato);
+
+        if(!isset($prato))
+            return redirect('listar.estabelecimentos.cadastrados')->withError('Prato não encontrado');
+        
+        return view("visualizarPrato")->with('prato', $prato);
+    }
 }
