@@ -53,6 +53,14 @@
       </div>  
       
       <a href="{{url()->previous()}}" class="btn btn-primary" style="margin: 20px">Voltar</a>
+
+      <div class="card">
+        <div class="card-header">Comentários</div>
+
+        <div class="card-body">
+          @include('includes.comentarios')
+        </div>
+      </div>
           
     </div>
   </div>

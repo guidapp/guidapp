@@ -49,7 +49,9 @@ class Evento extends Model
     }
 
     public function comentarios(){
-        return $this->morphMany('App\Comentario', 'comentarioable')->where('comentario_id', null);
+        return $this->morphMany('App\Comentario', 'comentarioable')
+                        ->where('comentario_id', null)
+                        ->orderBy('created_at', 'DESC');
     }
 
     public function avaliacao(){

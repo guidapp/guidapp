@@ -56,7 +56,8 @@ class Comentario extends Model
     }
 
     public function comentario(){
-        return $this->belongsTo(Comentario::class);
+        return $this->belongsTo(Comentario::class)
+                        ->orderBy('created_at', 'DESC');
     }
 
     public function respostas(){
