@@ -32,11 +32,14 @@
                 </button>
 
 
-                <input id="pesquisa" type="text" class="form-control" style="width:40%;" placeholder="Todos os eventos da cidade em um só lugar! ">
-                <!--Campo de busca-->
-                <div class="input-group-append">
-                  <button class="btn btn-outline-secondary" type="button">Pesquisar</button>
-                </div>
+                <form action="{{route('pesquisa')}}" enctype="multipart/form-data" method="POST">
+                @csrf
+                    <input id="pesquisa" name="busca" type="text" class="form-control" style="width:40%;display: inline;min-width: 400px;" placeholder="Todos os eventos da cidade em um só lugar! ">
+                    <!--Campo de busca-->
+                    <div class="input-group-append" style="display: inline;">
+                        <button class="btn btn-outline-secondary" type="submit">Pesquisar</button>
+                    </div>
+                </form>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->

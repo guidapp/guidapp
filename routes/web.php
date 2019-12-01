@@ -74,6 +74,10 @@ Route::get('/prato/{id}', 'PratoController@prapararAtualizacao')->name('prato.at
 Route::post('/prato/{id}', 'PratoController@atualizar')->name('prato.atualizar')->middleware('auth');
 Route::get('/prato/{id}/remover', 'PratoController@remover')->name('prato.remover')->middleware('auth');
 
+// PESQUISA
+Route::post('/pesquisa', 'PesquisaController@pesquisar')->name('pesquisa');
+Route::get('/pesquisa/evento/{busca?}', 'PesquisaController@pesquisarEvento')->name('pesquisa.evento');
+
 //  CONFIGURACAO
 Route::get('/configurarConta', function(){return view('configurarConta');})->name('configurar.conta')->middleware('auth');
 
