@@ -10,41 +10,26 @@
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Estabelecimentos</th>
-                <th scope="col">Status</th>
+                <th scope="col">Local</th>
                 <th scope="col">Opções</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Nome do estabelecimento 1</td>
-                <td>Nº de Visitas/mensagens</td>
-                <td>
-                  <button type="button" class="btn btn-primary">Abrir</button>
-                  <button type="button" class="btn btn-secondary">Editar</button>
-                  <button type="button" class="btn btn-danger">Deletar</button>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Nome do estabelecimento 2</td>
-                <td>Nº de Visitas/mensagens</td>
-                <td>
-                  <button type="button" class="btn btn-primary">Abrir</button>
-                  <button type="button" class="btn btn-secondary">Editar</button>
-                  <button type="button" class="btn btn-danger">Deletar</button>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>Nome do estabelecimento 3</td>
-                <td>Nº de Visitas/mensagens</td>
-                <td>
-                  <button type="button" class="btn btn-primary">Abrir</button>
-                  <button type="button" class="btn btn-secondary">Editar</button>
-                  <button type="button" class="btn btn-danger">Deletar</button>
-                </td>
-              </tr>
+              <?php $idTemp =-1; ?>
+              @foreach($estabelecimentos as $item)
+                <?php $idTemp++; ?>
+                <tbody>
+                  <tr>
+                    <th scope="row">{{$idTemp+1}}</th>
+                    <td>{{$item->nome}}</td>
+                    <td>{{'sei_la'}}</td>
+                    <td>
+                      <a  class="btn btn-secondary btn-sm" style="color:white">Eventos</a>
+                      <a  href="{{ route('estabelecimento.editar', [$item->id])}}" class="btn btn-primary btn-sm">Editar</a>
+                      <a  href="{{ route('estabelecimento.remover', [$item->id])}}" class="btn btn-danger btn-sm" style="color:white">Deletar</a>
+                    </td>
+                </tbody>
+              @endforeach
             </tbody>
             </table>
             <a class="btn btn-success" href="{{ route('estabelecimentos.cadastrados') }}">Criar Estabelecimento</a>

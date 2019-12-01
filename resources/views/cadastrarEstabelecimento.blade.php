@@ -6,10 +6,9 @@
       <div style="width:100%;">
           <div class="card">
             @if(isset($estabelecimento))
-              <form action="{{route('atualizar.estabelecimento.cadastrar')}}" enctype="multipart/form-data" method="POST">
+              <form action="{{route('estabelecimento.alterar', [$estabelecimento->id])}}" enctype="multipart/form-data" method="POST">
               @csrf
               <div class="card-header">Atualizar Estabelecimento</div>
-              <input type="hidden" name="idEvento" value="{{$eventos->id}}">  <!--  armazena o ID do Evento -->
             @else
               <form action="{{route('estabelecimento.salvar')}}" enctype="multipart/form-data" method="POST">
               @csrf
@@ -27,7 +26,7 @@
 
             <div class="row">
               <div class="col-sm-6 text-left">
-                @if(isset($estabelecimento))
+                @if(isset($estabelecimento->imagems[0]))
                   <img id="image-preview" style="max-width: 500px;max-height: 300px;" src="/{{ $estabelecimento->imagems[0]->nome }}"></img>
                 @else
                   <img id="image-preview" style="max-width: 500px;max-height: 300px;"></img>
@@ -43,9 +42,9 @@
                       <label>Nome do Estabelecimento<a style="color:red"> *</a></label>
                       <div class="input-group mb-3">
                         @if(isset($estabelecimento))
-                          <input type="text" class="@error('nome_estabelecimento') is-invalid @enderror form-control" name="nome_estabelecimento" aria-label="Default" value="{{ $estabelecimento->nome }}">
+                          <input type="text" class="@error('nome_estabelecimento') is-invalid @enderror form-control" name="nome" aria-label="Default" value="{{ $estabelecimento->nome }}">
                         @else
-                          <input type="text" class="@error('nome_estabelecimento') is-invalid @enderror form-control" name="nome_estabelecimento" aria-label="Default" placeholder="Digite o nome do estabelecimento.">
+                          <input type="text" class="@error('nome_estabelecimento') is-invalid @enderror form-control" name="nome" aria-label="Default" placeholder="Digite o nome do estabelecimento.">
                         @endif
                       </div>
                     </div>
@@ -74,7 +73,35 @@
                     </div>
                   </div>
               </div>
+            </div>
+          <div class="row">
+            <div class="col-sm-6 " style="margin-left:2%;">
+              <div>
+                <label>Telefone<a style="color:red"> *</a></label>
+                <div class="input-group mb-3">
+                  @if(isset($estabelecimento))
+                    <input type="text" class="@error('telefone') is-invalid @enderror form-control" name="telefone" aria-label="Default" value="{{ $estabelecimento->telefone }}">
+                  @else
+                    <input type="text" class="@error('telefone') is-invalid @enderror form-control" name="telefone" aria-label="Default" placeholder="Digite o telefone.">
+                  @endif
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-5" style="margin-left:1%;">
+              <div>
+                <label>Cidade<a style="color:red"> *</a></label>
+                <div class="input-group mb-3">
+                  @if(isset($estabelecimento))
+                    <input type="text" class="@error('cidade') is-invalid @enderror form-control" name="cidade" aria-label="Default" value="{{ $estabelecimento->cidade }}">
+                  @else
+                    <input type="text" class="@error('cidade') is-invalid @enderror form-control" name="cidade" aria-label="Default" placeholder="Digite a cidade do estabelecimento.">
+                  @endif
+                </div>
+              </div>
+            </div>
           </div>
+          <div class="row">
             <div class="col-sm " style="padding:1%;">
               <div class="card-body">
                 <div>

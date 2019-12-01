@@ -33,6 +33,17 @@ class CadastrarEstabelecimentoController extends Controller
 			}
 		}
 
-		return redirect()->route('atracao.cadastrar');
+		return redirect()->route('listar.estabelecimentos.cadastrados');
 	}
+
+	/*
+	*	FUNCAO: listar todos os estabelecimentos cadastrados
+	* TIPO: GET
+	*	VIEW: listarEstabelecimentosCadastrados
+	*/
+	public function listarEstabelecimento(){
+		$estabelecimentos = \App\Estabelecimento::where('user_id', Auth::user()->id)->get();
+		return view('listarEstabelecimentosCadastrados', ['estabelecimentos' => $estabelecimentos]);
+	}
+
 }
