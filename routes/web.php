@@ -61,9 +61,10 @@ Route::post('/atualizarevento', 'CadastrarEventoController@atualizarEvento')->na
 Route::post('/cadastrareventosalvar', 'CadastrarEventoController@cadastrarEventoSalvar')->name('evento.salvar')->middleware('auth');
 
 // ESTABELECIMENTOS
-Route::get('/estabelecimentoscadastrados', function(){return view('listarEstabelecimentosCadastrados');})->name('listar.estabelecimentos.cadastrados')->middleware('auth');
+Route::get('/estabelecimentoscadastrados', 'CadastrarEstabelecimentoController@listarEstabelecimento')->name('listar.estabelecimentos.cadastrados')->middleware('auth');
 Route::get('/cadastrarestabelecimento', function(){return view('cadastrarEstabelecimento');})->name('estabelecimentos.cadastrados')->middleware('auth');
-
+Route::post('/atualizarestabelecimento', 'CadastrarEstabelecimentoController@atualizarEstabelecimento')->name('atualizar.estabelecimento.cadastrar')->middleware('auth');
+Route::post('/cadastrarestabelecimentosalvar', 'CadastrarEstabelecimentoController@cadastrarEstabelecimentoSalvar')->name('estabelecimento.salvar')->middleware('auth');
 
 //  CONFIGURACAO
 Route::get('/configurarConta', function(){return view('configurarConta');})->name('configurar.conta')->middleware('auth');

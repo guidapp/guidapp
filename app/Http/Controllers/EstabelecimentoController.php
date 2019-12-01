@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Estabelecimento;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Repositories\ImageRepository;
 
 class EstabelecimentoController extends Controller
 {
@@ -28,7 +29,7 @@ class EstabelecimentoController extends Controller
         $user = Auth::user();
         if (isset($user)) {
             $estabelecimentos = Estabelecimento::where('user_id','=',$user->id)->get();
-            return view('ListarEstabelecimentos', compact(['estabelecimentos']));
+            return view('listarEstabelecimentosCadastrados')->with($estabelecimentos);
         }
         return view('home');
     }
@@ -83,14 +84,10 @@ class EstabelecimentoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        $estabelecimento = Estabelecimento::find($id);
-        if (isset($estabelecimento)) {
-            return view('EditarEstabelecimento', compact('estabelecimento'));
-        }
-        return redirect()->back()->with('warning','Estabelecimento não existe.');
-    }
+	public function edit($id){
+		$resultado = Estabelecimento::where('id',$id)->where('user_id',Auth::user()->id)->first();
+		return view('cadastrarEstabelecimento', ['estabelecimento' => $resultado]);
+	}
 
     /**
      * Update the specified resource in storage.
@@ -103,14 +100,18 @@ class EstabelecimentoController extends Controller
     {
         $request->validate(Estabelecimento::$rules, Estabelecimento::$messages);
         $estabelecimento = Estabelecimento::find($id);
-        $estabelecimento->nome = $request->nome;
-        $estabelecimento->latitude = $request->latitude;
-        $estabelecimento->longitude = $request->longitude;
-        $estabelecimento->descricao = $request->descricao;
-        $estabelecimento->telefone = $request->telefone;
-        $estabelecimento->cidade = $request->cidade;
+        $estabelecimento->fill($request->all());
         $estabelecimento->save();
-        return redirect()->route('estabelecimento.listar');
+
+        if(isset($request->imagem)) {
+			$repositorio = new ImageRepository();
+			$nomeImagem = $repositorio->saveImage($request['imagem'], 'estabelecimento', $estabelecimento->id, 250);
+			if($nomeImagem != '') {
+				$estabelecimento->updateImagem($nomeImagem);
+			}
+        }
+        
+        return redirect()->route('listar.estabelecimentos.cadastrados');
     }
 
     /**
@@ -125,6 +126,6 @@ class EstabelecimentoController extends Controller
         if (isset($estabelecimento)) {
             $estabelecimento->delete(); 
         }
-        return redirect()->route('estabelecimento.listar');
+        return redirect()->route('listar.estabelecimentos.cadastrados');
     }
 }
