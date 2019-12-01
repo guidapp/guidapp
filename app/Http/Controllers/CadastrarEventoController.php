@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Session;
 use Illuminate\Support\Facades\Auth;
 use App\Evento;
+use App\Repositories\ImageRepository;
 
 
 class CadastrarEventoController extends Controller
@@ -20,7 +21,7 @@ class CadastrarEventoController extends Controller
 	}
 
 	public function cadastrarEventoSalvar (Request $request){
-		// dd($request);
+		// dd($request->imagem);
 
 		//enviar para o banco
 		$evento = new \App\Evento();
@@ -36,6 +37,13 @@ class CadastrarEventoController extends Controller
 		// $evento->QuickHashIntSet
 		$evento->save();
 
+		if(isset($request->imagem)) {
+			$repositorio = new ImageRepository();
+			$nomeImagem = $repositorio->saveImage($request['imagem'], 'evento', $evento->id, 250);
+			if($nomeImagem != '') {
+				$evento->updateImagem($nomeImagem);
+			}
+		}
 
 		// //enviar para o banco
 		// $evento = new \App\Evento();
@@ -85,7 +93,18 @@ class CadastrarEventoController extends Controller
 	* VIEW: cadastrarEventos
 	*/
 	public function atualizarEvento(Request $request){
-		$resultado = Evento::where('id',$request->idEvento)->where('user_id',Auth::user()->id)->update(['nome' => $request->nome_evento,'descricao' => $request->descricao]);
+		$resultado = Evento::where('id',$request->idEvento)->where('user_id',Auth::user()->id)->first();
+		
+		$resultado->update(['nome' => $request->nome_evento,'descricao' => $request->descricao]);
+
+		if(isset($request->imagem)) {
+			$repositorio = new ImageRepository();
+			$nomeImagem = $repositorio->saveImage($request['imagem'], 'evento', $resultado->id, 250);
+			if($nomeImagem != '') {
+				$resultado->updateImagem($nomeImagem);
+			}
+		}
+
 		return redirect()->route('listar.eventos.cadastrados');
 	}
 
