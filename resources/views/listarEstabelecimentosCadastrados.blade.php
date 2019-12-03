@@ -24,13 +24,13 @@
                     <td>{{$item->nome}}</td>
                     <td>{{$item->cidade}}</td>
                     <td>
-                      <a  href="{{ route('estabelecimento.visualizar', [$item->id]) }}" class="btn btn-primary btn-sm" style="color:white">Detalhes</a>
+                      <a  href="{{ route('estabelecimento.visualizar', [$item->id]) }}" class="btn btn-info btn-sm" style="color:white">Detalhes</a>
+                      <a  href="{{ route('estabelecimento.eventos.listar', [$item->id])}}" class="btn btn-primary btn-sm" style="color:white">Eventos</a>
+                      <a  href="{{ route('estabelecimento.pratos.listar', [$item->id])}}" class="btn btn-primary btn-sm" style="color:white">Cardápio</a>
                       @can('editarEstabelecimento', $item)
-                        <a  href="{{ route('estabelecimento.editar', [$item->id]) }}" class="btn btn-primary btn-sm">Editar</a>
+                        <a  href="{{ route('estabelecimento.editar', [$item->id]) }}" class="btn btn-secondary btn-sm" style="margin-left:40%">Editar</a>
                         <a  href="{{ route('estabelecimento.remover', [$item->id]) }}" class="btn btn-danger btn-sm" style="color:white">Deletar</a>
                       @endcan
-                      <a  href="{{ route('estabelecimento.eventos.listar', [$item->id])}}" class="btn btn-secondary btn-sm" style="color:white">Eventos</a>
-                      <a  href="{{ route('estabelecimento.pratos.listar', [$item->id])}}" class="btn btn-secondary btn-sm" style="color:white">Pratos</a>
                     </td>
                 </tbody>
               @endforeach

@@ -23,10 +23,12 @@
                   <td>{{$item->nome}}</td>
                   <td>{{'sei_la'}}</td>
                   <td>
-                    <a  href="{{ route('evento.visualizar', [$item->id]) }}" class="btn btn-primary btn-sm" style="color:white">Ver detalhes</a>
+                    <a  href="{{ route('evento.visualizar', [$item->id]) }}" class="btn btn-info btn-sm" style="color:white">Detalhes</a>
+                    <a   class="btn btn-primary btn-sm" style="color:white">Atrações</a>
+
                     @can('editarEvento', $item)
-                      <a  href="{{ route('editar.cadastrar', ['idEvento' => $item])}}" class="btn btn-primary btn-sm">Editar</a>
-                      <a  href="{{ route('deletar.cadastrar', ['idEvento' => $item])}}" class="btn btn-danger btn-sm" style="color:white">Deletar</a>
+                      <a  href="{{ route('editar.cadastrar', ['idEvento' => $item])}}" class="btn btn-secondary btn-sm" style="margin-left:50%;">Editar</a>
+                      <a  href="{{ route('deletar.cadastrar', ['idEvento' => $item])}}" class="btn btn-danger btn-sm" style="color:white;">Deletar</a>
                     @endcan
                   </td>
               </tbody>

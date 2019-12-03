@@ -41,6 +41,7 @@
                         </div>
                         @else
                             <div class="col-sm">
+                                <div style="height: 45rem; margin-left:1px; overflow: auto; margin-top:20px; border: 1px solid #000; border-color:#e9e9e9; border-radius: 8px;">
                                 @foreach ($eventos as $evento)
                                 <div class="card" style="margin:2%" onclick="selecionarEvento({{$evento}})">
                                     <div class="row">
@@ -60,6 +61,7 @@
                                     </div>
                                 </div>
                                 @endforeach
+                                </div>
                             </div>
                         @endif
                     </div>
@@ -71,6 +73,7 @@
                         </div>
                         @else
                             <div class="col-sm">
+                                <div style="height: 45rem; margin-left:1px; overflow: auto; margin-top:20px; border: 1px solid #000; border-color:#e9e9e9; border-radius: 8px;">
                                 @foreach ($estabelecimentos as $estabelecimento)
                                 <div class="card" style="margin:2%" onclick="selecionarEstabelecimento({{$estabelecimento}})">
                                     <div class="row">
@@ -90,12 +93,13 @@
                                     </div>
                                 </div>
                                 @endforeach
+                                </div>
                             </div>
                         @endif
                     </div>
                 </div>
 
-                
+
             </div>
         </div>
 
