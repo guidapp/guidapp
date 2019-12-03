@@ -10,6 +10,7 @@
             @csrf
             <div class="card-header">Atualizar Evento</div>
             <input type="hidden" name="idEvento" value="{{$eventos->id}}">  <!--  armazena o ID do Evento -->
+            <input type="hidden" name="idEvento" value="{{$idEvento}}">
           @else
             <form action="{{route('evento.salvar')}}" enctype="multipart/form-data" method="POST">
             @csrf
