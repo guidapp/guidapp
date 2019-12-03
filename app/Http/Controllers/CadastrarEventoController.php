@@ -7,6 +7,7 @@ use Session;
 use Illuminate\Support\Facades\Auth;
 use App\Evento;
 use App\Estabelecimento;
+use App\EventoUnico;
 use App\Repositories\ImageRepository;
 
 
@@ -48,6 +49,8 @@ class CadastrarEventoController extends Controller
 				$evento->updateImagem($nomeImagem);
 			}
 		}
+
+		$evento->addEventoUnico($request);
 
 		// //enviar para o banco
 		// $evento = new \App\Evento();
@@ -100,6 +103,13 @@ class CadastrarEventoController extends Controller
 		$resultado = Evento::where('id',$request->idEvento)->where('user_id',Auth::user()->id)->first();
 		
 		$resultado->update(['nome' => $request->nome_evento,'descricao' => $request->descricao]);
+
+		if(isset($resultado->eventoUnico[0]))
+			$eventoUnico = $resultado->eventoUnico[0];
+			$eventoUnico->latitude = $request->latitude;
+			$eventoUnico->longitude = $request->longitude;
+			$eventoUnico->data = $request->dataEvento;
+			$eventoUnico->save();
 
 		if(isset($request->imagem)) {
 			$repositorio = new ImageRepository();

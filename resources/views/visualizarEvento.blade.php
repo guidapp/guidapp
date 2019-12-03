@@ -32,10 +32,6 @@
               </div>
 
               <div>
-                <label>Hora: {{ $evento->hora }}</label>
-              </div>
-
-              <div>
                 <label>Tags: {{ $evento->tags }}</label>
               </div>
             </div>

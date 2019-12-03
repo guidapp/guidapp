@@ -21,7 +21,13 @@
                 <tr>
                   <th scope="row">{{$idTemp+1}}</th>
                   <td>{{$item->nome}}</td>
-                  <td>{{'sei_la'}}</td>
+                  <td>
+                    @if(isset($item->eventoUnico[0]))
+                      {{ $item->eventoUnico[0]->data }}
+                    @else
+                      <a>--</a>
+                    @endif
+                  </td>
                   <td>
                     <a  href="{{ route('evento.visualizar', [$item->id]) }}" class="btn btn-primary btn-sm" style="color:white">Ver detalhes</a>
                     @can('editarEvento', $item)
