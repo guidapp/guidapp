@@ -35,8 +35,7 @@
                                 </div>
 
                                 <div>
-                                    <label>Data e Hora: </label>
-                                    <button class="btn btn-primary" style="width:200px;">Horário de Funcionamento</button>
+                                    <label>Data e Hora: {{ $estabelecimento->horario }}</label>
                                 </div>
                             </div>
                         </div>

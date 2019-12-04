@@ -32,6 +32,10 @@
               </div>
 
               <div>
+                <label>Horário: {{ $evento->horario }}</label>
+              </div>
+
+              <div>
                 <label>Tags: {{ $evento->tags }}</label>
               </div>
             </div>

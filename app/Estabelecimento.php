@@ -12,7 +12,7 @@ class Estabelecimento extends Model
 {
     use SoftDeletes;
     protected $fillable = [
-        'nome', 'latitude', 'longitude', 'descricao', 'telefone', 'cidade'
+        'nome', 'latitude', 'longitude', 'descricao', 'telefone', 'cidade', 'horario'
     ];
 
     public static $rules = [
@@ -22,6 +22,7 @@ class Estabelecimento extends Model
         'descricao' => 'required|string|max:3000',
         'telefone' => 'required|string',
         'cidade' => 'required|string',
+        'horario' => 'nullable'
     ];
 
     public static $messages = [
