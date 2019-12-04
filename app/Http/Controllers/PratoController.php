@@ -36,7 +36,7 @@ class PratoController extends Controller
 				$prato->addImagem($nomeImagem);
 			}
 		}
-        
+
         return redirect()->route('estabelecimento.pratos.listar', [$idEstabelecimento])->withSuccess('Prato cadastrado com sucesso.');
     }
 
@@ -44,13 +44,13 @@ class PratoController extends Controller
         $prato = Prato::find($idPrato);
 
         return view('cadastrarPratos')->with([
-            'prato' => $prato, 
+            'prato' => $prato,
             'estabelecimento' => $prato->estabelecimento]);
     }
 
     function atualizar(Request $request, $idPrato) {
         $request->validate(Prato::$rules, Prato::$messages);
-        
+
         $prato = Prato::find($idPrato);
 
         if(!isset($prato))
@@ -75,7 +75,7 @@ class PratoController extends Controller
 
         if(!isset($prato))
             return redirect('listar.estabelecimentos.cadastrados')->withError('Prato não encontrado');
-        
+
         $estabelecimento = $prato->estabelecimento;
 
         $prato->delete();
@@ -88,7 +88,7 @@ class PratoController extends Controller
 
         if(!isset($prato))
             return redirect('listar.estabelecimentos.cadastrados')->withError('Prato não encontrado');
-        
+
         return view("visualizarPrato")->with('prato', $prato);
     }
 }

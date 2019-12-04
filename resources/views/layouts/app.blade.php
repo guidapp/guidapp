@@ -45,8 +45,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <!-- @auth
-                            <a href="{{route('atracao.cadastrar')}}">+Atração </a>
-                            <a href="{{route('evento.cadastrar')}}">+Evento </a>
+
 
                         @endauth -->
                     </ul>

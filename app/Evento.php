@@ -111,7 +111,7 @@ class Evento extends Model
 		$evento_unico->latitude = $request->latitude;
 		$evento_unico->longitude = $request->longitude;
 		$evento_unico->data = $request->dataEvento;
-        
+
         $this->eventoUnico()->save($evento_unico);
     }
 
@@ -124,7 +124,17 @@ class Evento extends Model
     }
 
     public function getAtracoes() {
-        return $this->eventoUnico[0]->atracaos;
+        if(isset($this->eventoUnico[0]))
+            return $this->eventoUnico[0]->atracaos;
+        else {
+            $evento_unico = new EventoUnico;
+            $evento_unico->latitude = 100;
+            $evento_unico->longitude = 100;
+            $evento_unico->data = '2019-08-12';
+            $this->eventoUnico()->save($evento_unico);
+
+            return $evento_unico->atracaos;
+        }
     }
 
     public function getModelName() {

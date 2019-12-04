@@ -12,7 +12,7 @@
           @else
             <form action="{{route('prato.cadastrar', [$estabelecimento->id])}}" enctype="multipart/form-data" method="POST">
             @csrf
-            <div class="card-header">Criar Cadastrar</div>
+            <div class="card-header">Criar Prato</div>
           @endif
 
           <div class="row">
@@ -25,7 +25,7 @@
               <br>
               <input id="image" type="file" accept="image/*" name="imagem" onchange="loadFile(event)">
             </div>
-            
+
             <div class="col-sm-6 text-left">
               <div class="card-body">
                 <div class="p-2 bd-highlight">

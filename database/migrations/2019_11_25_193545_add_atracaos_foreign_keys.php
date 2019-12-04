@@ -17,6 +17,9 @@ class AddAtracaosForeignKeys extends Migration
             $table->unsignedBigInteger('evento_unico_id')->nullable();
             $table->foreign('evento_unico_id')->references('id')->on('evento_unicos');
         });
+        Schema::table('atracaos', function (Blueprint $table){
+            $table->foreign('estabelecimento_id')->references('id')->on('estabelecimentos');
+        });
     }
 
     /**

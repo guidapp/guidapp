@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Atracao;
+use App\Evento;
 use Illuminate\Http\Request;
 
 class AtracaoController extends Controller
@@ -34,8 +35,9 @@ class AtracaoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
+        // dd($request);
         return view("cadastrarAtracao");
     }
 
@@ -47,6 +49,7 @@ class AtracaoController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request);
         $request->validate(Atracao::$rules, Atracao::$messages);
         $atracao = new Atracao();
         $atracao->nome = $request->nome;
@@ -61,9 +64,13 @@ class AtracaoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($idEvento)
     {
-        //
+        $evento = Evento::find($idEvento);
+
+        $atracoes = $evento->getAtracoes();
+
+        return view('listarAtracoesCadastrados', ['atracoes' => $atracoes]);
     }
 
     /**

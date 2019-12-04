@@ -37,9 +37,11 @@ Route::post('comentarios/responder/{id}', 'ComentarioController@responderComenta
     ->middleware('auth');
 
 // ATRACAOS
-Route::get('/cadastraratracao', 'AtracaoController@create')->name('atracao.cadastrar')->middleware('auth');
-Route::post('/cadastraratracaosalvar', 'AtracaoController@store')->name('atracao.salvar')->middleware('auth');
-Route::get('/cadastraratracaoshow', 'AtracaoController@show')->name('atracao.show')->middleware('auth');
+// Route::get('/atracao', function(){return view('cadastrarAtracao');})->name('atracao.cadastrar')->middleware('auth');
+// Route::get('/cadastraratracao', 'AtracaoController@create')->name('atracao.cadastrar')->middleware('auth');
+Route::get('/cadastraratracaoshow/{id}', 'AtracaoController@show')->name('atracao.show')->middleware('auth');
+Route::post('/atracao/cadastrar/{idEvento}', 'AtracaoController@store')->name('atracao.cadastrar')->middleware('auth');
+Route::post('/atracao/atualizar/{id}', 'AtracaoController@update')->name('atracao.atualizar')->middleware('auth');
 
 //ESTABELECIMENTO
 Route::get('/cadastrarestabelecimento', 'EstabelecimentoController@create')->name('estabelecimento.cadastrar')->middleware('auth');
