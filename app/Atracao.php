@@ -13,13 +13,13 @@ class Atracao extends Model
 {
     use SoftDeletes;
     protected $fillable = [
-        'nome', 'descricao', 'hora'
+        'nome', 'descricao', 'horario'
     ];
 
     public static $rules = [
         'nome' => 'required|string|max:500',
         'descricao' => 'nullable|string',
-        'hora' => 'required|after_or_equal:today',
+        'horario' => 'required|after_or_equal:today',
     ];
 
     public static $messages = [

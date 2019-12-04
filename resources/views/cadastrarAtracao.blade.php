@@ -44,16 +44,16 @@
                   </div>
 
                   <div>
-                    <label>Hora<a style="color:red"> *</a></label>
+                    <label>Horário<a style="color:red"> *</a></label>
                     <div class="input-group mb-3">
                         @if(isset($atracao))
-                            <input type="time" class="@error('hora') is-invalid @enderror form-control" name="hora" aria-label="Default" value="{{ old('hora', $atracao->hora) }}">
+                            <input type="time" class="@error('horario') is-invalid @enderror form-control" name="horario" aria-label="Default" value="{{ old('horario', $atracao->horario) }}">
                         @else
-                            <input type="time" class="@error('hora') is-invalid @enderror form-control" name="hora" aria-label="Default" placeholder="Digite o hora do atração." value="{{ old('hora', '') }}">
+                            <input type="time" class="@error('horario') is-invalid @enderror form-control" name="horario" aria-label="Default" placeholder="Digite o horario do atração." value="{{ old('horario', '') }}">
                         @endif
                     </div>
-                    @if ($errors->has('hora'))
-                      <a style="color: red; font-weight: bold;">{{ $errors->first('hora') }}</a>
+                    @if ($errors->has('horario'))
+                      <a style="color: red; font-weight: bold;">{{ $errors->first('horario') }}</a>
                     @endif
                   </div>
 

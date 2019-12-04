@@ -21,6 +21,8 @@ class CreateEstabelecimentosTable extends Migration
             $table->string('descricao');
             $table->string('telefone');
             $table->string('cidade');
+            $table->string('horario')->nullable();
+            $table->string('tags')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

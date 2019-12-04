@@ -110,6 +110,27 @@ class Evento extends Model
         }
     }
 
+    public function addEventoUnico($request) {
+        $evento_unico = new EventoUnico;
+		$evento_unico->latitude = $request->latitude;
+		$evento_unico->longitude = $request->longitude;
+		$evento_unico->data = $request->dataEvento;
+        
+        $this->eventoUnico()->save($evento_unico);
+    }
+
+    public function addAtracao($atracao) {
+        if(!isset($evento_unico)) {
+            $this->addEventoUnico();
+        }
+
+        $this->eventoUnico[0]->save($atracao);
+    }
+
+    public function getAtracoes() {
+        return $this->eventoUnico[0]->atracaos;
+    }
+
     public function getModelName() {
         return 'evento';
     }

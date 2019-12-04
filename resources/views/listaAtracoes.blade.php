@@ -40,7 +40,7 @@
                             <tr>
                             <th scope="row">{{$idTemp+1}}</th>
                             <td>{{$item->nome}}</td>
-                            <td>{{$item->hora}}</td>
+                            <td>{{$item->horario}}</td>
                             <td>
                                 <a  href="{{ route('atracao.visualizar', [$item->id]) }}" class="btn btn-primary btn-sm" style="color:white">Ver detalhes</a>
                                 @can('editarAtracao', $item)

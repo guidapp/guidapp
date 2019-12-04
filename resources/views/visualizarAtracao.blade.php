@@ -23,7 +23,7 @@
                 </div>
 
                 <div>
-                    <label>Hora: {{ $atracao->hora }}</label>
+                    <label>Horário: {{ $atracao->horario }}</label>
                 </div>
 
                 <div>
