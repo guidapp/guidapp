@@ -20,6 +20,9 @@ class CreateEventosTable extends Migration
             $table->float('avaliacao');
             $table->integer('visitas');
             $table->string('hash');
+            $table->date('data')->nullable();
+            $table->time('horario')->nullable();
+            $table->string('tags')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

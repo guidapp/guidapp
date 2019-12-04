@@ -16,6 +16,9 @@ $factory->define(Evento::class, function (Faker $faker) {
         'visitas' => $faker->numberBetween(0,10000),
         'hash' => $faker->text,
         'estabelecimento_id' => $estabelecimento->id,
-        'user_id' => $estabelecimento->organizador->id
+        'user_id' => $estabelecimento->organizador->id,
+        'data' => $faker->dateTimeBetween('now','+1 year'),
+        'horario' => $faker->time(),
+        'tags' => $faker->text(200),
     ];
 });

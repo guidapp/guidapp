@@ -10,6 +10,7 @@ $factory->define(Prato::class, function (Faker $faker) {
         'nome' => $faker->name,
         'descricao' => $faker->text,
         'preco' => $faker->numberBetween(50,200),
-        'estabelecimento_id' => $faker->numberBetween(1,15)
+        'estabelecimento_id' => $faker->numberBetween(1,15),
+        'tags' => $faker->text,
     ];
 });

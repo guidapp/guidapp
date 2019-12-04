@@ -19,7 +19,7 @@ class Atracao extends Model
     public static $rules = [
         'nome' => 'required|string|max:500',
         'descricao' => 'nullable|string',
-        'hora' => 'required|after_or_equal:today',
+        'horario' => 'required|after_or_equal:today',
     ];
 
     public static $messages = [

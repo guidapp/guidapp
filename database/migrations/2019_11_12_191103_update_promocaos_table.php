@@ -34,8 +34,8 @@ class UpdatePromocaosTable extends Migration
     public function down()
     {
         Schema::table('promocaos', function (Blueprint $table) {
-            $table->integer('mes');
-            $table->integer('dia_semana');
+            $table->integer('mes')->nullable();
+            $table->integer('dia_semana')->nullable();
             $table->dropColumn('domingo');
             $table->dropColumn('segunda');
             $table->dropColumn('terca');
