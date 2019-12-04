@@ -2,101 +2,90 @@
 
 namespace App\Http\Controllers;
 
-use App\Atracao;
 use Illuminate\Http\Request;
+use App\Atracao;
+use App\Evento;
+use App\Repositories\ImageRepository;
 
 class AtracaoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $atracoes = Atracao::all();
-        return view('ListarAtracoes', compact(['atracoes']));
+    function indexByEvento($idEvento) {
+        $evento = Evento::find($idEvento);
+        $atracaos = $evento->atracaos;
+
+        return view('listaAtracoes')->with(['atracaos' => $atracaos, 'evento' => $evento]);
     }
 
-    /**
-     * Display a listing of the resource by user.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function indexByUser()
-    {
-        $atracoes = Atracao::all();
-        return view('ListarAtracoes', compact(['atracoes']));
+    function prepararCadastro($idEvento) {
+        $evento = Evento::find($idEvento);
+
+        return view('cadastrarAtracao')->with(['evento' => $evento]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view("cadastrarAtracao");
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
+    function cadastro(Request $request, $idEvento) {
         $request->validate(Atracao::$rules, Atracao::$messages);
-        $atracao = new Atracao();
-        $atracao->nome = $request->nome;
-        $atracao->descricao = $request->descricao;
+
+        $atracao = new Atracao($request->all());
+        $atracao->evento_id = $idEvento;
         $atracao->save();
-        return redirect()->route("atracao.cadastrar");
+
+		if(isset($request->imagem)) {
+			$repositorio = new ImageRepository();
+			$nomeImagem = $repositorio->saveImage($request['imagem'], 'atracao', $atracao->id, 250);
+			if($nomeImagem != '') {
+				$atracao->addImagem($nomeImagem);
+			}
+		}
+        
+        return redirect()->route('evento.atracoes.listar', [$idEvento])->withSuccess('Atração cadastrada com sucesso.');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+    function prapararAtualizacao($idAtracao) {
+        $atracao = Atracao::find($idAtracao);
+
+        return view('cadastrarAtracao')->with([
+            'atracao' => $atracao, 
+            'evento' => $atracao->evento]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+    function atualizar(Request $request, $idAtracao) {
+        $request->validate(Atracao::$rules, Atracao::$messages);
+        
+        $atracao = Atracao::find($idAtracao);
+
+        if(!isset($atracao))
+            return redirect('listar.eventos.cadastrados')->withError('Atração não encontrada');
+
+        $atracao->fill($request->all());
+        $atracao->save();
+
+		if(isset($request->imagem)) {
+			$repositorio = new ImageRepository();
+			$nomeImagem = $repositorio->saveImage($request['imagem'], 'atracao', $atracao->id, 250);
+			if($nomeImagem != '') {
+				$atracao->updateImagem($nomeImagem);
+			}
+		}
+
+        return redirect()->route('evento.atracoes.listar', [$atracao->evento->id])->withSuccess('Atração atualizada com sucesso.');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+    function remover($idAtracao) {
+        $atracao = Atracao::find($idAtracao);
+
+        if(!isset($atracao))
+            return redirect('listar.eventos.cadastrados')->withError('Atração não encontrada');
+        
+        $evento = $atracao->evento;
+
+        $atracao->delete();
+
+        return redirect()->route('evento.atracoes.listar', [$atracao->evento->id])->withSuccess('Atração removida com sucesso.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+    function visualizar($id) {
+        $atracao = Atracao::find($id);
+
+        return view('visualizarAtracao')->with('atracao', $atracao);
     }
 }

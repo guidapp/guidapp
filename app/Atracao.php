@@ -13,7 +13,7 @@ class Atracao extends Model
 {
     use SoftDeletes;
     protected $fillable = [
-        'nome', 'descricao', 'hora'
+        'nome', 'descricao', 'horario'
     ];
 
     public static $rules = [
@@ -53,6 +53,10 @@ class Atracao extends Model
         return $this->belongsTo(EventoUnico::class);
     }
 
+    public function evento(){
+        return $this->belongsTo(Evento::class);
+    }
+
     public function addComentario($texto) {
         $comentario = new Comentario;
         $comentario->texto = $texto;
@@ -61,6 +65,26 @@ class Atracao extends Model
         $comentario->usuario()->associate(Auth::user());
 
         $this->comentarios()->save($comentario);
+    }
+
+    public function addImagem($nomeImagem) {
+        $imagem = new Imagem;
+        $imagem->nome = $nomeImagem;
+
+        $this->imagems()->save($imagem);
+    }
+
+    public function updateImagem($nomeImagem) {
+        if($this->imagems->count() > 0) {
+            $imagem = $this->imagems[0];
+            $imagem->nome = $nomeImagem;
+            $imagem->save();
+        } else {
+            $imagem = new Imagem;
+            $imagem->nome = $nomeImagem;
+
+            $this->imagems()->save($imagem);
+        }
     }
 
     public function getModelName() {

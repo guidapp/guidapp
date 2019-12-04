@@ -16,6 +16,8 @@ class AddAtracaosForeignKeys extends Migration
         Schema::table('atracaos', function (Blueprint $table) {
             $table->unsignedBigInteger('evento_unico_id')->nullable();
             $table->foreign('evento_unico_id')->references('id')->on('evento_unicos');
+            $table->unsignedBigInteger('evento_id')->nullable();
+            $table->foreign('evento_id')->references('id')->on('eventos');
         });
     }
 
@@ -28,6 +30,7 @@ class AddAtracaosForeignKeys extends Migration
     {
         Schema::table('atracaos', function (Blueprint $table) {
             $table->dropColumn(['evento_unico_id']);
+            $table->dropColumn(['evento_id']);
         });
     }
 }
