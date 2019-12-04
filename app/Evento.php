@@ -76,6 +76,10 @@ class Evento extends Model
         return $this->hasMany(Festival::class);
     }
 
+    public function atracaos(){
+        return $this->hasMany(Atracao::class);
+    }
+
     public function addComentario($texto) {
         $comentario = new Comentario;
         $comentario->texto = $texto;

@@ -23,7 +23,7 @@
                   <td>{{$item->nome}}</td>
                   <td>{{'sei_la'}}</td>
                   <td>
-                    <a  class="btn btn-secondary btn-sm" style="color:white">Atrações</a>
+                    <a  href="{{ route('evento.atracoes.listar', [$item->id]) }}" class="btn btn-secondary btn-sm" style="color:white">Atrações</a>
                     <a  href="{{ route('editar.cadastrar', ['idEvento' => $item])}}" class="btn btn-primary btn-sm">Editar</a>
                     <a  href="{{ route('deletar.cadastrar', ['idEvento' => $item])}}" class="btn btn-danger btn-sm" style="color:white">Deletar</a>
                   </td>

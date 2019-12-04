@@ -70,5 +70,23 @@ class AuthServiceProvider extends ServiceProvider
 
             return $estabelecimento->usuario->id == Auth::id();
         });
+
+        Gate::define('editarEvento', function ($user, $object) {
+            $evento = Evento::find($object->id);
+
+            if(!isset($evento->organizador))
+                return false;
+
+            return $evento->organizador->id == Auth::id();
+        });
+
+        Gate::define('editarAtracao', function ($user, $object) {
+            $atracao = Atracao::find($object->id);
+
+            if(!isset($atracao->evento))
+                return false;
+
+            return Gate::allows('editarEvento', $atracao->evento);
+        });
     }
 }

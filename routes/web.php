@@ -74,6 +74,15 @@ Route::get('/prato/{id}', 'PratoController@prapararAtualizacao')->name('prato.at
 Route::post('/prato/{id}', 'PratoController@atualizar')->name('prato.atualizar')->middleware('auth');
 Route::get('/prato/{id}/remover', 'PratoController@remover')->name('prato.remover')->middleware('auth');
 
+// ATRACOES
+Route::get('/evento/{id}/atracoes', 'AtracaoController@indexByEvento')->name('evento.atracoes.listar');
+Route::get('/evento/{id}/atracao/cadastro', 'AtracaoController@prepararCadastro')->name('atracao.cadastrar')->middleware('auth');
+Route::post('/evento/{id}/atracao/cadastro', 'AtracaoController@cadastro')->name('atracao.cadastrar')->middleware('auth');
+Route::get('/atracao/{id}', 'AtracaoController@prapararAtualizacao')->name('atracao.atualizar')->middleware('auth');
+Route::post('/atracao/{id}', 'AtracaoController@atualizar')->name('atracao.atualizar')->middleware('auth');
+Route::get('/atracao/{id}/visualizar', 'AtracaoController@visualizar')->name('atracao.visualizar');
+Route::get('/atracao/{id}/remover', 'AtracaoController@remover')->name('atracao.remover')->middleware('auth');
+
 //  CONFIGURACAO
 Route::get('/configurarConta', function(){return view('configurarConta');})->name('configurar.conta')->middleware('auth');
 

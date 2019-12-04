@@ -41,11 +41,6 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        <!-- @auth
-                            <a href="{{route('atracao.cadastrar')}}">+Atração </a>
-                            <a href="{{route('evento.cadastrar')}}">+Evento </a>
-
-                        @endauth -->
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -106,7 +101,6 @@
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Sair') }}
                                     </a>
-                                    <a class="dropdown-item" href="{{ route('estabelecimento.listar')}}">Estabelecimentos</a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf

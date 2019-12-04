@@ -63,7 +63,7 @@ class CadastrarEventoController extends Controller
 		//
 		// $evento->save();
 
-		return redirect()->route('atracao.cadastrar');
+		return redirect()->route('evento.atracoes.listar', $evento->id);
 	}
 
 	/*
