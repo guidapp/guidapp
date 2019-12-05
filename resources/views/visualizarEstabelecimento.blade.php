@@ -23,6 +23,10 @@
                                 </div>
 
                                 <div>
+                                    <label>Endereço: {{ $estabelecimento->endereco }}</label>
+                                </div>
+
+                                <div>
                                     <label>Local: {{ $estabelecimento->cidade }}</label>
                                 </div>
 

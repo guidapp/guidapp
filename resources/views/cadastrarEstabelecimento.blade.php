@@ -50,6 +50,17 @@
                     </div>
 
                     <div>
+                      <label>Endereço do Estabelecimento<a style="color:red"> *</a></label>
+                      <div class="input-group mb-3">
+                        @if(isset($estabelecimento))
+                          <input type="text" class="@error('endereco') is-invalid @enderror form-control" name="endereco" aria-label="Default" value="{{ $estabelecimento->endereco }}">
+                        @else
+                          <input type="text" class="@error('endereco') is-invalid @enderror form-control" name="endereco" aria-label="Default" placeholder="Digite o endereço do estabelecimento.">
+                        @endif
+                      </div>
+                    </div>
+
+                    <div>
                       <label>Horário de Funcionamento<a style="color:red"> *</a></label>
                       <div class="input-group mb-3">
                         @if(isset($estabelecimento))

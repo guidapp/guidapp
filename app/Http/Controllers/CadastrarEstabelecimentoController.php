@@ -17,6 +17,7 @@ class CadastrarEstabelecimentoController extends Controller
 		$estabelecimento->descricao = $request->descricao;
 		$estabelecimento->latitude = $request->latitude;
 		$estabelecimento->longitude = $request->longitude;
+		$estabelecimento->endereco = $request->endereco;
 		$estabelecimento->tags = $request->tags;				//tags para o estabelecimento
 		$estabelecimento->horario = $request->horario;
 		$estabelecimento->telefone = $request->telefone;
