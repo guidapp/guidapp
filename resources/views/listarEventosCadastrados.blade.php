@@ -22,8 +22,8 @@
                   <th scope="row">{{$idTemp+1}}</th>
                   <td>{{$item->nome}}</td>
                   <td>
-                    @if(isset($item->eventoUnico[0]))
-                      {{ $item->eventoUnico[0]->data }}
+                    @if(isset($item))
+                      {{ $item->data }}
                     @else
                       <a>--</a>
                     @endif
