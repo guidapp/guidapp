@@ -53,8 +53,8 @@
                                         </div>
                                         <div class="col-sm-7 text-left">
                                             <p class="texto-listagem" style="font-weight:bold">{{ $evento->nome }}</p>
-                                            <p class="texto-listagem">local</p>
-                                            <p class="texto-listagem">hora</p>
+                                            <p class="texto-listagem">{{ $evento->data }}</p>
+                                            <p class="texto-listagem">{{ $evento->horario }}</p>
                                             <p class="texto-listagem">{{ $evento->visitas }}</p>
                                         </div>
                                     </div>
@@ -83,8 +83,8 @@
                                         </div>
                                         <div class="col-sm-7 text-left">
                                             <p class="texto-listagem" style="font-weight:bold">{{ $estabelecimento->nome }}</p>
-                                            <p class="texto-listagem">local</p>
-                                            <p class="texto-listagem">hora</p>
+                                            <p class="texto-listagem">{{ $estabelecimento->cidade }}</p>
+                                            <p class="texto-listagem">Hora</p>
                                             <p class="texto-listagem">{{ $estabelecimento->visitas }}</p>
                                         </div>
                                     </div>
@@ -95,7 +95,7 @@
                     </div>
                 </div>
 
-                
+
             </div>
         </div>
 

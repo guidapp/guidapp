@@ -14,7 +14,7 @@
                             <img id="image-preview" style="max-width: 500px;max-height: 300px;" src="/images/sem-imagem.jpg"></img>
                         @endif
                     </div>
-                
+
                     <div class="col-sm-6 text-left">
                         <div class="card-body">
                             <div class="p-2 bd-highlight">
@@ -33,7 +33,7 @@
                                 <div>
                                     <label>Telefone: {{ $estabelecimento->telefone }}</label>
                                 </div>
-                                
+
                                 <div>
                                     <label>Tags: {{ $estabelecimento->tags }}</label>
                                 </div>
@@ -56,7 +56,7 @@
             </div>
 
         <a href="{{url()->previous()}}" class="btn btn-primary" style="margin: 20px">Voltar</a>
-        
+
         </div>
     </div>
 </div>
