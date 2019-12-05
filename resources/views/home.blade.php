@@ -53,9 +53,9 @@
                                         </div>
                                         <div class="col-sm-7 text-left">
                                             <p class="texto-listagem" style="font-weight:bold">{{ $evento->nome }}</p>
-                                            <p class="texto-listagem">local</p>
-                                            <p class="texto-listagem">hora</p>
-                                            <p class="texto-listagem">{{ $evento->visitas }}</p>
+                                            <p class="texto-listagem">{{ $evento->endereco }}</p>
+                                            <p class="texto-listagem">{{ $evento->data }} {{ $evento->horario }}</p>
+                                            <p class="texto-listagem">{{ $evento->visitas }} visitas</p>
                                         </div>
                                     </div>
                                 </div>
@@ -83,9 +83,7 @@
                                         </div>
                                         <div class="col-sm-7 text-left">
                                             <p class="texto-listagem" style="font-weight:bold">{{ $estabelecimento->nome }}</p>
-                                            <p class="texto-listagem">local</p>
-                                            <p class="texto-listagem">hora</p>
-                                            <p class="texto-listagem">{{ $estabelecimento->visitas }}</p>
+                                            <p class="texto-listagem">{{ $estabelecimento->cidade }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -112,9 +110,8 @@
                 <div class="col-sm text-left">
                     <p id="nome_evento"></p>
                     <p id="tags_evento"></p>
-                    <p id="local_evento" style="display: inline;"></p>
-                    &nbsp
-                    <p id="datahora_evento" style="display: inline;"></p>
+                    <p id="local_evento"></p>
+                    <p id="datahora_evento"></p>
                 </div>
             </div>
 

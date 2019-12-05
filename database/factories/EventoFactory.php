@@ -10,7 +10,13 @@ $factory->define(Evento::class, function (Faker $faker) {
     return [
         'nome' => $faker->name,
         'descricao' => $faker->text,
-        'endereco' => $faker->address,
+        'endereco' => $faker->randomElement(
+            ['Garanhuns/PE', 
+            'Bom Conselho/PE', 
+            'Recife/PE', 
+            'Caruaru/PE', 
+            'Arapiraca/AL', 
+            'Maceio/AL']),
         'avaliacao' => $faker->numberBetween(1,5),
         'visitas' => $faker->numberBetween(0,10000),
         'hash' => $faker->text,
