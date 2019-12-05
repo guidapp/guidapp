@@ -54,7 +54,7 @@ class CadastrarEventoController extends Controller
 			}
 		}
 
-		$evento->addEventoUnico($request);
+		//$evento->addEventoUnico($request);
 
 		// //enviar para o banco
 		// $evento = new \App\Evento();
@@ -111,6 +111,7 @@ class CadastrarEventoController extends Controller
 		$resultado->endereco = $request->endereco;
 		$resultado->data = $request->data;
 		$resultado->horario = $request->horario;
+		$resultado->data = $request->data;
 		$resultado->tags = $request->tags;
 
 		/* $resultado->update([
@@ -124,12 +125,12 @@ class CadastrarEventoController extends Controller
 
 		$resultado->save();
 
-		if(isset($resultado->eventoUnico[0]))
+		/* if(isset($resultado->eventoUnico[0]))
 			$eventoUnico = $resultado->eventoUnico[0];
 			$eventoUnico->latitude = $request->latitude;
 			$eventoUnico->longitude = $request->longitude;
 			$eventoUnico->data = $request->data;
-			$eventoUnico->save();
+			$eventoUnico->save(); */
 
 		if(isset($request->imagem)) {
 			$repositorio = new ImageRepository();

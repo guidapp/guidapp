@@ -77,7 +77,7 @@
                     <div style="margin-left:3%;">
                         <label>Horário<a style="color:red"> *</a></label>
                       <div class="input-group mb-3">
-                          @if(isset($eventos->eventoUnico[0]))
+                          @if(isset($eventos))
                             <input type="time" class="form-control" name="horario" aria-label="Default" value="{{ $eventos->horario }}"></input>
                           @else
                             <input type="time" class="form-control" name="horario" aria-label="Default"></input>
@@ -90,7 +90,7 @@
                     <div style="margin-left:3%;">
                         <label>Data<a style="color:red"> *</a></label>
                       <div class="input-group mb-3">
-                          @if(isset($eventos->eventoUnico[0]))
+                          @if(isset($eventos))
                             <input type="date" class="form-control" name="data" aria-label="Default" value="{{ $eventos->data }}"></input>
                           @else
                             <input type="date" class="form-control" name="data" aria-label="Default" placeholder="#SHOW #BALADA #MUSICAAOVIVO #SAMBA"></input>
