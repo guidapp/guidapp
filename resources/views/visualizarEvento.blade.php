@@ -23,9 +23,12 @@
               </div>
 
               <div>
+                <label>Endereço do evento: {{ $evento->endereco }}</label>
+              </div>
+              {{-- <div>
                 <label>Local: </label>
                 <button class="btn btn-primary" style="width:120px;">Abrir Mapa</button>
-              </div>
+              </div> --}}
 
               <div>
                 <label>Data: {{ $evento->data }}</label>

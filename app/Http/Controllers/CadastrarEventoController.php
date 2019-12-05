@@ -28,6 +28,7 @@ class CadastrarEventoController extends Controller
 		//enviar para o banco
 		$evento = new \App\Evento();
 		$evento->nome = $request->nome_evento;
+		$evento->endereco = $request->endereco;
 		$evento->descricao = $request->descricao;
 		$evento->tags = $request->tags;				//tags para o evento
 		$evento->visitas = 0;										//valor aleatorio
