@@ -51,6 +51,16 @@
                       @endif
                     </div>
                   </div>
+                  <div>
+                      <label>Endereço do evento<a style="color:red"> *</a></label>
+                    <div class="input-group mb-3">
+                      @if(isset($eventos))
+                        <input type="text" class="@error('endereco') is-invalid @enderror form-control" name="endereco" aria-label="Default" value="{{ $eventos->endereco }}">
+                      @else
+                        <input type="text" class="@error('endereco') is-invalid @enderror form-control" name="endereco" aria-label="Default" placeholder="Digite o endereço do evento.">
+                      @endif
+                    </div>
+                  </div>
                   <div class="btn-group">
                     {{-- <div>
                         <label>Local<a style="color:red"> *</a></label>
