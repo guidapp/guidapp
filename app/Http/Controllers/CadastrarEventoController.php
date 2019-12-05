@@ -26,8 +26,9 @@ class CadastrarEventoController extends Controller
 		// dd($request->id_estabelecimento == "");
 
 		//enviar para o banco
+		$request->validate(Evento::$rules, Evento::$messages);
 		$evento = new \App\Evento();
-		$evento->nome = $request->nome_evento;
+		$evento->nome = $request->nome;
 		$evento->endereco = $request->endereco;
 		$evento->descricao = $request->descricao;
 		$evento->tags = $request->tags;				//tags para o evento
@@ -36,7 +37,7 @@ class CadastrarEventoController extends Controller
 		$evento->avaliacao = 1;									//valor aleatorio
 		$evento->user_id = Auth::user()->id;
 		$evento->horario = $request->horario;
-		$evento->data = $request->dataEvento;
+		$evento->data = $request->data;
 
 		if($request->id_estabelecimento == "")
 			$evento->estabelecimento_id = null;
@@ -105,13 +106,29 @@ class CadastrarEventoController extends Controller
 	public function atualizarEvento(Request $request){
 		$resultado = Evento::where('id',$request->idEvento)->where('user_id',Auth::user()->id)->first();
 		
-		$resultado->update(['nome' => $request->nome_evento,'descricao' => $request->descricao]);
+		$resultado->nome = $request->nome;
+		$resultado->descricao = $request->descricao;
+		$resultado->endereco = $request->endereco;
+		$resultado->data = $request->data;
+		$resultado->horario = $request->horario;
+		$resultado->tags = $request->tags;
+
+		/* $resultado->update([
+			'nome' => $request->nome,
+			'descricao' => $request->descricao,
+			'endereco' => $request->endereco,
+			'data' => $request->data,
+			'horario' => $request->horario,
+			'tags' => $request->tags,
+		]); */
+
+		$resultado->save();
 
 		if(isset($resultado->eventoUnico[0]))
 			$eventoUnico = $resultado->eventoUnico[0];
 			$eventoUnico->latitude = $request->latitude;
 			$eventoUnico->longitude = $request->longitude;
-			$eventoUnico->data = $request->dataEvento;
+			$eventoUnico->data = $request->data;
 			$eventoUnico->save();
 
 		if(isset($request->imagem)) {

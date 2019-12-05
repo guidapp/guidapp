@@ -45,11 +45,14 @@
                       <label>Nome do evento<a style="color:red"> *</a></label>
                     <div class="input-group mb-3">
                       @if(isset($eventos))
-                        <input type="text" class="@error('nome_evento') is-invalid @enderror form-control" name="nome_evento" aria-label="Default" value="{{ $eventos->nome }}">
+                        <input type="text" class="@error('nome') is-invalid @enderror form-control" name="nome" aria-label="Default" value="{{ $eventos->nome }}">
                       @else
-                        <input type="text" class="@error('nome_evento') is-invalid @enderror form-control" name="nome_evento" aria-label="Default" placeholder="Digite o nome do evento.">
+                        <input type="text" class="@error('nome') is-invalid @enderror form-control" name="nome" aria-label="Default" placeholder="Digite o nome do evento.">
                       @endif
                     </div>
+                    @if ($errors->has('nome'))
+                      <a style="color: red; font-weight: bold;">{{ $errors->first('nome') }}</a>
+                    @endif
                   </div>
                   <div>
                       <label>Endereço do evento<a style="color:red"> *</a></label>
@@ -60,6 +63,9 @@
                         <input type="text" class="@error('endereco') is-invalid @enderror form-control" name="endereco" aria-label="Default" placeholder="Digite o endereço do evento.">
                       @endif
                     </div>
+                    @if ($errors->has('endereco'))
+                      <a style="color: red; font-weight: bold;">{{ $errors->first('endereco') }}</a>
+                    @endif
                   </div>
                   <div class="btn-group">
                     {{-- <div>
@@ -77,14 +83,17 @@
                             <input type="time" class="form-control" name="horario" aria-label="Default"></input>
                           @endif
                       </div>
+                      @if ($errors->has('horario'))
+                        <a style="color: red; font-weight: bold;">{{ $errors->first('horario') }}</a>
+                      @endif
                     </div>
                     <div style="margin-left:3%;">
                         <label>Data<a style="color:red"> *</a></label>
                       <div class="input-group mb-3">
                           @if(isset($eventos->eventoUnico[0]))
-                            <input type="date" class="form-control" name="dataEvento" aria-label="Default" value="{{ $eventos->data }}"></input>
+                            <input type="date" class="form-control" name="data" aria-label="Default" value="{{ $eventos->data }}"></input>
                           @else
-                            <input type="date" class="form-control" name="dataEvento" aria-label="Default" placeholder="#SHOW #BALADA #MUSICAAOVIVO #SAMBA"></input>
+                            <input type="date" class="form-control" name="data" aria-label="Default" placeholder="#SHOW #BALADA #MUSICAAOVIVO #SAMBA"></input>
                           @endif
                       </div>
                     </div>
