@@ -4,6 +4,8 @@
     
     <div class="row">
         <div class="col-sm-12">
+            <a href="{{ route('pesquisa', $busca) }}" class="btn btn-success" style="margin: 10px">Voltar</a>
+            
             <div class="card">
                 <div class="card-header">Estabelecimentos</div>
                 <div class="card-body">
@@ -44,6 +46,8 @@
                     @endif
                 </div>
             </div>
+            
+            <a href="{{ route('pesquisa', $busca) }}" class="btn btn-success" style="margin: 10px">Voltar</a>
         </div>
     </div>
 </div>

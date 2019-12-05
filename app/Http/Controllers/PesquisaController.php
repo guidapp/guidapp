@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Evento;
 use App\Estabelecimento;
 use App\Prato;
+use App\Atracao;
 
 class PesquisaController extends Controller
 {
@@ -22,10 +23,14 @@ class PesquisaController extends Controller
         $pratos = Prato::where('nome', 'ilike', '%'.$busca.'%')
                             ->get();
 
+        $atracoes = Atracao::where('nome', 'ilike', '%'.$busca.'%')
+                            ->get();
+
         return view('ResultadoPesquisa')->with([
             'busca' => $busca,
             'eventos' => $eventos,
             'pratos' => $pratos,
+            'atracoes' => $atracoes,
             'estabelecimentos' => $estabelecimentos]);
     }
 
@@ -55,5 +60,14 @@ class PesquisaController extends Controller
         return view('ResultadoPesquisaPratos')->with([
             'busca' => $busca,
             'pratos' => $pratos]);
+    }
+
+    function pesquisarAtracao($busca="") {
+        $atracoes = Atracao::where('nome', 'ilike', '%'.$busca.'%')
+                            ->get();
+
+        return view('ResultadoPesquisaAtracoes')->with([
+            'busca' => $busca,
+            'atracoes' => $atracoes]);
     }
 }
