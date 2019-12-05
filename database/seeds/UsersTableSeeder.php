@@ -32,7 +32,7 @@ class UsersTableSeeder extends Seeder
 
                     $evento->atracaos()->saveMany(factory('App\Atracao', 3)->make());
 
-                    foreach ($evento->atracoes as $atracao) {
+                    foreach ($evento->atracaos as $atracao) {
                         $atracao->imagems()->saveMany(factory('App\Imagem', 3)->make());
                     }
                 }
