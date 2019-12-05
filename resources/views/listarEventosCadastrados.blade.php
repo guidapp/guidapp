@@ -40,7 +40,15 @@
             @endforeach
             </table>
 
-            <a href="{{url()->previous()}}" class="btn btn-primary" style="margin: 20px">Voltar</a>
+            <?php $route = app('router')->getRoutes()->match(app('request')->create(url()->previous()))->getName() ?>
+
+            @if($route == 'evento.cadastrar')
+              <a href="{{ route('listar.estabelecimentos.cadastrados') }}" class="btn btn-primary" style="margin: 20px">Meus Estabelecimentos</a>
+            @elseif($route == 'evento.atracoes.listar')
+              <a href="{{ route('home') }}" class="btn btn-primary" style="margin: 20px">Página Inicial</a>
+            @else
+              <a href="{{url()->previous()}}" class="btn btn-primary" style="margin: 20px">Voltar</a>
+            @endif
 
             @if(isset($estabelecimento))
               @can('editarEstabelecimento', $estabelecimento)

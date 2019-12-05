@@ -36,6 +36,15 @@
               @endforeach
             </tbody>
             </table>
+
+            <?php $route = app('router')->getRoutes()->match(app('request')->create(url()->previous()))->getName() ?>
+
+            @if($route == 'estabelecimentos.cadastrados' || $route == 'estabelecimento.eventos.listar' || $route == 'estabelecimento.pratos.listar')
+              <a href="{{ route('home') }}" class="btn btn-primary" style="margin: 20px">Página Inicial</a>
+            @else
+              <a href="{{url()->previous()}}" class="btn btn-primary" style="margin: 20px">Voltar</a>
+            @endif
+
             <a class="btn btn-success" href="{{ route('estabelecimentos.cadastrados') }}">Criar Estabelecimento</a>
         </div>
         </div>
