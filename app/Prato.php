@@ -11,13 +11,14 @@ class Prato extends Model
 {
     use SoftDeletes;
     protected $fillable = [
-        'nome', 'descricao', 'preco'
+        'nome', 'descricao', 'preco', 'tags'
     ];
 
     public static $rules = [
         'nome' => 'required|string|max:255',
         'descricao' => 'required|string|max:255',
         'preco' => 'required|numeric|min:0',
+        'tags' => 'nullable|string|max:255',
     ];
 
     public static $messages = [

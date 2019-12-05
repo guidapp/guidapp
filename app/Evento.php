@@ -11,14 +11,15 @@ class Evento extends Model
 {
     use SoftDeletes;
     protected $fillable = [
-        'nome', 'descricao', 'avaliacao', 'visitas', 'hash'
+        'nome', 'descricao', 'avaliacao', 'visitas', 'hash', 'endereco',
     ];
 
     protected $appends = ['qntComentariosNaoLidos'];
 
     public static $rules = [
         'nome' => 'required|string|max:255',
-        'descricao' => 'required|string|max:3000',
+        'descricao' => 'required|string|max:255',
+        'endereco' => 'required|string|max:255'
         // 'avaliacao' => 'required|between:0,5',
         // 'visitas' => 'required|integer|min:0',
         // 'hash' => 'required|string',

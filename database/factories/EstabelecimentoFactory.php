@@ -22,5 +22,6 @@ $factory->define(Estabelecimento::class, function (Faker $faker) {
         'user_id' => $faker->numberBetween(1,15),
         'horario' => $faker->text(200),
         'tags' => $faker->text(200),
+        'endereco' => $faker->address,
     ];
 });

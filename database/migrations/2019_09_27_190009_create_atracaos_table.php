@@ -18,6 +18,7 @@ class CreateAtracaosTable extends Migration
             $table->string('nome');
             $table->string('descricao')->nullable();
             $table->time('horario')->nullable();
+            $table->string('tags')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

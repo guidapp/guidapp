@@ -51,18 +51,38 @@
                       @endif
                     </div>
                   </div>
+                  <div>
+                      <label>Endereço do evento<a style="color:red"> *</a></label>
+                    <div class="input-group mb-3">
+                      @if(isset($eventos))
+                        <input type="text" class="@error('endereco') is-invalid @enderror form-control" name="endereco" aria-label="Default" value="{{ $eventos->endereco }}">
+                      @else
+                        <input type="text" class="@error('endereco') is-invalid @enderror form-control" name="endereco" aria-label="Default" placeholder="Digite o endereço do evento.">
+                      @endif
+                    </div>
+                  </div>
                   <div class="btn-group">
-                    <div>
+                    {{-- <div>
                         <label>Local<a style="color:red"> *</a></label>
                       <div class="input-group mb-3">
                           <button class="btn btn-primary" style="width:120px;">Abrir Mapa</button>
+                      </div>
+                    </div> --}}
+                    <div style="margin-left:3%;">
+                        <label>Horário<a style="color:red"> *</a></label>
+                      <div class="input-group mb-3">
+                          @if(isset($eventos->eventoUnico[0]))
+                            <input type="time" class="form-control" name="horario" aria-label="Default" value="{{ $eventos->horario }}"></input>
+                          @else
+                            <input type="time" class="form-control" name="horario" aria-label="Default"></input>
+                          @endif
                       </div>
                     </div>
                     <div style="margin-left:3%;">
                         <label>Data<a style="color:red"> *</a></label>
                       <div class="input-group mb-3">
                           @if(isset($eventos->eventoUnico[0]))
-                            <input type="date" class="form-control" name="dataEvento" aria-label="Default" value="{{ $eventos->eventoUnico[0]->data }}"></input>
+                            <input type="date" class="form-control" name="dataEvento" aria-label="Default" value="{{ $eventos->data }}"></input>
                           @else
                             <input type="date" class="form-control" name="dataEvento" aria-label="Default" placeholder="#SHOW #BALADA #MUSICAAOVIVO #SAMBA"></input>
                           @endif

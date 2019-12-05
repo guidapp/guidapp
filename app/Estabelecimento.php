@@ -12,23 +12,25 @@ class Estabelecimento extends Model
 {
     use SoftDeletes;
     protected $fillable = [
-        'nome', 'latitude', 'longitude', 'descricao', 'telefone', 'cidade'
+        'nome', 'latitude', 'longitude', 'endereco', 'descricao', 'telefone', 'cidade', 'horario'
     ];
 
     public static $rules = [
         'nome' => 'required|string|max:255',
         'latitude' => 'required|numeric',
         'longitude' => 'required|numeric',
-        'descricao' => 'required|string|max:3000',
+        'endereco' => 'required|string|max:255',
+        'descricao' => 'required|string|max:255',
         'telefone' => 'required|string',
         'cidade' => 'required|string',
+        'horario' => 'nullable'
     ];
 
     public static $messages = [
         'required' => 'O campo :attribute é obrigatório',
         'string' => 'O campo :attribute deve ser texto',
         'numeric' => 'O campo :attribute deve ser numérico',
-        'max' => 'O campo :attribute deve tem no máximo 3000 caracteres'
+        'max' => 'O campo :attribute deve tem no máximo 255 caracteres'
     ];
 
     public function usuario(){
