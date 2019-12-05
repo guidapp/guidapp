@@ -66,6 +66,9 @@
                     <input type="text" class="form-control" name="tags" aria-label="Default" placeholder="#SHOW #BALADA #MUSICAAOVIVO #SAMBA"></input>
                   @endif
                   </div>
+                  @if ($errors->has('tags'))
+                    <a style="color: red; font-weight: bold;">{{ $errors->first('tags') }}</a>
+                  @endif
                 </div>
               </div>
             </div>

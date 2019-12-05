@@ -48,20 +48,31 @@
                         @endif
                       </div>
                     </div>
-                    <div class="btn-group">
-                      <div>
-                          <label>Local<a style="color:red"> *</a></label>
-                        <div class="input-group mb-3">
-                            <button class="btn btn-primary" style="width:120px;">Abrir Mapa</button>
-                        </div>
-                      </div>
-                      <div style="margin-left:3%;">
-                          <label>Data e Hora<a style="color:red"> *</a></label>
-                        <div class="input-group mb-3">
-                              <button class="btn btn-primary" style="width:200px;">Horário de Funcionamento</button>
-                        </div>
+
+                    <div>
+                      <label>Endereço do Estabelecimento<a style="color:red"> *</a></label>
+                      <div class="input-group mb-3">
+                        @if(isset($estabelecimento))
+                          <input type="text" class="@error('endereco') is-invalid @enderror form-control" name="endereco" aria-label="Default" value="{{ $estabelecimento->endereco }}">
+                        @else
+                          <input type="text" class="@error('endereco') is-invalid @enderror form-control" name="endereco" aria-label="Default" placeholder="Digite o endereço do estabelecimento.">
+                        @endif
                       </div>
                     </div>
+
+                    <div>
+                      <label>Horário de Funcionamento<a style="color:red"> *</a></label>
+                      <div class="input-group mb-3">
+                        @if(isset($estabelecimento))
+                          <input type="text" class="@error('horario') is-invalid @enderror form-control" name="horario" aria-label="Default" value="{{ $estabelecimento->horario }}">
+                        @else
+                          <input type="text" class="@error('horario') is-invalid @enderror form-control" name="horario" aria-label="Default" placeholder="Horário de funcionamento.">
+                        @endif
+                      </div>
+                    </div>
+
+                
+
                     <div>
                       <label>Tags<a style="color:red"> *</a></label>
                       @if(isset($estabelecimento))

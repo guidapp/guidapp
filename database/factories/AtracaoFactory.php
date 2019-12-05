@@ -11,5 +11,6 @@ $factory->define(Atracao::class, function (Faker $faker) {
         'descricao' => $faker->text(200),
         'evento_unico_id' => $faker->numberBetween(1,15),
         'horario' => $faker->time(),
+        'tags' => $faker->text(200),
     ];
 });

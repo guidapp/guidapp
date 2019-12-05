@@ -13,13 +13,14 @@ class Atracao extends Model
 {
     use SoftDeletes;
     protected $fillable = [
-        'nome', 'descricao', 'horario'
+        'nome', 'descricao', 'horario', 'tags'
     ];
 
     public static $rules = [
         'nome' => 'required|string|max:500',
         'descricao' => 'nullable|string',
         'horario' => 'required|after_or_equal:today',
+        'tags' => 'nullable|string',
     ];
 
     public static $messages = [
@@ -33,9 +34,9 @@ class Atracao extends Model
         return $this->hasMany(Contato::class);
     }
 
-    public function apresentacaos(){
+    /* public function apresentacaos(){
         return $this->hasMany(Apresentacao::class);
-    }
+    } */
 
     public function comentarios(){
         return $this->morphMany('App\Comentario', 'comentarioable');

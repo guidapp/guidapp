@@ -16,8 +16,9 @@ class CreateEstabelecimentosTable extends Migration
         Schema::create('estabelecimentos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nome');
-            $table->double('latitude');
-            $table->double('longitude');
+            $table->double('latitude')->nullable();
+            $table->double('longitude')->nullable();
+            $table->string('endereco');
             $table->string('descricao');
             $table->string('telefone');
             $table->string('cidade');

@@ -27,6 +27,7 @@ class AtracaoController extends Controller
 
         $atracao = new Atracao($request->all());
         $atracao->evento_id = $idEvento;
+        
         $atracao->save();
 
 		if(isset($request->imagem)) {

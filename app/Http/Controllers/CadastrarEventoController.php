@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Session;
+//use Session;
 use Illuminate\Support\Facades\Auth;
 use App\Evento;
 use App\Estabelecimento;
@@ -29,11 +29,13 @@ class CadastrarEventoController extends Controller
 		$evento = new \App\Evento();
 		$evento->nome = $request->nome_evento;
 		$evento->descricao = $request->descricao;
-		// $evento->tags = $request->tags;				//tags para o evento
+		$evento->tags = $request->tags;				//tags para o evento
 		$evento->visitas = 0;										//valor aleatorio
 		$evento->hash = '16513';									//valor aleatorio
 		$evento->avaliacao = 1;									//valor aleatorio
 		$evento->user_id = Auth::user()->id;
+		$evento->horario = $request->horario;
+		$evento->data = $request->dataEvento;
 
 		if($request->id_estabelecimento == "")
 			$evento->estabelecimento_id = null;
