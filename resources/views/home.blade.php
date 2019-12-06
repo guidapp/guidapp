@@ -102,9 +102,8 @@
                 <div class="col-sm text-left">
                     <p id="nome_evento"></p>
                     <p id="tags_evento"></p>
-                    <p id="local_evento" style="display: inline;"></p>
-                    &nbsp
-                    <p id="datahora_evento" style="display: inline;"></p>
+                    <p id="local_evento"></p>
+                    <p id="datahora_evento"></p>
                 </div>
             </div>
 

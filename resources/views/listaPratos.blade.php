@@ -48,9 +48,15 @@
           </tbody>
         @endforeach
         </table>
-        
-        <a href="{{ route('listar.estabelecimentos.cadastrados') }}" class="btn btn-primary" style="margin: 20px">Voltar</a>
 
+        <?php $route = app('router')->getRoutes()->match(app('request')->create(url()->previous()))->getName() ?>
+
+        @if($route == 'prato.cadastrar')
+          <a href="{{ route('listar.estabelecimentos.cadastrados') }}" class="btn btn-primary" style="margin: 20px">Meus Estabelecimentos</a>
+        @else
+          <a href="{{url()->previous()}}" class="btn btn-primary" style="margin: 20px">Voltar</a>
+        @endif
+        
         @can('editarEstabelecimento', $estabelecimento)
           <a href="{{ route('prato.cadastrar', [$estabelecimento->id]) }}" class="btn btn-success" href="">Criar Prato</a>
         @endcan

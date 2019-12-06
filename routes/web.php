@@ -82,6 +82,7 @@ Route::get('/prato/visualizar/{id}', 'PratoController@visualizar')->name('prato.
 Route::get('/pesquisa/evento/{busca?}', 'PesquisaController@pesquisarEvento')->name('pesquisa.evento');
 Route::get('/pesquisa/estabelecimento/{busca?}', 'PesquisaController@pesquisarEstabelecimento')->name('pesquisa.estabelecimento');
 Route::get('/pesquisa/prato/{busca?}', 'PesquisaController@pesquisarPrato')->name('pesquisa.prato');
+Route::get('/pesquisa/atracao/{busca?}', 'PesquisaController@pesquisarAtracao')->name('pesquisa.atracao');
 Route::get('/pesquisa/{busca?}', 'PesquisaController@pesquisar')->name('pesquisa');
 
 // ATRACOES

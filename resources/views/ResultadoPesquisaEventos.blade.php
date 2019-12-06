@@ -4,6 +4,8 @@
     
     <div class="row">
         <div class="col-sm-12">
+            <a href="{{ route('pesquisa', $busca) }}" class="btn btn-success" style="margin: 10px">Voltar</a>
+
             <div class="card">
                 <div class="card-header">Eventos</div>
                 <div class="card-body">
@@ -34,6 +36,7 @@
                                                 <a  href="{{ route('editar.cadastrar', ['idEvento' => $item]) }}" class="btn btn-primary btn-sm">Editar</a>
                                                 <a  href="{{ route('deletar.cadastrar', ['idEvento' => $item]) }}" class="btn btn-danger btn-sm" style="color:white">Deletar</a>
                                             @endcan
+                                            <a  href="{{ route('evento.atracoes.listar', [$item->id]) }}" class="btn btn-secondary btn-sm" style="color:white">Atrações</a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -42,6 +45,8 @@
                     @endif
                 </div>
             </div>
+
+            <a href="{{ route('pesquisa', $busca) }}" class="btn btn-success" style="margin: 10px">Voltar</a>
         </div>
     </div>
 </div>

@@ -7,17 +7,21 @@ use App\Estabelecimento;
 use Faker\Generator as Faker;
 
 $factory->define(Evento::class, function (Faker $faker) {
-    $estabelecimento = Estabelecimento::find($faker->numberBetween(1,15));
-
     return [
         'nome' => $faker->name,
         'descricao' => $faker->text,
-        'endereco' => $faker->address,
+        'endereco' => $faker->randomElement(
+            ['Garanhuns/PE', 
+            'Bom Conselho/PE', 
+            'Recife/PE', 
+            'Caruaru/PE', 
+            'Arapiraca/AL', 
+            'Maceio/AL']),
         'avaliacao' => $faker->numberBetween(1,5),
         'visitas' => $faker->numberBetween(0,10000),
         'hash' => $faker->text,
-        'estabelecimento_id' => $estabelecimento->id,
-        'user_id' => $estabelecimento->organizador->id,
+        'estabelecimento_id' => $faker->numberBetween(1,15),
+        'user_id' => $faker->numberBetween(1,15),
         'data' => $faker->dateTimeBetween('now','+1 year'),
         'horario' => $faker->time(),
         'tags' => $faker->text(200),
