@@ -52,6 +52,14 @@
                     @endforeach
                 </table>
 
+                <?php $route = app('router')->getRoutes()->match(app('request')->create(url()->previous()))->getName() ?>
+
+                @if($route == 'atracao.cadastrar')
+                <a href="{{ route('listar.eventos.cadastrados') }}" class="btn btn-primary" style="margin: 20px">Meus Eventos</a>
+                @else
+                <a href="{{url()->previous()}}" class="btn btn-primary" style="margin: 20px">Voltar</a>
+                @endif
+
                 @can('editarEvento', $evento)
                     <a href="{{ route('atracao.cadastrar', [$evento->id]) }}" class="btn btn-success" href="">Criar Atração</a>
                 @endcan

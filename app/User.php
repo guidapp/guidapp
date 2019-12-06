@@ -57,6 +57,14 @@ class User extends Authenticatable
         return $this->morphOne('App\Imagem', 'imagemable');
     }
 
+    public function eventos(){
+        return $this->hasMany('App\Evento');
+    }
+
+    public function estabelecimentos(){
+        return $this->hasMany('App\Estabelecimento');
+    }
+
     public function avaliacaoEstabelecimentos(){
         return $this->hasMany(Estabelecimento::class)->using(EstabelecimentoUser::class);
     }

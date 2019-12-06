@@ -76,9 +76,9 @@ function selecionarEvento(evento) {
     document.getElementById('ingressos').style.display = "flex";
    
     document.getElementById('nome_evento').innerHTML = evento.nome;
-    document.getElementById('tags_evento').innerHTML = "tags";
-    document.getElementById('local_evento').innerHTML = "local";
-    document.getElementById('datahora_evento').innerHTML = "datahora";
+    document.getElementById('tags_evento').innerHTML = evento.tags;
+    document.getElementById('local_evento').innerHTML = evento.endereco;
+    document.getElementById('datahora_evento').innerHTML = evento.data + " - " + evento.horario;
     document.getElementById('botao-visualizacoes').innerHTML = evento.visitas + " visualizacoes";
     document.getElementById('botao-ingressos').innerHTML = "Comprar ingressos";
     document.getElementById('descricao').innerHTML = evento.descricao;
@@ -155,9 +155,9 @@ function selecionarEstabelecimento(estabelecimento) {
     document.getElementById('ingressos').style.display = "none";
     
     document.getElementById('nome_evento').innerHTML = estabelecimento.nome;
-    document.getElementById('tags_evento').innerHTML = "tags";
-    document.getElementById('local_evento').innerHTML = "local";
-    document.getElementById('datahora_evento').innerHTML = "datahora";
+    document.getElementById('tags_evento').innerHTML = estabelecimento.tags;
+    document.getElementById('local_evento').innerHTML = estabelecimento.endereco + " - " + estabelecimento.cidade;
+    document.getElementById('datahora_evento').innerHTML = estabelecimento.horario;
     document.getElementById('botao-visualizacoes').innerHTML = "-";
     document.getElementById('botao-ingressos').innerHTML = "-";
     document.getElementById('descricao').innerHTML = estabelecimento.descricao;

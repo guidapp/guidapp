@@ -7,34 +7,34 @@
             <a href="{{ route('pesquisa', $busca) }}" class="btn btn-success" style="margin: 10px">Voltar</a>
             
             <div class="card">
-                <div class="card-header">Pratos</div>
+                <div class="card-header">Atrações</div>
                 <div class="card-body">
-                    @if ($pratos->count() == 0)
+                    @if ($atracoes->count() == 0)
                         Não foram encontrados resultados para "{{ $busca }}"
                     @else
                         <table class="table table-striped">
                             <thead>
                                 <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Prato</th>
-                                <th scope="col">Preço</th>
+                                <th scope="col">Atração</th>
+                                <th scope="col">Hora</th>
                                 <th scope="col">Opções</th>
                                 </tr>
                             </thead>
                             
                             <tbody>
                                 <?php $idTemp =-1; ?>
-                                @foreach($pratos as $item)
+                                @foreach($atracoes as $item)
                                     <?php $idTemp++; ?>
                                     <tr>
                                         <th scope="row">{{$idTemp+1}}</th>
                                         <td>{{$item->nome}}</td>
-                                        <td>R$ {{$item->preco}}</td>
+                                        <td>{{$item->evento->data}} às {{$item->horario}}</td>
                                         <td>
-                                            <a  href="{{ route('prato.visualizar', [$item->id]) }}" class="btn btn-primary btn-sm" style="color:white">Ver detalhes</a>
-                                            @can('editarPrato', $item)
-                                                <a  href="{{ route('prato.atualizar', [$item->id]) }}" class="btn btn-primary btn-sm">Editar</a>
-                                                <a  href="{{ route('prato.remover', [$item->id]) }}" class="btn btn-danger btn-sm" style="color:white">Deletar</a>
+                                            <a  href="{{ route('atracao.visualizar', [$item->id]) }}" class="btn btn-primary btn-sm" style="color:white">Ver detalhes</a>
+                                            @can('editarAtracao', $item)
+                                                <a  href="{{ route('atracao.atualizar', [$item->id]) }}" class="btn btn-primary btn-sm">Editar</a>
+                                                <a  href="{{ route('atracao.remover', [$item->id]) }}" class="btn btn-danger btn-sm" style="color:white">Deletar</a>
                                             @endcan
                                         </td>
                                     </tr>
