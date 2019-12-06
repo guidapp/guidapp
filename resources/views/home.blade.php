@@ -1,106 +1,98 @@
 @extends('layouts.app')
 
-@push('scripts')
-    <script src="js/home.js"></script>
-    <script>
-    window.onload = function() {
-        selecionarEvento({!! $eventos[0] !!});
-    };
-    </script>
-@endpush
+
 
 @section('content')
-<div class="container">
-    @if (session('status'))
-        <div class="row">
-            <div class="card-body">
-                <div class="alert alert-success" role="alert">
-                    {{ session('status') }}
-                </div>
-            </div>
-        </div>
-    @endif
-
+<div class="container justify-content-center">
     <div class="row">
-        <div class="col-sm-4" style="padding:1%;">
-            <div class="card text-center">
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link active" id="eventos-tab" data-toggle="tab" href="#eventos" role="tab" aria-controls="eventos" aria-selected="true">Eventos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#estabelecimentos" role="tab" aria-controls="estabelecimentos" aria-selected="false">Estabelecimentos</a>
-                    </li>
-                </ul>
-
-                <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="eventos" role="tabpanel" aria-labelledby="eventos-tab">
-                        @if(count($eventos) == 0)
-                        <div class="alert alert-danger">
-                                Não há nenhum estabelecimento seu cadastrado no sistema.
+        <div class="col-sm-4">
+            <div class="card-body">
+                <div class="card">
+                    <!-- SELETOR evento/estabelecimento -->
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="eventos-tab" data-toggle="tab" href="#eventos" role="tab" aria-controls="eventos" aria-selected="true">Eventos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#estabelecimentos" role="tab" aria-controls="estabelecimentos" aria-selected="false">Estabelecimentos</a>
+                        </li>
+                    </ul>
+                    <!--x SELETOR evento/estabelecimento x-->
+                    <!-- tabela -->
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="eventos" role="tabpanel" aria-labelledby="eventos-tab" style="height: 45rem; margin-left:1px; overflow: auto; margin-top:20px; border: 1px solid #000; border-color:#e9e9e9; border-radius: 8px;">
+                            @if(count($eventos) == 0)
+                            <div class="alert alert-danger">
+                                    Não há nenhum estabelecimento seu cadastrado no sistema.
+                            </div>
+                            @else
+                                <div class="col-sm">
+                                    @foreach ($eventos as $evento)
+                                    <div class="card" style="margin:2%" onclick="selecionarEvento({{$evento}})">
+                                        <dir class="container">
+                                            <div class="row">
+                                                <div class="col" >
+                                                    @if (count($evento->imagems) > 0)
+                                                        <img src="{{ asset($evento->imagems[0]->nome) }}" class="imagem-menor">
+                                                    @else
+                                                        <img src="{{ asset('images/sem-imagem.jpg') }}" class="imagem-menor">
+                                                    @endif
+                                                </div>
+                                                <div  class="col">
+                                                    <p class="texto-listagem" style="font-weight:bold">{{ $evento->nome }}</p>
+                                                    <p class="texto-listagem">local</p>
+                                                    <p class="texto-listagem">hora</p>
+                                                    <p class="texto-listagem">{{ $evento->visitas }}</p>
+                                                </div>
+                                            </div>
+                                        </dir>
+                                    </div>
+                                    @endforeach
+                                </div>
+                            @endif
                         </div>
-                        @else
-                            <div class="col-sm">
-                                @foreach ($eventos as $evento)
-                                <div class="card" style="margin:2%" onclick="selecionarEvento({{$evento}})">
-                                    <div class="row">
-                                        <div class="col-sm-5">
-                                            @if (count($evento->imagems) > 0)
-                                                <img src="{{ asset($evento->imagems[0]->nome) }}" class="imagem-menor">
-                                            @else
-                                                <img src="{{ asset('images/sem-imagem.jpg') }}" class="imagem-menor">
-                                            @endif
-                                        </div>
-                                        <div class="col-sm-7 text-left">
-                                            <p class="texto-listagem" style="font-weight:bold">{{ $evento->nome }}</p>
-                                            <p class="texto-listagem">{{ $evento->endereco }}</p>
-                                            <p class="texto-listagem">{{ $evento->data }} {{ $evento->horario }}</p>
-                                            <p class="texto-listagem">{{ $evento->visitas }} visitas</p>
+
+                        <div class="tab-pane fade" id="estabelecimentos" role="tabpanel" aria-labelledby="estabelecimentos-tab" style="height: 45rem; margin-left:1px; overflow: auto; margin-top:20px; border: 1px solid #000; border-color:#e9e9e9; border-radius: 8px;">
+                            @if(count($estabelecimentos) == 0)
+                            <div class="alert alert-danger">
+                                    Não há nenhum estabelecimento seu cadastrado no sistema.
+                            </div>
+                            @else
+                                <div class="col-sm">
+                                    @foreach ($estabelecimentos as $estabelecimento)
+                                    <div class="card" style="margin:2%" onclick="selecionarEstabelecimento({{$estabelecimento}})">
+                                        <dir class="container">
+                                        <div class="row">
+                                            <div class="col">
+                                                @if (count($estabelecimento->imagems) > 0)
+                                                    <img src="{{ asset($estabelecimento->imagems[0]->nome) }}" class="imagem-menor">
+                                                @else
+                                                    <img src="{{ asset('images/sem-imagem.jpg') }}" class="imagem-menor">
+                                                @endif
+                                            </div>
+                                            <div class="col text-left">
+                                                <p class="texto-listagem" style="font-weight:bold">{{ $estabelecimento->nome }}</p>
+                                                <p class="texto-listagem">local</p>
+                                                <p class="texto-listagem">hora</p>
+                                                <p class="texto-listagem">{{ $estabelecimento->visitas }}</p>
+                                            </div>
                                         </div>
                                     </div>
+                                    </dir>
+                                    @endforeach
                                 </div>
-                                @endforeach
-                            </div>
-                        @endif
-                    </div>
-
-                    <div class="tab-pane fade" id="estabelecimentos" role="tabpanel" aria-labelledby="estabelecimentos-tab">
-                        @if(count($estabelecimentos) == 0)
-                        <div class="alert alert-danger">
-                                Não há nenhum estabelecimento seu cadastrado no sistema.
+                            @endif
                         </div>
-                        @else
-                            <div class="col-sm">
-                                @foreach ($estabelecimentos as $estabelecimento)
-                                <div class="card" style="margin:2%" onclick="selecionarEstabelecimento({{$estabelecimento}})">
-                                    <div class="row">
-                                        <div class="col-sm-5">
-                                            @if (count($estabelecimento->imagems) > 0)
-                                                <img src="{{ asset($estabelecimento->imagems[0]->nome) }}" class="imagem-menor">
-                                            @else
-                                                <img src="{{ asset('images/sem-imagem.jpg') }}" class="imagem-menor">
-                                            @endif
-                                        </div>
-                                        <div class="col-sm-7 text-left">
-                                            <p class="texto-listagem" style="font-weight:bold">{{ $estabelecimento->nome }}</p>
-                                            <p class="texto-listagem">{{ $estabelecimento->cidade }}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                @endforeach
-                            </div>
-                        @endif
-                    </div>
                 </div>
-
-                
+                </div>
             </div>
-        </div>
-
-        <div class="col-sm-8" style="padding:1%;">
+         </div>
+         <div class="col-sm-8">
+            <div class="card-body">
+                <div style="padding:1%;">
             <div class="row" style="padding:1%;">
                 <div class="col-sm-10">
-                    <img id="imagemDestaque" src="{{ asset('images/sem-imagem.jpg') }}" class="imagem-maior">
+                    <img id="imagemDestaque" src="{{ asset('images/sem-imagem.jpg') }}" class="img-fluid imagem-maior">
                 </div>
                 <div id="listaImagens" class="col-sm-2 text-left">
                 </div>
@@ -147,6 +139,15 @@
                 </div>
             </div>
         </div>
+         </div>
     </div>
 </div>
 @endsection
+@push('scripts')
+    <script src="js/home.js"></script>
+    <script>
+    window.onload = function() {
+        selecionarEvento({!! $eventos[0] !!});
+    };
+    </script>
+@endpush
