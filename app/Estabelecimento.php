@@ -23,7 +23,7 @@ class Estabelecimento extends Model
         'descricao' => 'required|string|max:255',
         'telefone' => 'required|string',
         'cidade' => 'required|string',
-        'horario' => 'nullable',
+        'horario' => 'required|string|max:255',
         'tags' => 'nullable|string',
     ];
 

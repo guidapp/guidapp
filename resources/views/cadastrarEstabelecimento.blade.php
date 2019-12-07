@@ -42,45 +42,55 @@
                       <label>Nome do Estabelecimento<a style="color:red"> *</a></label>
                       <div class="input-group mb-3">
                         @if(isset($estabelecimento))
-                          <input type="text" class="@error('nome_estabelecimento') is-invalid @enderror form-control" name="nome" aria-label="Default" value="{{ $estabelecimento->nome }}">
+                          <input type="text" class="@error('nome') is-invalid @enderror form-control" name="nome" aria-label="Default" value="{{ old('nome',$estabelecimento->nome) }}">
                         @else
-                          <input type="text" class="@error('nome_estabelecimento') is-invalid @enderror form-control" name="nome" aria-label="Default" placeholder="Digite o nome do estabelecimento.">
+                          <input type="text" class="@error('nome') is-invalid @enderror form-control" name="nome" aria-label="Default" placeholder="Digite o nome do estabelecimento." value="{{old('nome', '')}}">
                         @endif
                       </div>
+                        @if ($errors->has('nome'))
+                          <a style="color: red; font-weight: bold;">{{ $errors->first('nome') }}</a>
+                        @endif
                     </div>
 
                     <div>
                       <label>Endereço do Estabelecimento<a style="color:red"> *</a></label>
                       <div class="input-group mb-3">
                         @if(isset($estabelecimento))
-                          <input type="text" class="@error('endereco') is-invalid @enderror form-control" name="endereco" aria-label="Default" value="{{ $estabelecimento->endereco }}">
+                          <input type="text" class="@error('endereco') is-invalid @enderror form-control" name="endereco" aria-label="Default" value="{{ old('endereco',$estabelecimento->endereco) }}">
                         @else
-                          <input type="text" class="@error('endereco') is-invalid @enderror form-control" name="endereco" aria-label="Default" placeholder="Digite o endereço do estabelecimento.">
+                          <input type="text" class="@error('endereco') is-invalid @enderror form-control" name="endereco" aria-label="Default" placeholder="Digite o endereço do estabelecimento." value="{{old('endereco', '')}}">
                         @endif
                       </div>
+                        @if ($errors->has('endereco'))
+                          <a style="color: red; font-weight: bold;">{{ $errors->first('endereco') }}</a>
+                        @endif
                     </div>
 
                     <div>
                       <label>Horário de Funcionamento<a style="color:red"> *</a></label>
                       <div class="input-group mb-3">
                         @if(isset($estabelecimento))
-                          <input type="text" class="@error('horario') is-invalid @enderror form-control" name="horario" aria-label="Default" value="{{ $estabelecimento->horario }}">
+                          <input type="text" class="@error('horario') is-invalid @enderror form-control" name="horario" aria-label="Default" value="{{ old('horario',$estabelecimento->horario) }}">
                         @else
-                          <input type="text" class="@error('horario') is-invalid @enderror form-control" name="horario" aria-label="Default" placeholder="Horário de funcionamento.">
+                          <input type="text" class="@error('horario') is-invalid @enderror form-control" name="horario" aria-label="Default" placeholder="Horário de funcionamento." value="{{old('horario', '')}}">
                         @endif
                       </div>
-                    </div>
-
-                
-
-                    <div>
-                      <label>Tags<a style="color:red"> *</a></label>
-                      @if(isset($estabelecimento))
-                        <textarea type="text" class="form-control" name="tags" aria-label="Default">{{ $estabelecimento->tags }}</textarea>
-                      @else
-                        <input type="text" class="form-control" name="tags" aria-label="Default" placeholder="#SHOW #BALADA #MUSICAAOVIVO #SAMBA"></input>
+                      @if ($errors->has('horario'))
+                        <a style="color: red; font-weight: bold;">{{ $errors->first('horario') }}</a>
                       @endif
                     </div>
+
+                    <div>
+                      <label>Tags</label>
+                      @if(isset($estabelecimento))
+                        <input type="text" class="@error('tags') is-invalid @enderror form-control" name="tags" aria-label="Default"  value="{{ old('tags',$estabelecimento->tags) }}">
+                      @else
+                        <input type="text" class="@error('tags') is-invalid @enderror form-control" name="tags" aria-label="Default" placeholder="#SHOW #BALADA #MUSICAAOVIVO #SAMBA" value="{{ old('tags','') }}">
+                      @endif
+                    </div>
+                     @if ($errors->has('tags'))
+                        <a style="color: red; font-weight: bold;">{{ $errors->first('tags') }}</a>
+                      @endif
                     </div>
                   </div>
               </div>
@@ -91,11 +101,14 @@
                 <label>Telefone<a style="color:red"> *</a></label>
                 <div class="input-group mb-3">
                   @if(isset($estabelecimento))
-                    <input type="text" class="@error('telefone') is-invalid @enderror form-control" name="telefone" aria-label="Default" value="{{ $estabelecimento->telefone }}">
+                    <input type="text" class="@error('telefone') is-invalid @enderror form-control" name="telefone" aria-label="Default" value="{{ old('telefone',$estabelecimento->telefone) }}">
                   @else
-                    <input type="text" class="@error('telefone') is-invalid @enderror form-control" name="telefone" aria-label="Default" placeholder="Digite o telefone.">
+                    <input type="text" class="@error('telefone') is-invalid @enderror form-control" name="telefone" aria-label="Default" placeholder="Digite o telefone." value="{{ old('telefone','') }}">
                   @endif
                 </div>
+                @if ($errors->has('telefone'))
+                  <a style="color: red; font-weight: bold;">{{ $errors->first('telefone') }}</a>
+                @endif
               </div>
             </div>
 
@@ -104,11 +117,14 @@
                 <label>Cidade<a style="color:red"> *</a></label>
                 <div class="input-group mb-3">
                   @if(isset($estabelecimento))
-                    <input type="text" class="@error('cidade') is-invalid @enderror form-control" name="cidade" aria-label="Default" value="{{ $estabelecimento->cidade }}">
+                    <input type="text" class="@error('cidade') is-invalid @enderror form-control" name="cidade" aria-label="Default" value="{{ old('cidade',$estabelecimento->cidade) }}">
                   @else
-                    <input type="text" class="@error('cidade') is-invalid @enderror form-control" name="cidade" aria-label="Default" placeholder="Digite a cidade do estabelecimento.">
+                    <input type="text" class="@error('cidade') is-invalid @enderror form-control" name="cidade" aria-label="Default" placeholder="Digite a cidade do estabelecimento." value="{{ old('cidade','') }}">
                   @endif
                 </div>
+                @if ($errors->has('cidade'))
+                  <a style="color: red; font-weight: bold;">{{ $errors->first('cidade') }}</a>
+                @endif
               </div>
             </div>
           </div>
@@ -118,11 +134,14 @@
                 <div>
                   <label>Descrição<a style="color:red"> *</a></label>
                   @if(isset($estabelecimento))
-                    <textarea type="text" class="form-control" name="descricao" aria-label="Default">{{ $estabelecimento->descricao }}</textarea>
+                    <textarea type="text" class="@error('descricao') is-invalid @enderror form-control" name="descricao" aria-label="Default" >{{ old('descricao',$estabelecimento->descricao) }}</textarea>
                   @else
-                    <textarea type="text" class="form-control" name="descricao" aria-label="Default" placeholder="Fale sobre o seu estabelecimento."></textarea>
+                    <textarea type="text" class="@error('descricao') is-invalid @enderror form-control" name="descricao" aria-label="Default" placeholder="Fale sobre o seu estabelecimento." value="{{ old('descricao','') }}"></textarea>
                   @endif
                 </div>
+                @if ($errors->has('descricao'))
+                  <a style="color: red; font-weight: bold;">{{ $errors->first('descricao') }}</a>
+                @endif
                 <div>
                   <a href="{{url()->previous()}}" class="btn btn-danger">Cancelar</a>
                   @if(isset($estabelecimento))
