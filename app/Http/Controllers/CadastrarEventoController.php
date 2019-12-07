@@ -104,6 +104,7 @@ class CadastrarEventoController extends Controller
 	* VIEW: cadastrarEventos
 	*/
 	public function atualizarEvento(Request $request){
+		$request->validate(Evento::$rules, Evento::$messages);
 		$resultado = Evento::where('id',$request->idEvento)->where('user_id',Auth::user()->id)->first();
 		
 		$resultado->nome = $request->nome;

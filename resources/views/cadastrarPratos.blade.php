@@ -58,7 +58,7 @@
                   </div>
 
                   <div>
-                    <label>Tags<a style="color:red"> *</a></label>
+                    <label>Tags</label>
                   <div class="input-group mb-3">
                   @if(isset($prato))
                     <textarea type="text" class="form-control" name="tags" aria-label="Default">{{ $prato->tags }}</textarea>

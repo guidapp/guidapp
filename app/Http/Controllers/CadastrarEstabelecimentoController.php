@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\ImageRepository;
+use App\Estabelecimento;
 
 class CadastrarEstabelecimentoController extends Controller
 {
     public function cadastrarEstabelecimentoSalvar (Request $request){
 		// dd($request->imagem);
-
+    	$request->validate(Estabelecimento::$rules, Estabelecimento::$messages);
 		//enviar para o banco
 		$estabelecimento = new \App\Estabelecimento();
 		$estabelecimento->nome = $request->nome;

@@ -19,7 +19,9 @@ class Evento extends Model
     public static $rules = [
         'nome' => 'required|string|max:255',
         'descricao' => 'required|string|max:255',
-        'endereco' => 'required|string|max:255'
+        'endereco' => 'required|string|max:255',
+        'horario'   => 'required',
+        'data'      => 'required|date',
         // 'avaliacao' => 'required|between:0,5',
         // 'visitas' => 'required|integer|min:0',
         // 'hash' => 'required|string',
