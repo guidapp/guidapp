@@ -45,9 +45,9 @@
                       <label>Nome do evento<a style="color:red"> *</a></label>
                     <div class="input-group mb-3">
                       @if(isset($eventos))
-                        <input type="text" class="@error('nome') is-invalid @enderror form-control" name="nome" aria-label="Default" value="{{ $eventos->nome }}">
+                        <input type="text" class="@error('nome') is-invalid @enderror form-control" name="nome" aria-label="Default" value="{{ old('nome',$eventos->nome) }}">
                       @else
-                        <input type="text" class="@error('nome') is-invalid @enderror form-control" name="nome" aria-label="Default" placeholder="Digite o nome do evento.">
+                        <input type="text" class="@error('nome') is-invalid @enderror form-control" name="nome" aria-label="Default" placeholder="Digite o nome do evento." value="{{ old('nome','') }}">
                       @endif
                     </div>
                     @if ($errors->has('nome'))
@@ -58,9 +58,9 @@
                       <label>Endereço do evento<a style="color:red"> *</a></label>
                     <div class="input-group mb-3">
                       @if(isset($eventos))
-                        <input type="text" class="@error('endereco') is-invalid @enderror form-control" name="endereco" aria-label="Default" value="{{ $eventos->endereco }}">
+                        <input type="text" class="@error('endereco') is-invalid @enderror form-control" name="endereco" aria-label="Default" value="{{ old('endereco',$eventos->endereco) }}">
                       @else
-                        <input type="text" class="@error('endereco') is-invalid @enderror form-control" name="endereco" aria-label="Default" placeholder="Digite o endereço do evento.">
+                        <input type="text" class="@error('endereco') is-invalid @enderror form-control" name="endereco" aria-label="Default" placeholder="Digite o endereço do evento." value="{{ old('endereco','') }}">
                       @endif
                     </div>
                     @if ($errors->has('endereco'))
@@ -78,9 +78,9 @@
                         <label>Horário<a style="color:red"> *</a></label>
                       <div class="input-group mb-3">
                           @if(isset($eventos))
-                            <input type="time" class="form-control" name="horario" aria-label="Default" value="{{ $eventos->horario }}"></input>
+                            <input type="time" class="@error('horario') is-invalid @enderror form-control" name="horario" aria-label="Default" value="{{ old('horario',$eventos->horario) }}"></input>
                           @else
-                            <input type="time" class="form-control" name="horario" aria-label="Default"></input>
+                            <input type="time" class="@error('horario') is-invalid @enderror form-control" name="horario" aria-label="Default" value="{{ old('horario','') }}"></input>
                           @endif
                       </div>
                       @if ($errors->has('horario'))
@@ -91,22 +91,28 @@
                         <label>Data<a style="color:red"> *</a></label>
                       <div class="input-group mb-3">
                           @if(isset($eventos))
-                            <input type="date" class="form-control" name="data" aria-label="Default" value="{{ $eventos->data }}"></input>
+                            <input type="date" class="@error('data') is-invalid @enderror form-control" name="data" aria-label="Default" value="{{ old('data',$eventos->data) }}"></input>
                           @else
-                            <input type="date" class="form-control" name="data" aria-label="Default" placeholder="#SHOW #BALADA #MUSICAAOVIVO #SAMBA"></input>
+                            <input type="date" class="@error('data') is-invalid @enderror form-control" name="data" aria-label="Default" placeholder="#SHOW #BALADA #MUSICAAOVIVO #SAMBA" value="{{ old('data','') }}"></input>
                           @endif
                       </div>
+                      @if ($errors->has('data'))
+                        <a style="color: red; font-weight: bold;">{{ $errors->first('data') }}</a>
+                      @endif
                     </div>
                   </div>
                   <div>
-                      <label>Tags<a style="color:red"> *</a></label>
+                      <label>Tags</label>
                     <div class="input-group mb-3">
                       @if(isset($eventos))
-                        <textarea type="text" class="form-control" name="tags" aria-label="Default">{{ $eventos->tags }}</textarea>
+                        <input type="text" class="@error('tags') is-invalid @enderror form-control" name="tags" aria-label="Default" value="{{ old('tags',$eventos->tags) }}"></input>
                       @else
-                        <input type="text" class="form-control" name="tags" aria-label="Default" placeholder="#SHOW #BALADA #MUSICAAOVIVO #SAMBA"></input>
+                        <input type="text" class="@error('tags') is-invalid @enderror form-control" name="tags" aria-label="Default" placeholder="#SHOW #BALADA #MUSICAAOVIVO #SAMBA" value="{{ old('tags','') }}"></input>
                       @endif
                     </div>
+                    @if ($errors->has('tags'))
+                      <a style="color: red; font-weight: bold;">{{ $errors->first('tags') }}</a>
+                    @endif
                   </div>
                   </div>
                 </div>
@@ -118,11 +124,14 @@
                   <label>Descrição<a style="color:red"> *</a></label>
                 <div class="input-group mb-3">
                     @if(isset($eventos))
-                      <textarea type="text" class="form-control" name="descricao" aria-label="Default">{{ $eventos->descricao }}</textarea>
+                      <textarea type="text" class="@error('descricao') is-invalid @enderror form-control" name="descricao" aria-label="Default">{{ old('descricao',$eventos->descricao) }}</textarea>
                     @else
-                      <textarea type="text" class="form-control" name="descricao" aria-label="Default" placeholder="Descreva aqui sobre o evento."></textarea>
+                      <textarea type="text" class="@error('descricao') is-invalid @enderror form-control" name="descricao" aria-label="Default" placeholder="Descreva aqui sobre o evento." value="{{ old('descricao','') }}"></textarea>
                     @endif
                 </div>
+                @if ($errors->has('descricao'))
+                  <a style="color: red; font-weight: bold;">{{ $errors->first('descricao') }}</a>
+                @endif
               </div>
               <div>
                 <a href="{{url()->previous()}}" class="btn btn-danger">Cancelar</a>
